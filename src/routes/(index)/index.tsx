@@ -1,6 +1,6 @@
 import { A, createAsync } from "@solidjs/router";
 import Counter from "~/components/Counter";
-import { getAllPosts } from "~/posts";
+import { getAllPosts } from "~/all_posts";
 
 export default function Home() {
   const posts = createAsync(getAllPosts);
@@ -29,7 +29,7 @@ export default function Home() {
           About Page
         </A>{" "}
       </p>
-      {posts()?.map((p) => <div>{p}</div>)}
+      {posts()?.map((p) => <div>{JSON.stringify(p)}</div>)}
     </main>
   );
 }
