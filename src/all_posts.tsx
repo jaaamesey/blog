@@ -1,9 +1,9 @@
 "use server";
 
 const posts = new Map<string, unknown>(
-  Object.entries(import.meta.glob("/src/posts/*.mdx", { eager: true })).map(
-    ([k, v]) => [k.split("/").at(-1)!.split(".")[0], v] as const,
-  ),
+  Object.entries(
+    import.meta.glob("/src/routes/posts/*/*.mdx", { eager: true }),
+  ).map(([k, v]) => [k.split("/").at(-2)!.split(".")[0], v] as const),
 );
 const postsByDate = Array.from(posts).sort(
   ([, a], [, b]) =>
