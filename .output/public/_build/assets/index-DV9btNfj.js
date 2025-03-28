@@ -1,1 +1,0 @@
-import{d as e}from"./jsx-runtime-DjyUCCn_.js";import"./web-CEgYv_nT.js";function o(t){const n={p:"p",...t.components};return e(n.p,{children:"Here's what it was like using SolidStart for this site."})}function c(t={}){const{wrapper:n}=t.components||{};return n?e(n,{...t,children:e(o,{...t})}):o(t)}export{c as default};
