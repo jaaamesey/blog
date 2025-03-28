@@ -6,4 +6,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss(), mdx({ jsxImportSource: "solid-jsx" })],
   },
+  ssr: true,
+  server: { preset: "static" },
 });
