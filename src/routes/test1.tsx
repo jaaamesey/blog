@@ -1,6 +1,6 @@
 export default function () {
   return (
-    <div class="min-h-screen bg-page-bg flex justify-center py-8 px-4 text-text-primary">
+    <div class="min-h-screen flex justify-center py-8 px-4 text-text-primary">
       <div class="max-w-3xl w-full [&>p]:text-lg [&>p]:leading-relaxed [&>p]:mb-8">
         <header class="flex justify-between items-center pb-4 border-b border-border-color mb-8">
           <div class="text-text-secondary">bikeshedd.ing</div>
