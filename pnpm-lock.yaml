@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@mdx-js/node-loader':
-        specifier: ^3.1.0
-        version: 3.1.0(acorn@8.14.1)
       '@mdx-js/rollup':
         specifier: ^3.1.0
         version: 3.1.0(acorn@8.14.1)(rollup@4.37.0)
@@ -20,6 +17,9 @@ importers:
       '@solidjs/start':
         specifier: ^1.1.0
         version: 1.1.3(@types/node@22.13.14)(jiti@2.4.2)(lightningcss@1.29.2)(solid-js@1.9.5)(terser@5.39.0)(vinxi@0.5.3(@types/node@22.13.14)(db0@0.3.1)(ioredis@5.6.0)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(typescript@5.8.2))(vite@6.2.3(@types/node@22.13.14)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0))
+      fast-glob:
+        specifier: ^3.3.3
+        version: 3.3.3
       solid-js:
         specifier: ^1.9.5
         version: 1.9.5
@@ -33,9 +33,6 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.0.7
         version: 4.0.15(vite@6.2.3(@types/node@22.13.14)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0))
-      '@types/node':
-        specifier: ^22.13.14
-        version: 22.13.14
       tailwindcss:
         specifier: ^4.0.7
         version: 4.0.15
@@ -620,9 +617,6 @@ packages:
   '@mdx-js/mdx@3.1.0':
     resolution: {integrity: sha512-/QxEhPAvGwbQmy1Px8F899L5Uc2KZ6JtXwlCgJmjSTBedwOZkByYcBG4GceIGPXRDsmfxhHazuS+hlOShRLeDw==}
 
-  '@mdx-js/node-loader@3.1.0':
-    resolution: {integrity: sha512-ebg4584UltawHqC39PL99/8q4cImIrDsNkbWwg4EVMI0xSJb4M2EMCEyFLM97G/qTXcmLDyJhhcGRfx7cM2rfQ==}
-
   '@mdx-js/rollup@3.1.0':
     resolution: {integrity: sha512-q4xOtUXpCzeouE8GaJ8StT4rDxm/U5j6lkMHL2srb2Q3Y7cobE0aXyPzXVVlbeIMBi+5R5MpbiaVE5/vJUdnHg==}
     peerDependencies:
@@ -1119,9 +1113,6 @@ packages:
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
 
-  '@types/supports-color@8.1.3':
-    resolution: {integrity: sha512-Hy6UMpxhE3j1tLpl27exp1XqHD7n8chAiNPzWfz16LPZoMMoSc4dzLl6w9qijkEb/r5O1ozdu1CWGA2L83ZeZg==}
-
   '@types/unist@2.0.11':
     resolution: {integrity: sha512-CmBKiL6NNo/OqgmMn95Fk9Whlp2mtvIv+KNpQKN2F4SjvrEesubTRWGYSg+BnWZOnlCaSTU1sMpsBOzgbYhnsA==}
 
@@ -1580,9 +1571,6 @@ packages:
 
   emoji-regex-xs@1.0.0:
     resolution: {integrity: sha512-LRlerrMYoIDrT6jgpeZ2YYl/L8EulRTt5hQcYjy5AInh7HWXKimpqx68aknBFpGL2+/IcogTcaydJEgaTmOpDg==}
-
-  emoji-regex@10.4.0:
-    resolution: {integrity: sha512-EC+0oUMY1Rqm4O6LLrgjtYDvcVYTy7chDnM4Q7030tP4Kwj3u/pR6gP9ygnp2CJMK5Gq+9Q2oqmrFJAz01DXjw==}
 
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
@@ -2746,10 +2734,6 @@ packages:
     resolution: {integrity: sha512-HnLOCR3vjcY8beoNLtcjZ5/nxn2afmME6lhrDrebokqMap+XbeW8n9TXpPDOqdGK5qcI3oT0GKTW6wC7EMiVqA==}
     engines: {node: '>=12'}
 
-  string-width@6.1.0:
-    resolution: {integrity: sha512-k01swCJAgQmuADB0YIc+7TuatfNvTBVOoaUWJjTB9R4VJzR5vNWzf5t42ESVZFPS8xTySF7CAdV4t/aaIm3UnQ==}
-    engines: {node: '>=16'}
-
   string_decoder@1.1.1:
     resolution: {integrity: sha512-n/ShnvDi6FHbbVfviro+WojiFzv+s8MPMHBczVePfUpDJLwoLT0ht1l4YwBCbi8pJAveEEdnkHyPyTP/mzRfwg==}
 
@@ -3022,15 +3006,6 @@ packages:
 
   vfile-message@4.0.2:
     resolution: {integrity: sha512-jRDZ1IMLttGj41KcZvlrYAaI3CfqpLpfpf+Mfig13viT6NKvRzWZ+lXz0Y5D60w6uJIBAOGq9mSHf0gktF0duw==}
-
-  vfile-reporter@8.1.1:
-    resolution: {integrity: sha512-qxRZcnFSQt6pWKn3PAk81yLK2rO2i7CDXpy8v8ZquiEOMLSnPw6BMSi9Y1sUCwGGl7a9b3CJT1CKpnRF7pp66g==}
-
-  vfile-sort@4.0.0:
-    resolution: {integrity: sha512-lffPI1JrbHDTToJwcq0rl6rBmkjQmMuXkAxsZPRS9DXbaJQvc642eCg6EGxcX2i1L+esbuhq+2l9tBll5v8AeQ==}
-
-  vfile-statistics@3.0.0:
-    resolution: {integrity: sha512-/qlwqwWBWFOmpXujL/20P+Iuydil0rZZNglR+VNm6J0gpLHwuVM5s7g2TfVoswbXjZ4HuIhLMySEyIw5i7/D8w==}
 
   vfile@6.0.3:
     resolution: {integrity: sha512-KzIbH/9tXat2u30jf+smMwFCsno4wHVdNmzFyL+T/L3UGqqk6JKfVqOFOZEpZSHADH1k40ab6NUIXZq422ov3Q==}
@@ -3644,16 +3619,6 @@ snapshots:
       - acorn
       - supports-color
 
-  '@mdx-js/node-loader@3.1.0(acorn@8.14.1)':
-    dependencies:
-      '@mdx-js/mdx': 3.1.0(acorn@8.14.1)
-      source-map: 0.7.4
-      vfile: 6.0.3
-      vfile-reporter: 8.1.1
-    transitivePeerDependencies:
-      - acorn
-      - supports-color
-
   '@mdx-js/rollup@3.1.0(acorn@8.14.1)(rollup@4.37.0)':
     dependencies:
       '@mdx-js/mdx': 3.1.0(acorn@8.14.1)
@@ -4173,10 +4138,9 @@ snapshots:
   '@types/node@22.13.14':
     dependencies:
       undici-types: 6.20.0
+    optional: true
 
   '@types/resolve@1.20.2': {}
-
-  '@types/supports-color@8.1.3': {}
 
   '@types/unist@2.0.11': {}
 
@@ -4611,8 +4575,6 @@ snapshots:
   electron-to-chromium@1.5.123: {}
 
   emoji-regex-xs@1.0.0: {}
-
-  emoji-regex@10.4.0: {}
 
   emoji-regex@8.0.0: {}
 
@@ -6190,12 +6152,6 @@ snapshots:
       emoji-regex: 9.2.2
       strip-ansi: 7.1.0
 
-  string-width@6.1.0:
-    dependencies:
-      eastasianwidth: 0.2.0
-      emoji-regex: 10.4.0
-      strip-ansi: 7.1.0
-
   string_decoder@1.1.1:
     dependencies:
       safe-buffer: 5.1.2
@@ -6318,7 +6274,8 @@ snapshots:
 
   undici-types@5.28.4: {}
 
-  undici-types@6.20.0: {}
+  undici-types@6.20.0:
+    optional: true
 
   unenv@1.10.0:
     dependencies:
@@ -6462,27 +6419,6 @@ snapshots:
     dependencies:
       '@types/unist': 3.0.3
       unist-util-stringify-position: 4.0.0
-
-  vfile-reporter@8.1.1:
-    dependencies:
-      '@types/supports-color': 8.1.3
-      string-width: 6.1.0
-      supports-color: 9.4.0
-      unist-util-stringify-position: 4.0.0
-      vfile: 6.0.3
-      vfile-message: 4.0.2
-      vfile-sort: 4.0.0
-      vfile-statistics: 3.0.0
-
-  vfile-sort@4.0.0:
-    dependencies:
-      vfile: 6.0.3
-      vfile-message: 4.0.2
-
-  vfile-statistics@3.0.0:
-    dependencies:
-      vfile: 6.0.3
-      vfile-message: 4.0.2
 
   vfile@6.0.3:
     dependencies:
