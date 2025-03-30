@@ -13,10 +13,17 @@ export default createHandler(() => (
             {`
             @font-face {
               font-family: "Playfair";
-              src: url("/fonts/playfair.ttf");
+              src: url("/fonts/playfair.woff2");
+            }
+            @font-face {
+              font-family: "Playfair Display";
+              src: url("/fonts/playfairdisplay.woff2");
             }
             body {
               font-family: 'Playfair'
+            }
+            h1 {
+              font-family: 'Playfair Display'
             }
           `}
           </style>
