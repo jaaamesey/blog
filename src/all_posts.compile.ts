@@ -10,4 +10,15 @@ const configs = await Promise.all(
     ),
   ),
 );
-export const allPosts = configs.filter((p) => !p.id.startsWith("_"));
+export const allPosts = configs
+  .filter((p) => !p.id.startsWith("_"))
+  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+export const nextPosts = new Map(
+  allPosts.map((p, i) => [p.id, allPosts[i + 1]?.id]),
+);
+export const prevPosts = new Map(
+  allPosts.map((p, i) => [p.id, allPosts[i - 1]?.id]),
+);
+
+export const postsByKey = new Map(allPosts.map((p) => [p.id, p]));

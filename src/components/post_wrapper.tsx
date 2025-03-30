@@ -1,10 +1,14 @@
-import { JSX } from "solid-js";
+import { useLocation } from "@solidjs/router";
+import { createMemo, JSX } from "solid-js";
+import { nextPosts, prevPosts } from "~/all_posts.compile";
 import { PostConfig } from "~/post_types";
 
 export function PostWrapper(props: {
   postConfig: PostConfig;
   children: JSX.Element;
 }) {
+  const location = useLocation();
+  const id = createMemo(() => location.pathname.substring("/posts/".length));
   return (
     <div class="min-h-screen flex justify-center py-8 px-4 text-text-primary">
       <div class="max-w-3xl w-full [&>p]:text-lg [&>p]:leading-relaxed [&>p]:mb-8">
@@ -17,6 +21,13 @@ export function PostWrapper(props: {
           {props.postConfig.title}
         </h1>
         {props.children}
+        <div>
+          {id()}
+          {nextPosts.size}
+          more:
+          {prevPosts.get(id())}
+          {nextPosts.get(id())}
+        </div>
       </div>
     </div>
   );
