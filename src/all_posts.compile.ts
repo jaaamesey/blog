@@ -10,4 +10,4 @@ const configs = await Promise.all(
     ),
   ),
 );
-export const allPosts = configs;
+export const allPosts = configs.filter((p) => !p.id.startsWith("_"));
