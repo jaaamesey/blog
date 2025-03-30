@@ -7,5 +7,10 @@ export default defineConfig({
     plugins: [tailwindcss(), mdx({ jsxImportSource: "solid-jsx" })],
   },
   ssr: true,
-  server: { preset: "static" },
+  server: {
+    preset: "cloudflare-pages-static",
+    rollupConfig: {
+      external: ["node:async_hooks"],
+    },
+  },
 });
