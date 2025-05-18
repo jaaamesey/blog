@@ -5,7 +5,7 @@ import compileTime from "vite-plugin-compile-time";
 import rehypePrettyCode from "rehype-pretty-code";
 
 export default defineConfig({
-  solid: { exclude: /\.react\.tsx/ },
+  solid: { exclude: /\.react\.(tsx|jsx)/ },
   vite: {
     plugins: [
       tailwindcss(),
