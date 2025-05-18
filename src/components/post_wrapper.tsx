@@ -13,9 +13,23 @@ export function PostWrapper(props: {
   const location = useLocation();
   const id = createMemo(() => location.pathname.substring("/posts/".length));
   return (
-    <div class="min-h-screen flex justify-center py-8 px-4 text-text-primary">
+    <div class="min-h-screen flex justify-center py-8 px-4 text-text-primary overflow-x-clip">
       <div class="max-w-xl w-full">
-        <header class="flex justify-between items-center pb-4 border-b border-border-color mb-8">
+        <header class="sticky top-5 flex justify-between items-center pb-4 border-b border-border-color mb-8">
+          <div
+            style={{
+              position: "absolute",
+              "background-color": "rgb(var(--background-rgb))",
+              transition: "var(--bg-transition)",
+              height: "100%",
+              width: "100%",
+              transform: "scaleY(10) scaleX(5)",
+              "transform-origin": "center bottom",
+              top: 0,
+              "z-index": -1,
+              opacity: 0.975,
+            }}
+          />
           <div class="text-text-secondary">james karlsson</div>
           <div class="flex gap-2 text-text-secondary">
             <ColorSchemeIcon />
