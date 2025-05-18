@@ -59,8 +59,11 @@ const ColorSchemeIcon = clientOnly(() =>
     default: () => {
       const colorScheme = useColorScheme();
       return (
-        <button onClick={colorScheme?.rotate}>
-          {getColorSchemeIcon(colorScheme?.getOverride())}
+        <button class="hover:cursor-pointer" onClick={colorScheme?.rotate}>
+          colors:{" "}
+          <span class="inline-block w-10">
+            {getColorSchemeIcon(colorScheme?.getOverride())}
+          </span>
         </button>
       );
     },
@@ -70,11 +73,11 @@ const ColorSchemeIcon = clientOnly(() =>
 function getColorSchemeIcon(scheme: ColorScheme) {
   switch (scheme) {
     case "dark":
-      return "DARK";
+      return "dark";
     case "light":
-      return "LIGHT";
+      return "light";
     case undefined:
-      return "AUTO";
+      return "auto";
     default:
       throw new UnreachableError(scheme);
   }
