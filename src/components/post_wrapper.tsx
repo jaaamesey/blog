@@ -11,9 +11,9 @@ export function PostWrapper(props: {
   const id = createMemo(() => location.pathname.substring("/posts/".length));
   return (
     <div class="min-h-screen flex justify-center py-8 px-4 text-text-primary">
-      <div class="max-w-3xl w-full">
+      <div class="max-w-xl w-full">
         <header class="flex justify-between items-center pb-4 border-b border-border-color mb-8">
-          <div class="text-text-secondary">bikeshedd.ing</div>
+          <div class="text-text-secondary">james karlsson</div>
           <div class="flex gap-2 text-text-secondary">○ ○ ○</div>
           <div class="text-text-secondary">{props.postConfig.date}</div>
         </header>
