@@ -1,7 +1,13 @@
 import { A } from "@solidjs/router";
+import { onMount } from "solid-js";
 import { allPosts } from "~/all_posts.compile";
 
 export default function Home() {
+  onMount(() => {
+    if (document.getElementById("random-posts-title")?.innerText === "Posts") {
+      generateRandomPostsTitle();
+    }
+  });
   return (
     <main class="text-center mx-auto p-4 flex flex-col items-center gap-2">
       <h1 class="max-6-xs text-2xl my-6">james karlsson</h1>
@@ -13,7 +19,8 @@ export default function Home() {
           email
         </a>
       </div>
-      <h2 class="font-bold">posts</h2>
+      <h2 id="random-posts-title">Posts</h2>
+      <script>{`(${generateRandomPostsTitle})()`}</script>
       <div class="flex w-96 justify-end">
         {allPosts?.map((p) => (
           <A
@@ -32,3 +39,19 @@ export default function Home() {
     </main>
   );
 }
+
+const generateRandomPostsTitle = () => {
+  const titles = [
+    "posts",
+    "posterinos",
+    "very serious articles",
+    "thoughts",
+    "actual honest to god bikeshedding",
+    "content",
+    "articles",
+    "written testimony",
+    "truths",
+  ];
+  document.getElementById("random-posts-title")!.innerText =
+    titles[Math.floor(Math.random() * titles.length)];
+};
