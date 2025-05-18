@@ -1,0 +1,1 @@
+import{u as a}from"./routing-BVlrdZVR.js";import{a as t,b as e}from"./web-BimMTa15.js";import{A as m}from"./components-DfZqOYrc.js";function s(){const r=a();return[t(()=>r.param),e(m,{get href(){return"/client-routing-test/"+r.param+"1"},children:"next"})]}export{s as default};

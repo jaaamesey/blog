@@ -1,0 +1,302 @@
+{
+  "_Counter-DSURtuSZ.js": {
+    "file": "assets/Counter-DSURtuSZ.js",
+    "name": "Counter",
+    "imports": [
+      "_web-BimMTa15.js"
+    ]
+  },
+  "_all_posts.compile-DtdIbPmQ.js": {
+    "file": "assets/all_posts.compile-DtdIbPmQ.js",
+    "name": "all_posts.compile"
+  },
+  "_components-DfZqOYrc.js": {
+    "file": "assets/components-DfZqOYrc.js",
+    "name": "components",
+    "imports": [
+      "_web-BimMTa15.js",
+      "_routing-BVlrdZVR.js"
+    ]
+  },
+  "_index-BVOCwoKb.js": {
+    "file": "assets/index-BVOCwoKb.js",
+    "name": "index"
+  },
+  "_jsx-runtime-Du94DhBv.js": {
+    "file": "assets/jsx-runtime-Du94DhBv.js",
+    "name": "jsx-runtime",
+    "imports": [
+      "_web-BimMTa15.js",
+      "_all_posts.compile-DtdIbPmQ.js",
+      "_routing-BVlrdZVR.js",
+      "_components-DfZqOYrc.js"
+    ]
+  },
+  "_preload-helper-CM3UJVvY.js": {
+    "file": "assets/preload-helper-CM3UJVvY.js",
+    "name": "preload-helper"
+  },
+  "_routing-BVlrdZVR.js": {
+    "file": "assets/routing-BVlrdZVR.js",
+    "name": "routing",
+    "imports": [
+      "_web-BimMTa15.js"
+    ]
+  },
+  "_web-BimMTa15.js": {
+    "file": "assets/web-BimMTa15.js",
+    "name": "web"
+  },
+  "src/routes/(index)/index.tsx?pick=default&pick=$css": {
+    "file": "assets/index-CKUP4wqR.js",
+    "name": "index",
+    "src": "src/routes/(index)/index.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BimMTa15.js",
+      "_Counter-DSURtuSZ.js",
+      "_all_posts.compile-DtdIbPmQ.js",
+      "_components-DfZqOYrc.js",
+      "_routing-BVlrdZVR.js"
+    ]
+  },
+  "src/routes/[...404].tsx?pick=default&pick=$css": {
+    "file": "assets/_...404_-Dm1GioHL.js",
+    "name": "_...404_",
+    "src": "src/routes/[...404].tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BimMTa15.js",
+      "_components-DfZqOYrc.js",
+      "_routing-BVlrdZVR.js"
+    ]
+  },
+  "src/routes/about.tsx?pick=default&pick=$css": {
+    "file": "assets/about-CBIpkAS7.js",
+    "name": "about",
+    "src": "src/routes/about.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BimMTa15.js",
+      "_Counter-DSURtuSZ.js",
+      "_components-DfZqOYrc.js",
+      "_routing-BVlrdZVR.js"
+    ]
+  },
+  "src/routes/client-routing-test/[param].tsx?pick=default&pick=$css": {
+    "file": "assets/_param_-COMZBsOW.js",
+    "name": "_param_",
+    "src": "src/routes/client-routing-test/[param].tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_routing-BVlrdZVR.js",
+      "_web-BimMTa15.js",
+      "_components-DfZqOYrc.js"
+    ]
+  },
+  "src/routes/posts/___template/index.tsx?pick=default&pick=$css": {
+    "file": "assets/index-DFMTY-7S.js",
+    "name": "index",
+    "src": "src/routes/posts/___template/index.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_jsx-runtime-Du94DhBv.js",
+      "_web-BimMTa15.js",
+      "_all_posts.compile-DtdIbPmQ.js",
+      "_routing-BVlrdZVR.js",
+      "_components-DfZqOYrc.js"
+    ]
+  },
+  "src/routes/posts/___template/meta.ts?pick=default&pick=$css": {
+    "file": "assets/meta-PUbtxr7Y.js",
+    "name": "meta",
+    "src": "src/routes/posts/___template/meta.ts?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true
+  },
+  "src/routes/posts/_how-those-daily-puzzle-games-work/index.tsx?pick=default&pick=$css": {
+    "file": "assets/index-DkSemKl6.js",
+    "name": "index",
+    "src": "src/routes/posts/_how-those-daily-puzzle-games-work/index.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_jsx-runtime-Du94DhBv.js",
+      "_web-BimMTa15.js",
+      "_all_posts.compile-DtdIbPmQ.js",
+      "_routing-BVlrdZVR.js",
+      "_components-DfZqOYrc.js"
+    ]
+  },
+  "src/routes/posts/_how-those-daily-puzzle-games-work/meta.ts?pick=default&pick=$css": {
+    "file": "assets/meta-CErcayRg.js",
+    "name": "meta",
+    "src": "src/routes/posts/_how-those-daily-puzzle-games-work/meta.ts?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true
+  },
+  "src/routes/posts/_my-time-with-solid-start/index.tsx?pick=default&pick=$css": {
+    "file": "assets/index-2WJdCKKY.js",
+    "name": "index",
+    "src": "src/routes/posts/_my-time-with-solid-start/index.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_jsx-runtime-Du94DhBv.js",
+      "_web-BimMTa15.js",
+      "_all_posts.compile-DtdIbPmQ.js",
+      "_routing-BVlrdZVR.js",
+      "_components-DfZqOYrc.js"
+    ]
+  },
+  "src/routes/posts/_my-time-with-solid-start/meta.ts?pick=default&pick=$css": {
+    "file": "assets/meta-FfsHJZ1O.js",
+    "name": "meta",
+    "src": "src/routes/posts/_my-time-with-solid-start/meta.ts?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true
+  },
+  "src/routes/posts/_one/index.tsx?pick=default&pick=$css": {
+    "file": "assets/index-_jXnDhxm.js",
+    "name": "index",
+    "src": "src/routes/posts/_one/index.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_jsx-runtime-Du94DhBv.js",
+      "_web-BimMTa15.js",
+      "_all_posts.compile-DtdIbPmQ.js",
+      "_routing-BVlrdZVR.js",
+      "_components-DfZqOYrc.js"
+    ]
+  },
+  "src/routes/posts/_one/meta.ts?pick=default&pick=$css": {
+    "file": "assets/meta-BqrlQWg9.js",
+    "name": "meta",
+    "src": "src/routes/posts/_one/meta.ts?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true
+  },
+  "src/routes/posts/_two/index.tsx?pick=default&pick=$css": {
+    "file": "assets/index-CSevWBZL.js",
+    "name": "index",
+    "src": "src/routes/posts/_two/index.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_jsx-runtime-Du94DhBv.js",
+      "_web-BimMTa15.js",
+      "_all_posts.compile-DtdIbPmQ.js",
+      "_routing-BVlrdZVR.js",
+      "_components-DfZqOYrc.js"
+    ]
+  },
+  "src/routes/posts/_two/meta.ts?pick=default&pick=$css": {
+    "file": "assets/meta-DtkNl46x.js",
+    "name": "meta",
+    "src": "src/routes/posts/_two/meta.ts?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true
+  },
+  "src/routes/posts/_two/shouldnotappear/meta.ts?pick=default&pick=$css": {
+    "file": "assets/meta-BAGqRHE7.js",
+    "name": "meta",
+    "src": "src/routes/posts/_two/shouldnotappear/meta.ts?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true
+  },
+  "src/routes/posts/how_this_blog_works/index.tsx?pick=default&pick=$css": {
+    "file": "assets/index-CrVizKyP.js",
+    "name": "index",
+    "src": "src/routes/posts/how_this_blog_works/index.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_jsx-runtime-Du94DhBv.js",
+      "_preload-helper-CM3UJVvY.js",
+      "_web-BimMTa15.js",
+      "_all_posts.compile-DtdIbPmQ.js",
+      "_routing-BVlrdZVR.js",
+      "_components-DfZqOYrc.js"
+    ],
+    "dynamicImports": [
+      "src/utils/synchronous_react_component.tsx",
+      "src/routes/posts/how_this_blog_works/some-react-component.react.tsx"
+    ]
+  },
+  "src/routes/posts/how_this_blog_works/meta.ts?pick=default&pick=$css": {
+    "file": "assets/meta-BJNXyS_V.js",
+    "name": "meta",
+    "src": "src/routes/posts/how_this_blog_works/meta.ts?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true
+  },
+  "src/routes/posts/how_this_blog_works/some-react-component.react.tsx": {
+    "file": "assets/some-react-component.react-DAIFDFqZ.js",
+    "name": "some-react-component.react",
+    "src": "src/routes/posts/how_this_blog_works/some-react-component.react.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-BVOCwoKb.js"
+    ]
+  },
+  "src/routes/test1.tsx?pick=default&pick=$css": {
+    "file": "assets/test1-DgL4ul5t.js",
+    "name": "test1",
+    "src": "src/routes/test1.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BimMTa15.js"
+    ]
+  },
+  "src/utils/synchronous_react_component.tsx": {
+    "file": "assets/synchronous_react_component-BiEVunlX.js",
+    "name": "synchronous_react_component",
+    "src": "src/utils/synchronous_react_component.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BimMTa15.js",
+      "_index-BVOCwoKb.js"
+    ]
+  },
+  "virtual:$vinxi/handler/client": {
+    "file": "assets/client-DfWJkVtW.js",
+    "name": "client",
+    "src": "virtual:$vinxi/handler/client",
+    "isEntry": true,
+    "imports": [
+      "_web-BimMTa15.js",
+      "_preload-helper-CM3UJVvY.js",
+      "_routing-BVlrdZVR.js"
+    ],
+    "dynamicImports": [
+      "src/routes/[...404].tsx?pick=default&pick=$css",
+      "src/routes/about.tsx?pick=default&pick=$css",
+      "src/routes/test1.tsx?pick=default&pick=$css",
+      "src/routes/(index)/index.tsx?pick=default&pick=$css",
+      "src/routes/client-routing-test/[param].tsx?pick=default&pick=$css",
+      "src/routes/posts/___template/index.tsx?pick=default&pick=$css",
+      "src/routes/posts/___template/meta.ts?pick=default&pick=$css",
+      "src/routes/posts/_how-those-daily-puzzle-games-work/index.tsx?pick=default&pick=$css",
+      "src/routes/posts/_how-those-daily-puzzle-games-work/meta.ts?pick=default&pick=$css",
+      "src/routes/posts/_my-time-with-solid-start/index.tsx?pick=default&pick=$css",
+      "src/routes/posts/_my-time-with-solid-start/meta.ts?pick=default&pick=$css",
+      "src/routes/posts/_one/index.tsx?pick=default&pick=$css",
+      "src/routes/posts/_one/meta.ts?pick=default&pick=$css",
+      "src/routes/posts/_two/index.tsx?pick=default&pick=$css",
+      "src/routes/posts/_two/meta.ts?pick=default&pick=$css",
+      "src/routes/posts/how_this_blog_works/index.tsx?pick=default&pick=$css",
+      "src/routes/posts/how_this_blog_works/meta.ts?pick=default&pick=$css",
+      "src/routes/posts/_two/shouldnotappear/meta.ts?pick=default&pick=$css"
+    ],
+    "css": [
+      "assets/client-1Fl6X32I.css"
+    ]
+  }
+}
