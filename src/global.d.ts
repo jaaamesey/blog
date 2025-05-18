@@ -9,7 +9,12 @@ declare global {
     _hooks: {
       setColorSchemeOverride(scheme: ColorScheme): void;
       onColorSchemeChanged(listener: () => void): () => void;
-      getColorScheme(): { active: ColorScheme; fromOverride: boolean };
+      getColorScheme(): {
+        active: ColorScheme;
+        fromOverride: boolean;
+        browserPreference: ColorScheme;
+        override: ColorScheme;
+      };
     };
   }
 }

@@ -44,7 +44,7 @@ const ColorSchemeIcon = clientOnly(() =>
       const colorScheme = useColorScheme();
       return (
         <button onClick={colorScheme?.rotate}>
-          {getColorSchemeIcon(colorScheme?.get())}
+          {getColorSchemeIcon(colorScheme?.getOverride())}
         </button>
       );
     },

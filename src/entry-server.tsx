@@ -46,11 +46,18 @@ export default createHandler(() => (
                 return () => colorSchemeListeners.delete(listener);
               },
               getColorScheme() {
+                const override =
+                  window.localStorage.getItem("colorSchemeOverride") ||
+                  undefined;
                 return {
                   active: currentColorScheme,
-                  fromOverride: !!window.localStorage.getItem(
-                    "colorSchemeOverride",
-                  ),
+                  fromOverride: !!override,
+                  override,
+                  browserPreference: window.matchMedia(
+                    "(prefers-color-scheme: dark)",
+                  ).matches
+                    ? "dark"
+                    : "light",
                 };
               },
             };
