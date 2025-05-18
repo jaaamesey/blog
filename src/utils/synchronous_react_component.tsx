@@ -1,6 +1,6 @@
 import { createElement } from "react";
 import { createRoot, Root } from "react-dom/client";
-import { createRenderEffect, createSignal } from "solid-js";
+import { createRenderEffect, createSignal, onCleanup } from "solid-js";
 
 export function SynchronousReactComponent<
   ReactProps extends {} | undefined,
@@ -18,6 +18,7 @@ export function SynchronousReactComponent<
       createElement(props.Component as React.FunctionComponent, props.props),
     );
   });
+  onCleanup(() => reactRoot()?.unmount());
   return (
     <div>
       <div
