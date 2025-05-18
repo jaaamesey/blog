@@ -39,12 +39,10 @@ function getColorSchemes(initialColorScheme: {
   override: ColorScheme;
   browserPreference: ColorScheme;
 }): ColorScheme[] {
-  if (initialColorScheme.override === "dark") {
-    return ["dark", "light", undefined];
-  }
   if (
-    initialColorScheme.override === undefined &&
-    initialColorScheme.browserPreference === "light"
+    initialColorScheme.override === "dark" ||
+    (initialColorScheme.override === undefined &&
+      initialColorScheme.browserPreference === "light")
   ) {
     return ["dark", "light", undefined];
   }
