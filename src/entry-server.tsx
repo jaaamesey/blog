@@ -35,7 +35,6 @@ export default createHandler(() => (
 
             window._hooks = {
               setColorSchemeOverride(scheme) {
-                console.log("changed to ", scheme);
                 window.localStorage.setItem(
                   "colorSchemeOverride",
                   scheme || "",
