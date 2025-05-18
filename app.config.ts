@@ -18,6 +18,6 @@ export default defineConfig({
   },
   ssr: true,
   server: {
-    preset: "static",
+    preset: "cloudflare-pages-static",
   },
 });
