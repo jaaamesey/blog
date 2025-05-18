@@ -18,11 +18,9 @@ export default createHandler(() => (
                 (window.matchMedia("(prefers-color-scheme: dark)").matches
                   ? "dark"
                   : "light");
-              if (scheme !== currentColorScheme) {
-                for (const l of colorSchemeListeners) {
-                  l();
-                }
-                currentColorScheme = scheme as ColorScheme;
+              currentColorScheme = scheme as ColorScheme;
+              for (const l of colorSchemeListeners) {
+                l();
               }
               if (scheme == "dark") {
                 document.documentElement.classList.add("colorSchemeDark");
@@ -37,6 +35,7 @@ export default createHandler(() => (
 
             window._hooks = {
               setColorSchemeOverride(scheme) {
+                console.log("changed to ", scheme);
                 window.localStorage.setItem(
                   "colorSchemeOverride",
                   scheme || "",
