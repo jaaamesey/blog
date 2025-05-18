@@ -5,14 +5,15 @@
   --foreground-rgb: 63, 51, 77;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background-rgb: 37,31, 71;
-    --foreground-rgb: 226, 192, 252;
-  }
+.colorSchemeDark {
+  --background-rgb: 37,31, 71;
+  --foreground-rgb: 226, 192, 252;
 }
 
 body {
   background: rgb(var(--background-rgb));
   color: rgb(var(--foreground-rgb));
+  transition: background 0.25s, color 0.1s;
 }
+
+@custom-variant dark (&:where(.colorSchemeDark, .colorSchemeDark *));

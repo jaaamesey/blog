@@ -20,7 +20,7 @@ export function PostWrapper(props: {
         <h1 class="text-4xl md:text-5xl mb-6 text-text-primary">
           {props.postConfig.title}
         </h1>
-        <div>{props.children}</div>
+        <div class="text-lg">{props.children}</div>
         <div>
           {id()}
           {nextPosts.size}
