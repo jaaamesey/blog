@@ -14,10 +14,11 @@ export default function Home() {
       <div class="mb-6 text-sm">i makea da software</div>
       <div class="flex gap-4 mb-6">
         <a href="https://github.com/jaaamesey">github</a>
-        <a href="https://www.canva.com/">work</a>
+        <a href="https://www.canva.com">work</a>
         <a href="#" onClick={() => alert("it's jameskarlsson1(at)gmail.com")}>
           email
         </a>
+        <a href="https://bridj.link">bridj.link</a>
       </div>
       <h2 id="random-posts-title">Posts</h2>
       <script>{`(${generateRandomPostsTitle})()`}</script>
