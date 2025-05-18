@@ -1,4 +1,4 @@
-import { useLocation } from "@solidjs/router";
+import { A, useLocation } from "@solidjs/router";
 import { createMemo, JSX } from "solid-js";
 import { nextPosts, prevPosts } from "~/all_posts.compile";
 import { PostConfig } from "~/post_types";
@@ -30,7 +30,9 @@ export function PostWrapper(props: {
               opacity: 0.975,
             }}
           />
-          <div class="text-text-secondary">james karlsson</div>
+          <div class="text-text-secondary">
+            <A href="/">james karlsson</A>
+          </div>
           <div class="flex gap-2 text-text-secondary">
             <ColorSchemeIcon />
           </div>
@@ -40,7 +42,7 @@ export function PostWrapper(props: {
           {props.postConfig.title}
         </h1>
         <div class="text-lg">{props.children}</div>
-        <div>
+        <div style={{ display: "none" }}>
           {id()}
           {nextPosts.size}
           more:
