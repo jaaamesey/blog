@@ -1,0 +1,3 @@
+import{d as e,M as i,h as c,P as h}from"./jsx-runtime-DDkb-lCz.js";import{b as o}from"./web-DHHpNyjm.js";import"./all_posts.compile-DtdIbPmQ.js";import"./routing-C7VmgkDX.js";import"./components-BOUg6qAW.js";function r(n){const t={a:"a",h1:"h1",h2:"h2",p:"p",...n.components};return i(c,{children:[e(t.h2,{children:"H2"}),`
+`,e(t.p,{children:e(t.a,{href:"/posts/two",children:"link"})}),`
+`,e(t.h1,{children:"big"})]})}function a(n={}){const{wrapper:t}=n.components||{};return t?e(t,{...n,children:e(r,{...n})}):r(n)}const p={title:"Some title",date:"2025-03-30"},u=()=>o(h,{postConfig:p,get children(){return o(a,{})}});export{u as default};
