@@ -12,7 +12,7 @@ const configs = await Promise.all(
 );
 export const allPosts = configs
   .filter((p) => !p.id.startsWith("_"))
-  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
 export const nextPosts = new Map(
   allPosts.map((p, i) => [p.id, allPosts[i + 1]?.id]),

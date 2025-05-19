@@ -23,7 +23,7 @@ export default function Home() {
       </div>
       <h2 id="random-posts-title">Posts</h2>
       <script>{`(${generateRandomPostsTitle})()`}</script>
-      <div class="flex max-w-96 w-full justify-end">
+      <div class="flex flex-col gap-2 max-w-96 w-full justify-end">
         {allPosts?.map((p) => (
           <A
             class="w-full bg-white rounded-2xl p-4 text-start text-gray-950"

@@ -1,0 +1,7 @@
+import {EmbedReactComponent} from '~/utils/embed_react_component';
+
+Article text goes here
+
+<EmbedReactComponent loader={() => import('./react_bad.react.jsx').then(r=>r.BadTodoApp1)}/>
+
+<EmbedReactComponent loader={() => import('./react_bad.react.jsx').then(r=>r.BadTodoApp2)}/>
