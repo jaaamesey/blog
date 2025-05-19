@@ -30,10 +30,10 @@ export default function Home() {
             href={`/posts/${p.id}`}
           >
             <div class="flex justify-between gap-4">
-              <div>
+              <div class="whitespace-nowrap">
                 <em>{p.date}</em>
               </div>
-              <div>{p.title}</div>
+              <div class="text-end">{p.title}</div>
             </div>
           </A>
         ))}
