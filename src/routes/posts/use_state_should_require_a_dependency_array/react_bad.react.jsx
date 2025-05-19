@@ -3,10 +3,11 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 
 // Doesn't update
 export function BadTodoApp1() {
-	const [items, setItems] = useState([{ name: 'First item' }, { name: 'Second item' }, { name: 'Third item' }]);
+	const [items, setItems] = useState([{ id: 'first-id', name: 'First item' }, { id: 'second-id', name: 'Second item' }, { id: 'third-id', name: 'Third item' }]);
 	const [activeItem, setActiveItem] = useState(0);
 
 	return <div>
+		<div>Editing {items[activeItem].id}</div>
 		<TodoEditor1 item={items[activeItem]} />
 		<button onClick={() => setActiveItem(n => (n + 1) % items.length)}>Next</button>
 	</div>
@@ -26,6 +27,7 @@ export function BadTodoApp2() {
 	const [activeItem, setActiveItem] = useState(0);
 
 	return <div>
+		<div>Editing {items[activeItem].id}</div>
 		<TodoEditor2 item={items[activeItem]} />
 		<button onClick={() => setActiveItem(n => (n + 1) % items.length)}>Next</button>
 	</div>
@@ -54,6 +56,7 @@ export function BadTodoApp3() {
 	const [activeItem, setActiveItem] = useState(0);
 
 	return <div>
+		<div>Editing {items[activeItem].id}</div>
 		<TodoEditor3 item={items[activeItem]} />
 		<button onClick={() => setActiveItem(n => (n + 1) % items.length)}>Next</button>
 	</div>
