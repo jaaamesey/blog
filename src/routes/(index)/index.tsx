@@ -23,13 +23,13 @@ export default function Home() {
       </div>
       <h2 id="random-posts-title">Posts</h2>
       <script>{`(${generateRandomPostsTitle})()`}</script>
-      <div class="flex w-96 justify-end">
+      <div class="flex max-w-96 w-full justify-end">
         {allPosts?.map((p) => (
           <A
             class="w-full bg-white rounded-2xl p-4 text-start text-gray-950"
             href={`/posts/${p.id}`}
           >
-            <div class="flex justify-between">
+            <div class="flex justify-between gap-4">
               <div>
                 <em>{p.date}</em>
               </div>

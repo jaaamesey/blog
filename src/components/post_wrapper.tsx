@@ -15,7 +15,7 @@ export function PostWrapper(props: {
   return (
     <div class="min-h-screen flex justify-center py-8 px-4 text-text-primary overflow-x-clip">
       <div class="max-w-xl w-full">
-        <header class="sticky top-5 flex justify-between items-center pb-4 border-b border-border-color mb-8">
+        <header class="sticky top-5 not-sm:text-xs flex justify-between items-center pb-4 border-b border-border-color mb-8">
           <div
             style={{
               position: "absolute",

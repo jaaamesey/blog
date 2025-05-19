@@ -30,6 +30,7 @@ pre {
   background-color: #1F2028;
   padding: 16px;
   border-radius: 8px;
+  overflow: auto;
 } 
 
 pre [data-highlighted-line] {
