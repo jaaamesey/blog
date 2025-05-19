@@ -1,5 +1,5 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
+import React, { useMemo } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 
 // Doesn't update
 export function BadTodoApp1() {
@@ -21,7 +21,6 @@ function TodoEditor1({ item }) {
 }
 
 
-// Doesn't update
 export function BadTodoApp2() {
 	const [items, setItems] = useState([{ id: 'first-id', name: 'First item' }, { id: 'second-id', name: 'Second item' }, { id: 'third-id', name: 'Third item' }]);
 	const [activeItem, setActiveItem] = useState(0);
@@ -45,5 +44,58 @@ function TodoEditor2({ item }) {
 		console.log('Updating database:', item.id, name)
 	})
 	return <div><input value={name} onChange={(e) => setName(e.target.value)} /></div>
+
+}
+
+
+// Perfect!
+export function BadTodoApp3() {
+	const [items, setItems] = useState([{ id: 'first-id', name: 'First item' }, { id: 'second-id', name: 'Second item' }, { id: 'third-id', name: 'Third item' }]);
+	const [activeItem, setActiveItem] = useState(0);
+
+	return <div>
+		<TodoEditor3 item={items[activeItem]} />
+		<button onClick={() => setActiveItem(n => (n + 1) % items.length)}>Next</button>
+	</div>
+
+}
+
+function TodoEditor3({ item }) {
+	const [name, setName] = useStateWithDeps(item.name, [item]);
+	const [completed, setCompleted] = useStateWithDeps(item.completed, [item]);
+	useEffect(() => {
+		setName(item.name);
+		setCompleted(item.completed);
+	}, [item])
+	useEffect(() => {
+		console.log('Updating database:', item.id, name)
+	})
+	return <div><input value={name} onChange={(e) => setName(e.target.value)} /></div>
+
+}
+function useMutableDerivation(source) {
+	const prevSource = useRef(source);
+	const overlay = useRef(source);
+	if (source !== prevSource.current) {
+		overlay.current = source;
+	}
+	prevSource.current = source;
+
+	const forceRerender = useState()[1];
+
+	const mutate = useCallback((newState) => {
+		if (newState === overlay.current) {
+			return;
+		}
+		overlay.current = newState;
+		forceRerender(Symbol());
+	}, []);
+
+	return [overlay.current, mutate];
+}
+
+function useStateWithDeps(createNewState, deps) {
+	const sourceState = useMemo(typeof createNewState === 'function' ? createNewState : () => createNewState, deps);
+	return useMutableDerivation(sourceState);
 
 }
