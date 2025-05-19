@@ -1,5 +1,6 @@
 import {Counter} from './components'
 import {EmbedReactComponent} from '~/utils/embed_react_component';
+import {LessExpensiveSolidComponent} from './less-expensive-solid-component.tsx'
 
 Hey, here's some text.
 
@@ -14,4 +15,11 @@ here's a counter <Counter/>
 
 
 React component: 
+
 <EmbedReactComponent loader={() => import("./some-react-component.react").then(c => c.SomeReactComponent)} props={{start: 2}} />
+
+<EmbedReactComponent loader={() => import("./expensive-react-component.react.jsx").then(c => c.ExpensiveReactComponent)} props={{start: 2}} />
+
+Solid equivalent:
+
+<LessExpensiveSolidComponent/>
