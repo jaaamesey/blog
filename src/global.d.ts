@@ -17,6 +17,11 @@ declare global {
       };
     };
   }
+  namespace JSX {
+    interface HTMLElementTags {
+      marquee: any;
+    }
+  }
 }
 
 export {};

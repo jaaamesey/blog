@@ -1,6 +1,7 @@
 import { A } from "@solidjs/router";
 import { onMount } from "solid-js";
 import { allPosts } from "~/all_posts.compile";
+import { Marquee } from "./marquee";
 
 export default function Home() {
   onMount(() => {
@@ -36,6 +37,9 @@ export default function Home() {
             </div>
           </A>
         ))}
+      </div>
+      <div class="mt-20 w-96">
+        <Marquee>bikeshedd.ing</Marquee>
       </div>
     </main>
   );
