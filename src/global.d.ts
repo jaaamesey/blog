@@ -22,6 +22,9 @@ declare global {
       marquee: any;
     }
   }
+  interface Document {
+    startViewTransition?: (_: () => Promise<unknown>) => void;
+  }
 }
 
 export {};

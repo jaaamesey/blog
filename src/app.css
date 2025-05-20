@@ -63,3 +63,18 @@ code[data-line-numbers-max-digits="4"] > [data-line]::before {
   width: 2.25rem;
 }
 @custom-variant dark (&:where(.colorSchemeDark, .colorSchemeDark *));
+
+
+.titleTransition  span {
+  view-transition-name: title
+}
+
+::view-transition-group(*) {
+  animation-duration: 0.175s;
+  animation-timing-function: ease;
+}
+
+@view-transition {
+  navigation: auto;
+}
+

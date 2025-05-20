@@ -31,7 +31,9 @@ export function PostWrapper(props: {
             }}
           />
           <div class="text-text-secondary">
-            <A href="/">james karlsson</A>
+            <A href="/" style={{ "view-transition-name": "logo" }}>
+              james karlsson
+            </A>
           </div>
           <div class="flex gap-2 text-text-secondary">
             <ColorSchemeIcon />
@@ -39,7 +41,15 @@ export function PostWrapper(props: {
           <div class="text-text-secondary">{props.postConfig.date}</div>
         </header>
         <h1 class="text-4xl md:text-5xl mb-6 text-text-primary">
-          {props.postConfig.title}
+          <div>
+            <span
+              style={{
+                "view-transition-name": `title-${id()}`,
+              }}
+            >
+              {props.postConfig.title}
+            </span>
+          </div>
         </h1>
         <div class="text-lg">{props.children}</div>
         <div style={{ display: "none" }}>
