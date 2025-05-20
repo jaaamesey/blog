@@ -26,14 +26,14 @@ export default function Home() {
       <div class="flex flex-col gap-2 max-w-96 w-full justify-end">
         {allPosts?.map((p) => (
           <A
-            class="w-full bg-white rounded-2xl p-4 text-start text-gray-950"
+            class="w-full bg-white/90 rounded-2xl p-4 text-start text-gray-950"
             href={`/posts/${p.id}`}
           >
-            <div class="flex justify-between gap-4">
-              <div class="whitespace-nowrap">
+            <div class="flex flex-col justify-between gap-preserve 2">
+              <div>
                 <em>{p.date}</em>
               </div>
-              <div class="text-end">{p.title}</div>
+              <div class="text-lg">{p.title}</div>
             </div>
           </A>
         ))}
