@@ -16,7 +16,7 @@ here's a counter <Counter/>
 
 React component: 
 
-<EmbedReactComponent loader={() => import("./some-react-component.react").then(c => c.SomeReactComponent)} props={{start: 2}} />
+<EmbedReactComponent loader={() => import("./some-react-component.react.jsx").then(c => c.SomeReactComponent)} props={{start: 2}} />
 
 <EmbedReactComponent loader={() => import("./expensive-react-component.react.jsx").then(c => c.ExpensiveReactComponent)} props={{start: 2}} />
 
