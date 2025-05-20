@@ -1,5 +1,5 @@
 import { A } from "@solidjs/router";
-import { onCleanup, onMount } from "solid-js";
+import { onCleanup, onMount, For } from "solid-js";
 import { allPosts } from "~/all_posts.compile";
 import { Marquee } from "./marquee";
 
@@ -31,38 +31,40 @@ export default function Home() {
       <h2 id="random-posts-title">Posts</h2>
       <script>{`(${generateRandomPostsTitle})()`}</script>
       <div class="flex flex-col gap-2 max-w-96 w-full justify-end">
-        {allPosts?.map((p) => {
-          const titleEl = (<span>{p.title}</span>) as HTMLSpanElement;
-          return (
-            <A
-              class="w-full bg-white/90 rounded-2xl p-4 text-start text-gray-950"
-              href={`/posts/${p.id}`}
-              onClick={() => {
-                if (document.startViewTransition) {
-                  const promise = new Promise((resolve) => {
-                    console.log("CREATING PROMISE!");
-                    resolveViewTransition(undefined);
-                    resolveViewTransition = resolve;
-                    setTimeout(resolve, 5000);
-                  });
-                  document.startViewTransition(() => promise);
-                }
-              }}
-            >
-              <div class="flex flex-col justify-between gap-preserve 2">
-                <div>
-                  <em>{p.date}</em>
+        <For each={allPosts}>
+          {(p) => {
+            const titleEl = (<span>{p.title}</span>) as HTMLSpanElement;
+            return (
+              <A
+                class="w-full bg-white/90 rounded-2xl p-4 text-start text-gray-950"
+                href={`/posts/${p.id}`}
+                onClick={() => {
+                  if (document.startViewTransition) {
+                    const promise = new Promise((resolve) => {
+                      console.log("CREATING PROMISE!");
+                      resolveViewTransition(undefined);
+                      resolveViewTransition = resolve;
+                      setTimeout(resolve, 5000);
+                    });
+                    document.startViewTransition(() => promise);
+                  }
+                }}
+              >
+                <div class="flex flex-col justify-between gap-preserve 2">
+                  <div>
+                    <em>{p.date}</em>
+                  </div>
+                  <div
+                    class="text-lg"
+                    style={{ "view-transition-name": `title-${p.id}` }}
+                  >
+                    {titleEl}
+                  </div>
                 </div>
-                <div
-                  class="text-lg"
-                  style={{ "view-transition-name": `title-${p.id}` }}
-                >
-                  {titleEl}
-                </div>
-              </div>
-            </A>
-          );
-        })}
+              </A>
+            );
+          }}
+        </For>
       </div>
       <div class="mt-20 w-96">
         <Marquee>bikeshedd.ing</Marquee>

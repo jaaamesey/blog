@@ -3,6 +3,8 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 import css from "@eslint/css";
 import { defineConfig, globalIgnores } from "eslint/config";
+import solid from "eslint-plugin-solid/configs/typescript";
+import * as tsParser from "@typescript-eslint/parser";
 
 export default defineConfig([
   globalIgnores(["dist/", "node_modules/", ".vinxi/", ".git/", ".output/"]),
@@ -21,5 +23,15 @@ export default defineConfig([
     plugins: { css },
     language: "css/css",
     extends: ["css/recommended"],
+  },
+  {
+    files: ["**/*.{ts,tsx}"],
+    ...solid,
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        project: "tsconfig.json",
+      },
+    },
   },
 ]);
