@@ -1,4 +1,5 @@
 declare module "*.mdx" {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let MDXComponent: (props: Record<string, unknown>) => any;
   export default MDXComponent;
 }
@@ -19,6 +20,7 @@ declare global {
   }
   namespace JSX {
     interface HTMLElementTags {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       marquee: any;
     }
   }

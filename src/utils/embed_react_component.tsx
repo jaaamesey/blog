@@ -1,7 +1,9 @@
 import { createResource, createRoot } from "solid-js";
 import { clientOnly } from "@solidjs/start";
 
-const EmbedReactComponentImpl = <ReactProps extends {} | undefined>(props: {
+const EmbedReactComponentImpl = <
+  ReactProps extends Record<string, unknown> | undefined,
+>(props: {
   loader: () => Promise<React.FunctionComponent<ReactProps>>;
   props?: ReactProps;
 }) => {

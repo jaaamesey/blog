@@ -47,8 +47,9 @@ export default createHandler(() => (
               },
               getColorScheme() {
                 const override =
-                  window.localStorage.getItem("colorSchemeOverride") ||
-                  undefined;
+                  (window.localStorage.getItem(
+                    "colorSchemeOverride",
+                  ) as ColorScheme) || undefined;
                 return {
                   active: currentColorScheme,
                   fromOverride: !!override,
@@ -90,5 +91,3 @@ export default createHandler(() => (
     )}
   />
 ));
-
-function earlyInjectedScript() {}

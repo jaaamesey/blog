@@ -3,7 +3,7 @@ import { createRoot, Root } from "react-dom/client";
 import { createRenderEffect, createSignal, onCleanup } from "solid-js";
 
 export function SynchronousReactComponent<
-  ReactProps extends {} | undefined,
+  ReactProps extends Record<string, unknown> | undefined,
 >(props: {
   Component: React.FunctionComponent<ReactProps>;
   props?: ReactProps;

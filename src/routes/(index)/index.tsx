@@ -10,7 +10,7 @@ export default function Home() {
     }
   });
   // TODO: Make view transitions part of router
-  let resolveViewTransition = (_: unknown) => {};
+  let resolveViewTransition: (_: unknown) => void = () => {};
   onCleanup(() => {
     console.log("cleaning");
     resolveViewTransition(undefined);

@@ -62,18 +62,14 @@ code[data-line-numbers-max-digits="3"] > [data-line]::before {
 code[data-line-numbers-max-digits="4"] > [data-line]::before {
   width: 2.25rem;
 }
-@custom-variant dark (&:where(.colorSchemeDark, .colorSchemeDark *));
 
-
-.titleTransition  span {
-  view-transition-name: title
-}
-
+/* eslint-disable-next-line css/use-baseline */
 ::view-transition-group(*) {
   animation-duration: 0.175s;
   animation-timing-function: ease;
 }
 
+/* eslint-disable-next-line css/use-baseline */
 @view-transition {
   navigation: auto;
 }
