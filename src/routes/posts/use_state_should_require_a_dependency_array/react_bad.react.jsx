@@ -48,7 +48,35 @@ function TodoEditor2({ item }) {
 	return <div><input value={name} onChange={(e) => setName(e.target.value)} /></div>
 
 }
+export function BadTodoAppTwoPointFive() {
+	const [items, setItems] = useState([{ id: 'first-id', name: 'First item' }, { id: 'second-id', name: 'Second item' }, { id: 'third-id', name: 'Third item' }]);
+	const [activeItem, setActiveItem] = useState(0);
 
+	return <div>
+		TodoEditorTwoPointFive
+		<div>Editing {items[activeItem].id}</div>
+		<TodoEditorTwoPointFive item={items[activeItem]} />
+		<button onClick={() => setActiveItem(n => (n + 1) % items.length)}>Next</button>
+	</div>
+
+}
+
+// Updates, but causes an extra render
+function TodoEditorTwoPointFive({ item: sourceItem }) {
+	const [item, setInternalItem] = useState(sourceItem);
+	const [name, setName] = useStateWithDeps(item.name, [item]);
+	const [completed, setCompleted] = useStateWithDeps(item.completed, [item]);
+	if (sourceItem !== item) {
+		setInternalItem(sourceItem);
+		setName(sourceItem.name);
+		setCompleted(sourceItem.completed);
+	}
+
+	useEffect(() => {
+		console.log('Updating database:', item.id, name)
+	})
+	return <div><input value={name} onChange={(e) => setName(e.target.value)} /></div>
+}
 
 // Perfect!
 export function BadTodoApp3() {
