@@ -64,8 +64,8 @@ export function BadTodoAppTwoPointFive() {
 // Updates, but causes an extra render
 function TodoEditorTwoPointFive({ item: sourceItem }) {
 	const [item, setInternalItem] = useState(sourceItem);
-	const [name, setName] = useStateWithDeps(item.name, [item]);
-	const [completed, setCompleted] = useStateWithDeps(item.completed, [item]);
+	const [name, setName] = useState(item.name);
+	const [completed, setCompleted] = useState(item.completed);
 	if (sourceItem !== item) {
 		setInternalItem(sourceItem);
 		setName(sourceItem.name);
