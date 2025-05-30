@@ -48,7 +48,7 @@ function TodoEditor1({ item, saveName, saveDrawing, enableDrawing }) {
 	}, [item])
 	return <div class="flex flex-col gap-2"><form class="flex"><input value={name} onChange={(e) => setName(e.target.value)} /><button type="submit" style={{ display: enableDrawing ? 'none' : undefined }} onClick={(e) => { e.preventDefault(); saveName(name) }}>Save</button></form>{enableDrawing ? <div class="flex flex-col gap-2"><strong>Notes</strong>
 		<div class="flex gap-2">{colors.map(color => <span style={{ display: 'inline-block', width: '28px', height: '28px', "background-color": color, "border-radius": '100%', outline: '#aaa solid 1px', transform: brushColor === color ? 'scale(1.3)' : undefined }} onClick={() => setBrushColor(color)} />)}</div>
-		<canvas ref={canvasRef} class="border-black border" width={canvasSize.width} height={canvasSize.height} style={{ ...canvasSize, "image-rendering": 'pixelated' }} onMouseMove={e => {
+		<canvas ref={canvasRef} class="border-black border" width={canvasSize.width} height={canvasSize.height} style={{ ...canvasSize, "image-rendering": 'pixelated', "touch-action": 'none' }} onPointerMove={e => {
 			const canvas = e.currentTarget;
 			const ctx = canvas.getContext('2d');
 			if (!e.buttons) { ctx.beginPath(); return; }
@@ -90,7 +90,7 @@ function TodoEditorWithDeps({ item, saveName, saveDrawing, enableDrawing }) {
 	}, [item])
 	return <div class="flex flex-col gap-2"><form class="flex"><input value={name} onChange={(e) => setName(e.target.value)} /><button type="submit" style={{ display: enableDrawing ? 'none' : undefined }} onClick={(e) => { e.preventDefault(); saveName(name) }}>Save</button></form>{enableDrawing ? <div class="flex flex-col gap-2"><strong>Notes</strong>
 		<div class="flex gap-2">{colors.map(color => <span style={{ display: 'inline-block', width: '28px', height: '28px', "background-color": color, "border-radius": '100%', outline: '#aaa solid 1px', transform: brushColor === color ? 'scale(1.3)' : undefined }} onClick={() => setBrushColor(color)} />)}</div>
-		<canvas ref={canvasRef} class="border-black border" width={canvasSize.width} height={canvasSize.height} style={{ ...canvasSize, "image-rendering": 'pixelated' }} onMouseMove={e => {
+		<canvas ref={canvasRef} class="border-black border" width={canvasSize.width} height={canvasSize.height} style={{ ...canvasSize, "image-rendering": 'pixelated', "touch-action": 'none' }} onPointerMove={e => {
 			const canvas = e.currentTarget;
 			const ctx = canvas.getContext('2d');
 			if (!e.buttons) { ctx.beginPath(); return; }
@@ -108,6 +108,9 @@ function TodoEditorWithDeps({ item, saveName, saveDrawing, enableDrawing }) {
 	</div> : undefined}</div>
 }
 
+function handleDrawMouseMove(e, brushColor) {
+
+}
 
 function TodoEditorWithUseEffect({ item, saveName, saveDrawing, enableDrawing }) {
 	const [brushColor, setBrushColor] = useState('black');
@@ -137,7 +140,7 @@ function TodoEditorWithUseEffect({ item, saveName, saveDrawing, enableDrawing })
 	}, [item])
 	return <div class="flex flex-col gap-2"><form class="flex"><input value={name} onChange={(e) => setName(e.target.value)} /><button type="submit" style={{ display: enableDrawing ? 'none' : undefined }} onClick={(e) => { e.preventDefault(); saveName(name) }}>Save</button></form>{enableDrawing ? <div class="flex flex-col gap-2"><strong>Notes</strong>
 		<div class="flex gap-2">{colors.map(color => <span style={{ display: 'inline-block', width: '28px', height: '28px', "background-color": color, "border-radius": '100%', outline: '#aaa solid 1px', transform: brushColor === color ? 'scale(1.3)' : undefined }} onClick={() => setBrushColor(color)} />)}</div>
-		<canvas ref={canvasRef} class="border-black border" width={canvasSize.width} height={canvasSize.height} style={{ ...canvasSize, "image-rendering": 'pixelated' }} onMouseMove={e => {
+		<canvas ref={canvasRef} class="border-black border" width={canvasSize.width} height={canvasSize.height} style={{ ...canvasSize, "image-rendering": 'pixelated', "touch-action": 'none' }} onPointerMove={e => {
 			const canvas = e.currentTarget;
 			const ctx = canvas.getContext('2d');
 			if (!e.buttons) { ctx.beginPath(); return; }
