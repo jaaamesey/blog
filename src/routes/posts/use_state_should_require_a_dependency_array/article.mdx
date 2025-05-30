@@ -5,7 +5,7 @@ React has a wonderful hook called [`useState`](https://react.dev/reference/react
 
 There's a few points I'd like to argue here.
 
-My first, and hopefully least controversial point, is that **using `useState` like this is bad, and should throw a lint error**:
+1. **Using `useState` like this is bad, and should throw a lint error**:
 
 ```ts {2,3}
 function Component({ someProp }) {
@@ -15,11 +15,11 @@ function Component({ someProp }) {
 }
 ```
 
-The second is that **derived state is *sometimes* a valid approach to solving a problem**, but **the escape hatches React suggests can be somewhat invasive and error-prone**.
+2. **Derived state is *sometimes* a valid approach to solving a problem**, but **the escape hatches React suggests can be somewhat invasive and error-prone**.
 
-The third is that **the "right" primitive for this would be a `useState` hook that requires a dependency array**. The title. We'll get to that eventually.
+3. **The "right" primitive for this would be a `useState` hook that requires a dependency array**. The title. We'll get to that eventually.
  
-## useState as it exists now should not allow derived state
+## 1. useState as it exists now should not allow derived state
 
 So, about that lint error I suggested. Maybe you've already identified the issue with the code above. If not, hopefully this demo illustrates it better:
 
@@ -67,7 +67,7 @@ function SolidComponent(props) {
 So, I don't really see a reason why React's ESLint config shouldn't prohibit this.
 
 
-## Official workarounds
+## 2. The unpleasant workarounds for derived state
 
 React offers a few solutions to this problem, both in the old ["You Probably Don't Need Derived State"](https://legacy.reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html) article (pre-hooks!), and in the [way more recent article on useState](https://react.dev/reference/react/useState#resetting-state-with-a-key).  
 
@@ -183,7 +183,7 @@ function EditPanel({ item, ... }) {
 
 
 
-## We need better primitives for mutable derived state
+## 3. Better primitives for mutable derived state
 
 In my opinion, these workarounds are far more complex than just having proper tools for mutable derived state. And these days, at least [Svelte](https://svelte.dev/docs/svelte/$derived) and [SolidJS](https://dev.to/this-is-learning/mutable-derivations-in-reactivity-2ffl) seem to agree.
 

@@ -1,15 +1,23 @@
 const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/react_bad.react-DdXAFAjF.js","assets/index-BJfUAbRs.js"])))=>i.map(i=>d[i]);
-import{d as n,M as l,h as y,P as B}from"./jsx-runtime-OVrRlQkB.js";import{_ as o}from"./preload-helper-ug3pwPZ1.js";import{E as a}from"./embed_react_component-BqAZ-l4f.js";import{i as u,t as g,v as F,l as m,x as A,y as f,b as c}from"./web-V5pwFSD5.js";import"./all_posts.compile-uYno7xFZ.js";import"./routing-BMGDGDqe.js";import"./components-Dc_S2E9h.js";const C="_demoWrapper_ksh75_1",E={demoWrapper:C};var b=g("<div><noscript></noscript><!$><!/>");function s(r){return(()=>{var e=u(b),t=e.firstChild,d=t.nextSibling,[h,p]=F(d.nextSibling);return m(e,()=>r.children,h,p),A(()=>f(e,`w-full bg-white text-black p-4 rounded-lg ${E.demoWrapper}`)),e})()}function i(r){const e={a:"a",code:"code",em:"em",figure:"figure",h2:"h2",li:"li",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...r.components};return l(y,{children:[l(e.p,{children:["React has a wonderful hook called ",n(e.a,{href:"https://react.dev/reference/react/useState",children:n(e.code,{children:"useState"})})," that we use to set and listen to things that might change over time."]}),`
+import{d as n,M as l,h as y,P as B}from"./jsx-runtime-OVrRlQkB.js";import{_ as o}from"./preload-helper-ug3pwPZ1.js";import{E as a}from"./embed_react_component-BqAZ-l4f.js";import{i as u,t as g,v as F,l as m,x as A,y as f,b as c}from"./web-V5pwFSD5.js";import"./all_posts.compile-uYno7xFZ.js";import"./routing-BMGDGDqe.js";import"./components-Dc_S2E9h.js";const C="_demoWrapper_ksh75_1",E={demoWrapper:C};var b=g("<div><noscript></noscript><!$><!/>");function s(r){return(()=>{var e=u(b),t=e.firstChild,d=t.nextSibling,[h,p]=F(d.nextSibling);return m(e,()=>r.children,h,p),A(()=>f(e,`w-full bg-white text-black p-4 rounded-lg ${E.demoWrapper}`)),e})()}function i(r){const e={a:"a",code:"code",em:"em",figure:"figure",h2:"h2",li:"li",ol:"ol",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...r.components};return l(y,{children:[l(e.p,{children:["React has a wonderful hook called ",n(e.a,{href:"https://react.dev/reference/react/useState",children:n(e.code,{children:"useState"})})," that we use to set and listen to things that might change over time."]}),`
 `,n(e.p,{children:"There's a few points I'd like to argue here."}),`
-`,l(e.p,{children:["My first, and hopefully least controversial point, is that ",l(e.strong,{children:["using ",n(e.code,{children:"useState"})," like this is bad, and should throw a lint error"]}),":"]}),`
+`,l(e.ol,{children:[`
+`,l(e.li,{children:[l(e.strong,{children:["Using ",n(e.code,{children:"useState"})," like this is bad, and should throw a lint error"]}),":"]}),`
+`]}),`
 `,n(e.figure,{"data-rehype-pretty-code-figure":"",children:n(e.pre,{style:{backgroundColor:"#282c34",color:"#abb2bf"},tabIndex:"0","data-language":"ts","data-theme":"one-dark-pro",children:l(e.code,{"data-language":"ts","data-theme":"one-dark-pro",style:{display:"grid"},children:[l(e.span,{"data-line":"",children:[n(e.span,{style:{color:"#C678DD"},children:"function"}),n(e.span,{style:{color:"#61AFEF"},children:" Component"}),n(e.span,{style:{color:"#ABB2BF"},children:"({ "}),n(e.span,{style:{color:"#E06C75",fontStyle:"italic"},children:"someProp"}),n(e.span,{style:{color:"#ABB2BF"},children:" }) {"})]}),`
 `,n(e.span,{"data-line":"","data-highlighted-line":"",children:n(e.span,{style:{color:"#7F848E",fontStyle:"italic"},children:"	// ESLint error: initial state depends on a mutable value"})}),`
 `,l(e.span,{"data-line":"","data-highlighted-line":"",children:[n(e.span,{style:{color:"#C678DD"},children:"	const"}),n(e.span,{style:{color:"#ABB2BF"},children:" ["}),n(e.span,{style:{color:"#E5C07B"},children:"state"}),n(e.span,{style:{color:"#ABB2BF"},children:", "}),n(e.span,{style:{color:"#E5C07B"},children:"setState"}),n(e.span,{style:{color:"#ABB2BF"},children:"] "}),n(e.span,{style:{color:"#56B6C2"},children:"="}),n(e.span,{style:{color:"#61AFEF"},children:" useState"}),n(e.span,{style:{color:"#ABB2BF"},children:"("}),n(e.span,{style:{color:"#E06C75"},children:"someProp"}),n(e.span,{style:{color:"#ABB2BF"},children:");"})]}),`
 `,n(e.span,{"data-line":"",children:n(e.span,{style:{color:"#ABB2BF"},children:"	..."})}),`
 `,n(e.span,{"data-line":"",children:n(e.span,{style:{color:"#ABB2BF"},children:"}"})})]})})}),`
-`,l(e.p,{children:["The second is that ",l(e.strong,{children:["derived state is ",n(e.em,{children:"sometimes"})," a valid approach to solving a problem"]}),", but ",n(e.strong,{children:"the escape hatches React suggests can be somewhat invasive and error-prone"}),"."]}),`
-`,l(e.p,{children:["The third is that ",l(e.strong,{children:['the "right" primitive for this would be a ',n(e.code,{children:"useState"})," hook that requires a dependency array"]}),". The title. We'll get to that eventually."]}),`
-`,n(e.h2,{children:"useState as it exists now should not allow derived state"}),`
+`,l(e.ol,{start:"2",children:[`
+`,l(e.li,{children:[`
+`,l(e.p,{children:[l(e.strong,{children:["Derived state is ",n(e.em,{children:"sometimes"})," a valid approach to solving a problem"]}),", but ",n(e.strong,{children:"the escape hatches React suggests can be somewhat invasive and error-prone"}),"."]}),`
+`]}),`
+`,l(e.li,{children:[`
+`,l(e.p,{children:[l(e.strong,{children:['The "right" primitive for this would be a ',n(e.code,{children:"useState"})," hook that requires a dependency array"]}),". The title. We'll get to that eventually."]}),`
+`]}),`
+`]}),`
+`,n(e.h2,{children:"1. useState as it exists now should not allow derived state"}),`
 `,n(e.p,{children:"So, about that lint error I suggested. Maybe you've already identified the issue with the code above. If not, hopefully this demo illustrates it better:"}),`
 `,n(s,{children:n(a,{loader:()=>o(()=>import("./react_bad.react-DdXAFAjF.js"),__vite__mapDeps([0,1])).then(t=>t.BadTodoApp1)})}),`
 `,l(e.p,{children:['When you change the "task" being edited, ',n(e.strong,{children:"the text in the input doesn't change to whatever the title for the new task is for."})]}),`
@@ -36,7 +44,7 @@ import{d as n,M as l,h as y,P as B}from"./jsx-runtime-OVrRlQkB.js";import{_ as o
 `,n(e.span,{"data-line":"",children:n(e.span,{style:{color:"#ABB2BF"},children:"}"})})]})})}),`
 `,l(e.p,{children:["...Solid's recommended ESLint config ",n(e.em,{children:"does"})," fire a warning for this!"]}),`
 `,n(e.p,{children:"So, I don't really see a reason why React's ESLint config shouldn't prohibit this."}),`
-`,n(e.h2,{children:"Official workarounds"}),`
+`,n(e.h2,{children:"2. The unpleasant workarounds for derived state"}),`
 `,l(e.p,{children:["React offers a few solutions to this problem, both in the old ",n(e.a,{href:"https://legacy.reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html",children:`"You Probably Don't Need Derived State"`})," article (pre-hooks!), and in the ",n(e.a,{href:"https://react.dev/reference/react/useState#resetting-state-with-a-key",children:"way more recent article on useState"}),"."]}),`
 `,l(e.p,{children:["First, if the derived state you're creating is read-only, i.e. is only written to when the source state changes - you don't need ",n(e.code,{children:"useState"})," at all. You can just compute it directly like so:"]}),`
 `,n(e.figure,{"data-rehype-pretty-code-figure":"",children:n(e.pre,{style:{backgroundColor:"#282c34",color:"#abb2bf"},tabIndex:"0","data-language":"js","data-theme":"one-dark-pro",children:l(e.code,{"data-language":"js","data-theme":"one-dark-pro",style:{display:"grid"},children:[l(e.span,{"data-line":"",children:[n(e.span,{style:{color:"#C678DD"},children:"function"}),n(e.span,{style:{color:"#61AFEF"},children:" Component"}),n(e.span,{style:{color:"#ABB2BF"},children:"({ "}),n(e.span,{style:{color:"#E06C75",fontStyle:"italic"},children:"a"}),n(e.span,{style:{color:"#ABB2BF"},children:" }) {"})]}),`
@@ -103,7 +111,7 @@ import{d as n,M as l,h as y,P as B}from"./jsx-runtime-OVrRlQkB.js";import{_ as o
 `,n(e.span,{"data-line":"","data-highlighted-line":"",children:n(e.span,{style:{color:"#7F848E",fontStyle:"italic"},children:"	// 2. someDatabase.sync({ id: 'Second item ID', name: 'Second item name' })"})}),`
 `,n(e.span,{"data-line":"",children:n(e.span,{style:{color:"#ABB2BF"},children:"..."})}),`
 `,n(e.span,{"data-line":"",children:" "})]})})}),`
-`,n(e.h2,{children:"We need better primitives for mutable derived state"}),`
+`,n(e.h2,{children:"3. Better primitives for mutable derived state"}),`
 `,l(e.p,{children:["In my opinion, these workarounds are far more complex than just having proper tools for mutable derived state. And these days, at least ",n(e.a,{href:"https://svelte.dev/docs/svelte/$derived",children:"Svelte"})," and ",n(e.a,{href:"https://dev.to/this-is-learning/mutable-derivations-in-reactivity-2ffl",children:"SolidJS"})," seem to agree."]}),`
 `,l(e.p,{children:["Let's look at the ",n(e.code,{children:"createWritable"}),' "hook" being proposed for Solid. Its implementation is actually fairly simple, and reveals a lot about its expected behaviour.']}),`
 `,n(e.p,{children:"Some context:"}),`
