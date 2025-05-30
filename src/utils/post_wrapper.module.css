@@ -5,5 +5,10 @@
 .postBody h2 {
   font-size: 1.5rem;
   font-weight: bold;
+}
+
+.postBody ul {
+  list-style-type: circle;
+  margin-left: 64px;
 
 }

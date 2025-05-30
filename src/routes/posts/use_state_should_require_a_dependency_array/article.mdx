@@ -7,15 +7,15 @@ There's a few points I'd like to argue here.
 
 My first, and hopefully least controversial point, is that **using `useState` like this is bad, and should throw a lint error**:
 
-```ts
+```ts {2,3}
 function Component({ someProp }) {
-	// ESLint error: initial state depends on an unstable value
+	// ESLint error: initial state depends on a mutable function Component({ someProp }) {value
 	const [state, setState] = useState(someProp);
 	...
 }
 ```
 
-The second is that **derived state is *sometimes* a valid approach to solving a problem**, but **the escape hatches React suggests can be invasive and error-prone**.
+The second is that **derived state is *sometimes* a valid approach to solving a problem**, but **the escape hatches React suggests can be somewhat invasive and error-prone**.
 
 The third is that **the "right" primitive for this would be a `useState` hook that requires a dependency array**. The title. We'll get to that eventually.
  
@@ -33,7 +33,7 @@ But the text for the previous task you were editing before isn't relevant to the
 
 Let's see if anything familiar comes up in the code for that edit panel:
 
-```jsx
+```jsx {2-3}
 function EditPanel({ item, saveName }) {
 	// This isn't reset when `item.name` changes!
 	const [name, setName] = useState(item.name);
@@ -54,7 +54,7 @@ It's a [fairly common position](https://stackoverflow.com/questions/58288286/wha
 
 I've seen this problem come up way too often in production, and it's in no way exclusive to React - it's the reality of any moving part that is tied to another moving part, but also needs to move on its own for a while. You'll find the same problem in SolidJS, except...
 
-```js
+```js {2-3}
 function SolidComponent(props) {
 	// ESLint error: The reactive variable 'props.someProp' should be used within JSX, a tracked scope (like
 	// createEffect), or inside an event handler function, or else changes will be ignored.
@@ -81,9 +81,9 @@ function Component({ a }) {
 }
 ```
 
-Or, if you really don't want to re-compute it each render, and aren't using the new React Compiler, there's `useMemo`:
+Or, if you really don't want to re-compute it each render, and aren't using the new [React Compiler](https://react.dev/learn/react-compiler), there's `useMemo`:
 
-```js
+```js {3}
 function Component({ a }) {
 	const [b, setB] = useState(0);
 	const sum = useMemo(() => a + b, [a, b]);
@@ -109,7 +109,7 @@ But we have to be careful with this - what if there's still some state that we w
 
 Call it contrived, but maybe we want to add *drawings* to our tasks. With different brush colours.
 
-```js
+```js {2}
 function EditPanel(...) {
 	const [brushColor, setBrushColor] = useState('black');
 	...
@@ -155,9 +155,9 @@ But despite this pattern only being applied to *one* value, it already looks qui
 
 Now, what I've seen more in practice is code that looks like this, which definitely *seems* more elegant:
 
-```jsx
+```jsx {3-5}
 function EditPanel({ item, ... }) {
-	const [name, setName] = useState(item.name, [item]);
+	const [name, setName] = useState(item.name);
 	useEffect(() => {
 		setName(item.name);
 	}, [item.name]);
@@ -166,8 +166,7 @@ function EditPanel({ item, ... }) {
 
 But this introduces an unnecessary re-render. What's even worse is the fact that the first re-render has a mix of stale and non-stale data, leading to potentially dangerous behaviour with other useEffects:
 
-```jsx
-
+```jsx {4, 6-8}
 function EditPanel({ item, ... }) {
 ...
 	useEffect(() => {
@@ -189,9 +188,9 @@ In my opinion, these workarounds are far more complex than just having proper to
 Let's look at the `createWritable` "hook" being proposed for Solid. Its implementation is actually fairly simple, and reveals a lot about its expected behaviour.
 
 Some context: 
-- Solid components only render once, so instead of "hooks" you just have factory functions that usually start with `create`
-- `createSignal` is basically just `useState`
-- `createMemo` is basically just `useMemo`, but automatically derives its dependencies instead of requiring a dependency array
+- Solid components only render once, so instead of "hooks" you just have factory functions that usually start with `create`.
+- `createSignal` is basically just `useState`.
+- `createMemo` is basically just `useMemo`, but automatically derives its dependencies instead of requiring a dependency array.
 
 
 ```js
@@ -210,11 +209,11 @@ function createWritable(
 
 What this returns is state that is *memoized* by whatever dependencies were used to create that state. Just like Svelte's `$derived`, that state can change over the lifetime of its dependencies - but once one of those dependencies changes, that state is trashed and re-computed.
 
-I'm only using Solid's implementation as an example here because implementing a hook like this in React is actually quite annoying. For starters, [rules of hooks](https://react.dev/reference/rules/rules-of-hooks#only-call-hooks-at-the-top-level) prevent you from nesting a `useState` inside a `useMemo`. 
+I'm only using Solid's implementation as an example here because implementing a hook like this in React is actually quite annoying. For starters, [Rules of Hooks](https://react.dev/reference/rules/rules-of-hooks#only-call-hooks-at-the-top-level) prevent you from nesting a `useState` inside a `useMemo`. 
 
 But React implementations of this concept do exist, such as [use-state-with-deps](https://react.dev/reference/react/useState#storing-information-from-previous-renders). Let's give it a shot.
 
-```jsx
+```jsx {1, 4} 
 import { useStateWithDeps as useState } from 'use-state-with-deps';
 
 function EditPanel({ item, ... }) {
@@ -227,13 +226,13 @@ function EditPanel({ item, ... }) {
 <EmbedReactComponent props={{enableDrawing: true}} loader={() => import('./react_bad.react.jsx').then(r=>r.BadTodoAppWithDeps)}/>
 </DemoWrapper>
 
-No messing with `key`, setter calls in the root render method, or `useEffect` - it *just works*.
+No messing with `key`, setter calls in the root render method, or `useEffect` - it just kinda works.
 
 
 What I'm proposing is that **this becomes how `useState` works by default**. 
 
 Remember that ESLint error I proposed further up? Maybe it should look more like this:
-```ts
+```ts {2,3}
 function Component({ someProp }) {
 	// ESLint error: someProp not specified in dependency array
 	const [state, setState] = useState(someProp);
@@ -243,7 +242,7 @@ function Component({ someProp }) {
 
 ...and be fixed like so:
 
-```js
+```js {2,3}
 function Component({ someProp }) {
 	// No error!
 	const [state, setState] = useState(someProp, [someProp]);
@@ -255,9 +254,9 @@ There's a lot of precedent to draw from with how dependency arrays for `useMemo`
 
 Of course, we wouldn't want to fully follow `useEffect`'s precedent and have the absence of a dependency array re-create state on each render. A missing dependency array here should behave the same as an empty one, which also means code like this is still perfectly valid:
 
-```js
+```js {2,3}
 function Component({ someProp }) {
-	// No error - we're not deriving state from anything that moves.
+	// No error - we're not deriving state from anything mutable.
 	const [state, setState] = useState(0);
 	...
 }
@@ -266,7 +265,7 @@ function Component({ someProp }) {
 
 I'm not trying to entirely rule out having `useState` *not* reset when something it depends on changes. You'd still have the option of lying to the dependency array like with other hooks:
 
-```javascript
+```javascript {1}
 // eslint-disable-next-line react-hooks/exhaustive-deps
 useState(someProp, []);
 ```
