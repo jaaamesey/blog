@@ -100,28 +100,37 @@ Let's go back to the todo list example from before. The textbook way of fixing t
 ```
 
 <DemoWrapper>
-<EmbedReactComponent props={{enableDrawing: true}} loader={() => import('./react_bad.react.jsx').then(r=>r.BadTodoAppWithKey)}/>
+<EmbedReactComponent props={{enableDrawing: false}} loader={() => import('./react_bad.react.jsx').then(r=>r.BadTodoAppWithKey)}/>
 </DemoWrapper>
 
 And it works - the input field changes when we edit a new task! 
 
 But we have to be careful with this - what if there's still some state that we want to *preserve*?
 
-Call it contrived, but maybe we want to add *drawings* to our tasks:
+Call it contrived, but maybe we want to add *drawings* to our tasks. With different brush colours.
 
-DRAWING DEMO
+```js
+function EditPanel(...) {
+	const [brushColor, setBrushColor] = useState('black');
+	...
+}
+```
 
-Why should the colour we're drawing with reset each time we change what task we're editing?
+<DemoWrapper>
+<EmbedReactComponent props={{enableDrawing: true}} loader={() => import('./react_bad.react.jsx').then(r=>r.BadTodoAppWithKey)}/>
+</DemoWrapper>
+
+**Try changing the brush colour before editing another task.** Why should the colour we're drawing with reset each time we change what task we're editing?
 
 If `key` changes between renders, the entire component tree below that point is *"remounted"*. That means that the underlying DOM nodes will be re-created, and that *any* state declared below that point will be trashed and reset.
 
-This is why we're now seeing that field reset as expected, and why we're seeing X reset as *not* expected. We can't just reset state at the level of a single `useState` hook, or even a single component instance. Also, you need to create a proper `key`, which can get annoying when working with more than one dependency.
+This is why we're now seeing that field reset as expected, and why we're seeing the chosen brush colour reset as *not* expected. We can't just reset state at the level of a single `useState` hook, or even a single component instance.
 
-You might have also noticed that we're now passing on the responsibility of resetting this state to the *consumer* of this component. What if we end up using it elsewhere, but forget to provide a `key` prop?
+You might have also noticed that we're now passing on the responsibility of resetting this state to the *consumer* of this component. What if we end up using it elsewhere, but forget to provide a `key` prop? Also, what if you have more than one dependency that should cause a component to reset? You're going to need to merge those into a single key somehow.
 
 So, sometimes forcing a remount with `key` is absolutely the right option, but there's cases where it's too much of an ask. 
 
-For those cases, [the React docs provides a more isolated pattern](https://react.dev/reference/react/useState#storing-information-from-previous-renders):
+For those cases, [the React docs provides a pattern that's a bit more isolated](https://react.dev/reference/react/useState#storing-information-from-previous-renders):
 
 ```js
 export default function CountLabel({ count }) {
@@ -146,11 +155,32 @@ But despite this pattern only being applied to *one* value, it already looks qui
 
 Now, what I've seen more in practice is code that looks like this, which definitely *seems* more elegant:
 
-TODO EXAMPLE WITH USEEFFECT
+```jsx
+function EditPanel({ item, ... }) {
+	const [name, setName] = useState(item.name, [item]);
+	useEffect(() => {
+		setName(item.name)
+	}, [item.name]);
+...
+```
 
-But this introduces an unnecessary re-render. What's even worse is the fact that the first re-render has a mix of stale and non-stale data, leading to potentially dangerous behaviour with useEffect:
+But this introduces an unnecessary re-render. What's even worse is the fact that the first re-render has a mix of stale and non-stale data, leading to potentially dangerous behaviour with other useEffects:
 
-IMAGE OF DATABASE CALLS
+```jsx
+
+function EditPanel({ item, ... }) {
+...
+	useEffect(() => {
+		someDatabase.sync({ id: item.id, name });
+	}, [item.id, name]);
+	// Runs twice when item.id changes:
+	// 1. someDatabase.sync({ id: 'Second item ID', name: 'First item name' })
+	// 2. someDatabase.sync({ id: 'Second item ID', name: 'Second item name' })
+...
+
+```
+
+
 
 ## We need better primitives for mutable derived state
 
@@ -184,9 +214,21 @@ I'm only using Solid's implementation as an example here because implementing a 
 
 But React implementations of this concept do exist, such as [use-state-with-deps](https://react.dev/reference/react/useState#storing-information-from-previous-renders). Let's give it a shot.
 
-EXAMPLE
+```jsx
+import { useStateWithDeps as useState } from 'use-state-with-deps';
 
-It *just works*.
+function EditPanel({ item, ... }) {
+	const [name, setName] = useState(item.name, [item]);
+	...
+}
+```
+
+<DemoWrapper>
+<EmbedReactComponent props={{enableDrawing: true}} loader={() => import('./react_bad.react.jsx').then(r=>r.BadTodoAppWithDeps)}/>
+</DemoWrapper>
+
+No messing with `key`, setter calls in the root render method, or `useEffect` - it *just works*.
+
 
 What I'm proposing is that **this becomes how `useState` works by default**. 
 
