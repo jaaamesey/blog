@@ -213,7 +213,7 @@ function createWritable(
 
 What this returns is state that is *memoized* by whatever dependencies were used to create that state. Just like Svelte's `$derived`, that state can change over the lifetime of its dependencies - but once one of those dependencies changes, that state is trashed and re-computed.
 
-I'm only using Solid's implementation as an example here because implementing a hook like this in React is actually quite annoying. For starters, [Rules of Hooks](https://react.dev/reference/rules/rules-of-hooks#only-call-hooks-at-the-top-level) prevent you from nesting a `useState` inside a `useMemo`. 
+I'm only using Solid's implementation as an example here because implementing a hook like this in React is actually quite annoying. For starters, [Rules of Hooks](https://react.dev/reference/rules/rules-of-hooks#only-call-hooks-at-the-top-level) prevents you from nesting a `useState` inside a `useMemo`. 
 
 But React implementations of this concept do exist, such as [use-state-with-deps](https://react.dev/reference/react/useState#storing-information-from-previous-renders). Let's give it a shot.
 

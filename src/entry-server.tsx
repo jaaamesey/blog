@@ -68,10 +68,12 @@ export default createHandler(() => (
             @font-face {
               font-family: "Playfair";
               src: url("/fonts/playfair.woff2");
+              font-display: swap;
             }
             @font-face {
               font-family: "Playfair Display";
               src: url("/fonts/playfairdisplay.woff2");
+              font-display: swap;
             }
             body {
               font-family: 'Playfair', serif;

@@ -6,6 +6,7 @@ import { UnreachableError } from "~/utils/unreachable_error";
 import { useColorScheme } from "~/utils/use_color_scheme";
 import { clientOnly } from "@solidjs/start";
 import styles from "./post_wrapper.module.css";
+import { Title } from "@solidjs/meta";
 
 export function PostWrapper(props: {
   postConfig: PostConfig;
@@ -15,6 +16,7 @@ export function PostWrapper(props: {
   const id = createMemo(() => location.pathname.substring("/posts/".length));
   return (
     <div class="min-h-screen flex justify-center py-8 px-4 text-text-primary overflow-x-clip">
+      <Title>{props.postConfig.title}</Title>
       <div class="max-w-xl w-full">
         <header class="sticky top-5 not-sm:text-xs flex justify-between items-center pb-4 border-b border-border-color mb-8 z-1">
           <div

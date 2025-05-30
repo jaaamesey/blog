@@ -2,6 +2,7 @@ import { A } from "@solidjs/router";
 import { onCleanup, onMount, For } from "solid-js";
 import { allPosts } from "~/all_posts.compile";
 import { Marquee } from "./marquee";
+import { Title } from "@solidjs/meta";
 
 export default function Home() {
   onMount(() => {
@@ -18,6 +19,7 @@ export default function Home() {
   });
   return (
     <main class="text-center mx-auto p-4 flex flex-col items-center gap-2">
+      <Title>bikeshedd.ing</Title>
       <h1 class="max-6-xs text-2xl my-6">james karlsson</h1>
       <div class="mb-6 text-sm">i makea da software</div>
       <div class="flex gap-4 mb-6">
