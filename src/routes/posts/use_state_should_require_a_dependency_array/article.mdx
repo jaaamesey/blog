@@ -91,19 +91,37 @@ function Component({ a }) {
 }
 ```
 
-It's the cases that can't be represented this way - cases that need *mutable* derived state - that get really messy. This tends to come up a lot when dealing with user input and optimistic updates (if you can't use `useOptimistic` or Tanstack Query for whatever reason).
+It's the cases that can't be represented this way - cases that need *mutable* derived state - that get really messy. This tends to come up a lot when dealing with user input and optimistic updates (if you can't use [`useOptimistic`](https://react.dev/reference/react/useOptimistic) or [Tanstack Query](https://tanstack.com/query/latest) for whatever reason).
 
-Let's go back to the todo list example from before. The textbook way of fixing this is through the `key` prop, which exists on every React component.
+Let's go back to the todo list example from before. The textbook way of fixing this is through the `key` prop, which exists on every React component. So, let's add that to where this component is used:
 
-And it works! But we have to be careful with this - what if there's still some state that we want to *preserve*?
+```jsx
+<EditPanel item={items[selectedItemId]} key={selectedItemId} />
+```
 
-If `key` changes between renders, the entire component tree below that point is re-mounted. In addition to DOM nodes being recreated, any state declared below that point is *trashed* and reset.
+<DemoWrapper>
+<EmbedReactComponent loader={() => import('./react_bad.react.jsx').then(r=>r.BadTodoAppWithKey)}/>
+</DemoWrapper>
 
-We can't just reset state at the level of a single `useState` hook, or even a single component instance. Also, you need to create a proper `key`, which can get annoying when working with more than one dependency.
+And it works - the input field changes when we edit a new task! 
 
-So, sometimes forcing a remount with `key` is fine, but there's many cases when it's too much of an ask. 
+But we have to be careful with this - what if there's still some state that we want to *preserve*?
 
-For those cases, the React docs provides a more isolated pattern:
+Call it contrived, but maybe we want to add *drawings* to our tasks:
+
+DRAWING DEMO
+
+Why should the colour we're drawing with reset each time we change what task we're editing?
+
+If `key` changes between renders, the entire component tree below that point is *"remounted"*. That means that the underlying DOM nodes will be re-created, and that *any* state declared below that point will be trashed and reset.
+
+This is why we're now seeing that field reset as expected, and why we're seeing X reset as *not* expected. We can't just reset state at the level of a single `useState` hook, or even a single component instance. Also, you need to create a proper `key`, which can get annoying when working with more than one dependency.
+
+You might have also noticed that we're now passing on the responsibility of resetting this state to the *consumer* of this component. What if we end up using it elsewhere, but forget to provide a `key` prop?
+
+So, sometimes forcing a remount with `key` is absolutely the right option, but there's cases where it's too much of an ask. 
+
+For those cases, [the React docs provides a more isolated pattern](https://react.dev/reference/react/useState#storing-information-from-previous-renders):
 
 ```js
 export default function CountLabel({ count }) {
@@ -136,7 +154,7 @@ IMAGE OF DATABASE CALLS
 
 ## We need better primitives for mutable derived state
 
-[Svelte](https://svelte.dev/docs/svelte/$derived) and [SolidJS](https://dev.to/this-is-learning/mutable-derivations-in-reactivity-2ffl) are now introducing proper tools for dealing with mutable derived state.
+In my opinion, these workarounds are a lot more complex than just having proper tools for mutable derived state. [Svelte](https://svelte.dev/docs/svelte/$derived) and [SolidJS](https://dev.to/this-is-learning/mutable-derivations-in-reactivity-2ffl) seem to agree.
 
 Let's look at the `createWritable` "hook" being proposed for Solid. Its implementation is actually fairly simple, and reveals a lot about its expected behaviour.
 
@@ -164,11 +182,11 @@ What this returns is state that is *memoized* by whatever dependencies were used
 
 I'm only using Solid's implementation as an example here because implementing a hook like this in React is actually quite annoying. For starters, [rules of hooks](https://react.dev/reference/rules/rules-of-hooks#only-call-hooks-at-the-top-level) prevent you from nesting a `useState` inside a `useMemo`. 
 
-But React implementations of this concept do exist, such as https://github.com/peterjuras/use-state-with-deps:
+But React implementations of this concept do exist, such as [use-state-with-deps](https://react.dev/reference/react/useState#storing-information-from-previous-renders):
 
 EXAMPLE
 
-Hopefully the somewhat inflammatory title of this article makes a bit more sense now. What I'm proposing is that this becomes **how `useState` works by default**. 
+What I'm proposing is that **this becomes how `useState` works by default**. 
 
 Remember that ESLint error I proposed further up? Maybe it should look more like this:
 ```ts
@@ -189,7 +207,7 @@ function Component({ someProp }) {
 }
 ```
 
-There's a lot of precedent to draw from with how dependency arrays for `useMemo` and `useEffect` work. We'd probably want to inherit the same ESLint warnings and autofixes, and have the React Compiler auto-generate it in the same way.
+There's a lot of precedent to draw from with how dependency arrays for `useMemo` and `useEffect` work. We'd probably want to inherit the same ESLint warnings and autofixes, and have the React Compiler auto-generate dependencies in the same way.
 
 Of course, we wouldn't want to fully follow `useEffect`'s precedent and have the absence of a dependency array re-create state on each render. A missing dependency array here should behave the same as an empty one, which also means code like this is still perfectly valid:
 

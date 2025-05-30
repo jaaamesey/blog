@@ -73,7 +73,7 @@ const ColorSchemeIcon = clientOnly(() =>
       const colorScheme = useColorScheme();
       return (
         <button class="hover:cursor-pointer" onClick={colorScheme?.rotate}>
-          colors:{" "}
+          colours:{" "}
           <span class="inline-block w-10">
             {getColorSchemeIcon(colorScheme?.getOverride())}
           </span>

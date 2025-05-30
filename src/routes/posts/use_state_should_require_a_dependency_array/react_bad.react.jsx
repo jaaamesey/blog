@@ -27,6 +27,26 @@ function TodoEditor1({ item, saveName }) {
 	return <form class="flex"><input value={name} onChange={(e) => setName(e.target.value)} /><button type="submit" onClick={(e) => { e.preventDefault(); saveName(name) }}>Save</button></form>
 }
 
+export function BadTodoAppWithKey() {
+	const [items, setItems] = useState([{ name: 'First task' }, { name: 'Second task' }, { name: 'Third task' }]);
+	const [activeItem, setActiveItem] = useState(0);
+
+	return <div class="flex flex-col gap-2">
+		<h2 class="text-xl font-bold">Todo list</h2>
+		<div class="flex w-full justify-between flex-wrap gap-4">
+			<div class="flex flex-col gap-2 grow">
+				<strong>Tasks:</strong>
+				{items.map((item, i) => <button class="text-start" style={{ fontWeight: activeItem === i ? 'bold' : undefined }} onClick={() => setActiveItem(i)}>Edit "{item.name}"</button>)}
+			</div>
+			<div class="flex flex-col gap-2 basis-40">
+				<strong>Editing "{items[activeItem].name}"</strong>
+				Title: <TodoEditor1 key={activeItem} item={items[activeItem]} saveName={(name) => setItems(p => p.map((item, i) => i === activeItem ? { ...item, name } : item))} />
+			</div>
+		</div>
+	</div>
+
+}
+
 
 export function BadTodoApp2() {
 	const [items, setItems] = useState([{ id: 'first-id', name: 'First item' }, { id: 'second-id', name: 'Second item' }, { id: 'third-id', name: 'Third item' }]);
