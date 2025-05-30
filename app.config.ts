@@ -23,7 +23,7 @@ export default defineConfig({
     prerender: {
       // What the hell, crawling is broken???
       crawlLinks: false,
-      routes: ["/", ...allPosts.map((p) => "/" + p.id)],
+      routes: ["/", ...allPosts.map((p) => "/posts/" + p.id)],
     },
   },
 });
