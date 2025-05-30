@@ -267,7 +267,7 @@
     "isDynamicEntry": true
   },
   "src/routes/posts/use_state_should_require_a_dependency_array/index.tsx?pick=default&pick=$css": {
-    "file": "assets/index-BDpVB2cY.js",
+    "file": "assets/index-hIihmHmz.js",
     "name": "index",
     "src": "src/routes/posts/use_state_should_require_a_dependency_array/index.tsx?pick=default&pick=$css",
     "isEntry": true,
@@ -300,7 +300,7 @@
     "isDynamicEntry": true
   },
   "src/routes/posts/use_state_should_require_a_dependency_array/react_bad.react.jsx": {
-    "file": "assets/react_bad.react-ByCw-Rpn.js",
+    "file": "assets/react_bad.react-C_OzqwXq.js",
     "name": "react_bad.react",
     "src": "src/routes/posts/use_state_should_require_a_dependency_array/react_bad.react.jsx",
     "isDynamicEntry": true,
@@ -319,7 +319,7 @@
     ]
   },
   "virtual:$vinxi/handler/client": {
-    "file": "assets/client-naLqGCVE.js",
+    "file": "assets/client-C2jD0Jvp.js",
     "name": "client",
     "src": "virtual:$vinxi/handler/client",
     "isEntry": true,

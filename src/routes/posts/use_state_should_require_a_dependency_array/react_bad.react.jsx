@@ -59,6 +59,10 @@ function TodoEditor1({ item, saveName, saveDrawing, enableDrawing }) {
 			ctx.lineCap = 'round';
 			ctx.lineTo(x, y);
 			ctx.stroke();
+		}} onPointerUp={(e) => {
+			const canvas = e.currentTarget;
+			const ctx = canvas.getContext('2d');
+			ctx.beginPath();
 		}} /><button onClick={() => {
 			saveName(name)
 			saveDrawing(canvasRef.current.toDataURL('image/png'))
@@ -101,15 +105,16 @@ function TodoEditorWithDeps({ item, saveName, saveDrawing, enableDrawing }) {
 			ctx.lineCap = 'round';
 			ctx.lineTo(x, y);
 			ctx.stroke();
-		}} /><button onClick={() => {
+		}} onPointerUp={(e) => {
+			const canvas = e.currentTarget;
+			const ctx = canvas.getContext('2d');
+			ctx.beginPath();
+		}}
+		/><button onClick={() => {
 			saveName(name)
 			saveDrawing(canvasRef.current.toDataURL('image/png'))
 		}}>Save</button>
 	</div> : undefined}</div>
-}
-
-function handleDrawMouseMove(e, brushColor) {
-
 }
 
 function TodoEditorWithUseEffect({ item, saveName, saveDrawing, enableDrawing }) {
@@ -151,6 +156,10 @@ function TodoEditorWithUseEffect({ item, saveName, saveDrawing, enableDrawing })
 			ctx.lineCap = 'round';
 			ctx.lineTo(x, y);
 			ctx.stroke();
+		}} onPointerUp={(e) => {
+			const canvas = e.currentTarget;
+			const ctx = canvas.getContext('2d');
+			ctx.beginPath();
 		}} /><button onClick={() => {
 			saveName(name)
 			saveDrawing(canvasRef.current.toDataURL('image/png'))
