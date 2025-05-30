@@ -1,11 +1,11 @@
 import {EmbedReactComponent} from '~/utils/embed_react_component';
 import {DemoWrapper} from '~/utils/demo_wrapper';
 
-React has a wonderful hook called [`useState`](https://react.dev/reference/react/useState) that we use to store things that might change over time, and have those changes reflected in the UI.
+React has a wonderful hook called [`useState`](https://react.dev/reference/react/useState) that we use to set and listen to things that might change over time.
 
 There's a few points I'd like to argue here.
 
-My first, and hopefully least controversial point, is that **using `useState` like this should throw a lint error**:
+My first, and hopefully least controversial point, is that **using `useState` like this is bad, and should throw a lint error**:
 
 ```ts
 function Component({ someProp }) {
@@ -100,7 +100,7 @@ Let's go back to the todo list example from before. The textbook way of fixing t
 ```
 
 <DemoWrapper>
-<EmbedReactComponent loader={() => import('./react_bad.react.jsx').then(r=>r.BadTodoAppWithKey)}/>
+<EmbedReactComponent props={{enableDrawing: true}} loader={() => import('./react_bad.react.jsx').then(r=>r.BadTodoAppWithKey)}/>
 </DemoWrapper>
 
 And it works - the input field changes when we edit a new task! 
@@ -140,11 +140,11 @@ export default function CountLabel({ count }) {
 }
 ```
 
-The nicest thing I can say about this is that it works. And at the very least, React *does* prevent Effects from running and children from re-rendering if all a render here does is trigger another render.
+The nicest thing I can say about this is that it works - this *would* force only the state we specify to reset. And at the very least, React *does* prevent Effects from running and children from re-rendering if all a render here does is trigger another render.
 
-But this looks confusing, despite this pattern only being applied to *one* value. We now have to manage previous state, and there's a lot of room for things to go wrong. Maybe our condition gets us stuck in an infinite loop, or maybe we accidentally omit a dependency that we should be listening to.
+But despite this pattern only being applied to *one* value, it already looks quite janky. We now have to manage previous state, and there's a lot of room for things to go wrong. Maybe our condition gets us stuck in an infinite loop, or maybe we accidentally omit a dependency that we should be listening to.
 
-What I've seen more in practice is code like this, which definitely *looks* more elegant:
+Now, what I've seen more in practice is code that looks like this, which definitely *seems* more elegant:
 
 TODO EXAMPLE WITH USEEFFECT
 
@@ -154,7 +154,7 @@ IMAGE OF DATABASE CALLS
 
 ## We need better primitives for mutable derived state
 
-In my opinion, these workarounds are a lot more complex than just having proper tools for mutable derived state. [Svelte](https://svelte.dev/docs/svelte/$derived) and [SolidJS](https://dev.to/this-is-learning/mutable-derivations-in-reactivity-2ffl) seem to agree.
+In my opinion, these workarounds are far more complex than just having proper tools for mutable derived state. And these days, at least [Svelte](https://svelte.dev/docs/svelte/$derived) and [SolidJS](https://dev.to/this-is-learning/mutable-derivations-in-reactivity-2ffl) seem to agree.
 
 Let's look at the `createWritable` "hook" being proposed for Solid. Its implementation is actually fairly simple, and reveals a lot about its expected behaviour.
 
@@ -182,9 +182,11 @@ What this returns is state that is *memoized* by whatever dependencies were used
 
 I'm only using Solid's implementation as an example here because implementing a hook like this in React is actually quite annoying. For starters, [rules of hooks](https://react.dev/reference/rules/rules-of-hooks#only-call-hooks-at-the-top-level) prevent you from nesting a `useState` inside a `useMemo`. 
 
-But React implementations of this concept do exist, such as [use-state-with-deps](https://react.dev/reference/react/useState#storing-information-from-previous-renders):
+But React implementations of this concept do exist, such as [use-state-with-deps](https://react.dev/reference/react/useState#storing-information-from-previous-renders). Let's give it a shot.
 
 EXAMPLE
+
+It *just works*.
 
 What I'm proposing is that **this becomes how `useState` works by default**. 
 
@@ -227,5 +229,5 @@ I'm not trying to entirely rule out having `useState` *not* reset when something
 useState(someProp, [])
 ```
 
-...which is a much simpler escape hatch than what it takes to get the behaviour that's more "correct" today.
+...which in my opinion, is a much simpler escape hatch than what it takes to get the behaviour that's more "correct" today.
 

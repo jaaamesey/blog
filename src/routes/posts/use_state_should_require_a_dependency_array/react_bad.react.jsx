@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useLayoutEffect, useMemo } from 'react'
 import { useState, useEffect, useRef, useCallback } from 'react'
 
 // Doesn't update
@@ -15,19 +15,47 @@ export function BadTodoApp1() {
 			</div>
 			<div class="flex flex-col gap-2 basis-40">
 				<strong>Editing "{items[activeItem].name}"</strong>
-				Title: <TodoEditor1 item={items[activeItem]} saveName={(name) => setItems(p => p.map((item, i) => i === activeItem ? { ...item, name } : item))} />
+				Title: <TodoEditor1 item={items[activeItem]} saveName={(name) => setItems(p => p.map((item, i) => i === activeItem ? { ...item, name } : item))} saveDrawing={(drawing) => setItems(p => p.map((item, i) => i === activeItem ? { ...item, drawing } : item))} />
 			</div>
 		</div>
 	</div>
 
 }
 
-function TodoEditor1({ item, saveName }) {
+const colors = ['black', 'white', 'red', 'blue', 'yellow'];
+
+function TodoEditor1({ item, saveName, saveDrawing, enableDrawing }) {
 	const [name, setName] = useState(item.name, [item]);
-	return <form class="flex"><input value={name} onChange={(e) => setName(e.target.value)} /><button type="submit" onClick={(e) => { e.preventDefault(); saveName(name) }}>Save</button></form>
+	const [brushColor, setBrushColor] = useState('black');
+	const canvasSize = { width: 200, height: 200 };
+	const canvasRef = useRef();
+	useLayoutEffect(() => {
+		if (!canvasRef.current) { return; }
+		const ctx = canvasRef.current.getContext('2d');
+		//ctx.reset();
+		if (!item.drawing) { return }
+		const img = new Image(canvasSize.width, canvasSize.height);
+		img.src = item.drawing;
+		ctx.drawImage(img, 0, 0);
+	}, [item.drawing])
+	return <div class="flex flex-col gap-2"><form class="flex"><input value={name} onChange={(e) => setName(e.target.value)} /><button type="submit" onClick={(e) => { e.preventDefault(); saveName(name) }}>Save</button></form>{enableDrawing ? <div class="flex flex-col gap-2"><strong>Notes</strong>
+		<div class="flex gap-2">{colors.map(color => <span style={{ display: 'inline-block', width: '28px', height: '28px', "background-color": color, "border-radius": '100%', outline: '#aaa solid 1px', transform: brushColor === color ? 'scale(1.3)' : undefined }} onClick={() => setBrushColor(color)} />)}</div>
+		<canvas ref={canvasRef} class="border-black border" width={canvasSize.width} height={canvasSize.height} style={{ ...canvasSize, "image-rendering": 'pixelated' }} onMouseMove={e => {
+			const canvas = e.currentTarget;
+			const ctx = canvas.getContext('2d');
+			if (!e.buttons) { ctx.beginPath(); return; }
+			const x = e.pageX - e.currentTarget.offsetLeft;
+			const y = e.pageY - e.currentTarget.offsetTop;
+			ctx.strokeStyle = brushColor;
+			ctx.lineWidth = 2;
+			ctx.lineCap = 'round';
+			ctx.lineTo(x, y);
+			ctx.stroke();
+		}} /><button onClick={() => saveDrawing(canvasRef.current.toDataURL('image/png'))}>Save notes</button>
+	</div> : undefined}</div>
 }
 
-export function BadTodoAppWithKey() {
+export function BadTodoAppWithKey(props) {
 	const [items, setItems] = useState([{ name: 'First task' }, { name: 'Second task' }, { name: 'Third task' }]);
 	const [activeItem, setActiveItem] = useState(0);
 
@@ -40,7 +68,7 @@ export function BadTodoAppWithKey() {
 			</div>
 			<div class="flex flex-col gap-2 basis-40">
 				<strong>Editing "{items[activeItem].name}"</strong>
-				Title: <TodoEditor1 key={activeItem} item={items[activeItem]} saveName={(name) => setItems(p => p.map((item, i) => i === activeItem ? { ...item, name } : item))} />
+				Title: <TodoEditor1 key={activeItem} item={items[activeItem]} saveName={(name) => setItems(p => p.map((item, i) => i === activeItem ? { ...item, name } : item))} saveDrawing={(drawing) => setItems(p => p.map((item, i) => i === activeItem ? { ...item, drawing } : item))} enableDrawing={props.enableDrawing} />
 			</div>
 		</div>
 	</div>
