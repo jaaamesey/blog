@@ -5,7 +5,7 @@ React has a wonderful hook called [`useState`](https://react.dev/reference/react
 
 There's a few points I'd like to argue here.
 
-1. **Using `useState` like this is bad, and should throw a lint error**:
+1.&nbsp;**Using `useState` like this is bad, and should throw a lint error**:
 
 ```ts {2,3}
 function Component({ someProp }) {
@@ -15,9 +15,9 @@ function Component({ someProp }) {
 }
 ```
 
-2. **Derived state is *sometimes* a valid approach to solving a problem**, but **the escape hatches React suggests can be somewhat invasive and error-prone**.
+2.&nbsp;**Derived state is *sometimes* a valid approach to solving a problem**, but **the escape hatches React suggests can be somewhat invasive and error-prone**.
 
-3. **The "right" primitive for this would be a `useState` hook that requires a dependency array**. The title. We'll get to that eventually.
+3.&nbsp;**The "right" primitive for this would be a `useState` hook that requires a dependency array**. The title. We'll get to that eventually.
  
 ## 1. useState as it exists now should not allow derived state
 
