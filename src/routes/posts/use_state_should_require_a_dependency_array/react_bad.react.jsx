@@ -3,22 +3,28 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 
 // Doesn't update
 export function BadTodoApp1() {
-	const [items, setItems] = useState([{ id: 'first-id', name: 'First item' }, { id: 'second-id', name: 'Second item' }, { id: 'third-id', name: 'Third item' }]);
+	const [items, setItems] = useState([{ name: 'First item' }, { name: 'Second item' }, { name: 'Third item' }]);
 	const [activeItem, setActiveItem] = useState(0);
 
-	return <div>
-		<div>Editing {items[activeItem].id}</div>
-		<TodoEditor1 item={items[activeItem]} />
-		<button onClick={() => setActiveItem(n => (n + 1) % items.length)}>Next</button>
+	return <div class="flex flex-col gap-2">
+		<h2 class="text-xl font-bold">Todo list</h2>
+		<div class="flex w-full justify-between flex-wrap gap-4">
+			<div class="flex flex-col gap-2 grow">
+				<strong>Tasks:</strong>
+				{items.map((item, i) => <button class="text-start" style={{ fontWeight: activeItem === i ? 'bold' : undefined }} onClick={() => setActiveItem(i)}>Edit "{item.name}"</button>)}
+			</div>
+			<div class="flex flex-col gap-2 basis-40">
+				<strong>Editing "{items[activeItem].name}"</strong>
+				Title: <TodoEditor1 item={items[activeItem]} saveName={(name) => setItems(p => p.map((item, i) => i === activeItem ? { ...item, name } : item))} />
+			</div>
+		</div>
 	</div>
 
 }
 
-function TodoEditor1({ item }) {
+function TodoEditor1({ item, saveName }) {
 	const [name, setName] = useState(item.name, [item]);
-	const [completed, setCompleted] = useState(item.completed, [item]);
-	return <div><input value={name} onChange={(e) => setName(e.target.value)} /></div>
-
+	return <div class="flex"><input value={name} onChange={(e) => setName(e.target.value)} /><button onClick={() => saveName(name)}>Save</button></div>
 }
 
 

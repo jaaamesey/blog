@@ -1,0 +1,9 @@
+.demoWrapper button {
+  background: #ddd;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.demoWrapper input {
+  border: solid black 1px;
+}

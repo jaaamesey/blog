@@ -40,7 +40,7 @@ export function PostWrapper(props: {
           </div>
           <div class="text-text-secondary">{props.postConfig.date}</div>
         </header>
-        <h1 class="text-4xl md:text-5xl mb-6 text-text-primary">
+        <h1 class="text-4xl md:text-5xl mb-8 text-text-primary">
           <div>
             <span
               style={{
@@ -51,7 +51,7 @@ export function PostWrapper(props: {
             </span>
           </div>
         </h1>
-        <div class="text-lg">{props.children}</div>
+        <div class="text-lg flex flex-col gap-4">{props.children}</div>
         <div style={{ display: "none" }}>
           {id()}
           {nextPosts.size}

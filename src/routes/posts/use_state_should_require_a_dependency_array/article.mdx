@@ -1,11 +1,217 @@
 import {EmbedReactComponent} from '~/utils/embed_react_component';
+import {DemoWrapper} from '~/utils/demo_wrapper';
 
-Article text goes here
+  
 
+
+Maybe I should have chosen something that sounds less blasphemous for my first article. Oh well.
+
+There's a few points I'd like to argue here.
+
+My first, and hopefully least controversial point, is that **code like this should throw a lint error**:
+
+```ts
+function Component({ someProp }) {
+	// ESLint error: initial state depends on an unstable value
+	const [state, setState] = useState(someProp);
+	...
+}
+```
+
+The second is that **derived state is *sometimes* a valid approach to solving a problem**, but **the escape hatches React suggests can be invasive and error-prone**.
+
+The third is that **the "right" primitive for this would be a `useState` hook that requires a dependency array**. The title: we'll get to that eventually.
+ 
+## useState as it exists now should not allow derived state
+
+So, about that lint error I suggested. Maybe you've already identified the issue with the code above. If not, hopefully this demo illustrates it better:
+
+<DemoWrapper>
 <EmbedReactComponent loader={() => import('./react_bad.react.jsx').then(r=>r.BadTodoApp1)}/>
+</DemoWrapper>
 
-<EmbedReactComponent loader={() => import('./react_bad.react.jsx').then(r=>r.BadTodoApp2)}/>
+When you change the "task" being edited, **the text in the input doesn't change to whatever the title for the new task is for.**
 
-<EmbedReactComponent loader={() => import('./react_bad.react.jsx').then(r=>r.BadTodoAppTwoPointFive)}/>
+But the text for the previous task you were editing before isn't relevant to the task you're editing now, right? Wouldn't you expect it to "reset" with the rest of the UI?
 
-<EmbedReactComponent loader={() => import('./react_bad.react.jsx').then(r=>r.BadTodoApp3)}/>
+Let's see if anything familiar comes up in the code for that edit panel:
+
+```jsx
+function EditPanel({ item, saveName }) {
+	// This isn't reset when `item.name` changes!
+	const [name, setName] = useState(item.name);
+	return (
+		<div>
+			<input value={name} onChange={(e) => setName(e.target.value)} />
+			<button onClick={() => saveName(name)}>Save</button>
+		</div>
+	);
+}
+```
+
+**What we've done here is create *un*-reactive code by accident.**
+
+Ideally, components should be dealing with the reality that a prop can change over time. But instead, we're taking a snapshot of only the *initial* value of a prop, and ignoring any changes.
+
+It's a [fairly common position](https://stackoverflow.com/questions/58288286/what-is-derived-state-in-react-and-why-is-it-important) that deriving *any* mutable state from other state should be avoided where possible. In other words, you shouldn't be able to put a prop or some other piece of state inside a `useState` call. And I'd agree to an extent - so much so that I think that piece of code should warrant the death penalty, or at least a warning from ESLint. But there's no such warning, and I haven't been strapped to the electric chair just yet.
+
+I've seen this problem come up way too often in production, and it's in no way exclusive to React - it's the reality of any moving part that is tied to another moving part, but also needs to move on its own for a while. You'll find the same problem in SolidJS, except...
+
+```js
+function SolidComponent(props) {
+	// ESLint error: The reactive variable 'props.someProp' should be used within JSX, a tracked scope (like
+	// createEffect), or inside an event handler function, or else changes will be ignored.
+	const [state, setState] = createSignal(props.someProp);
+}
+```
+
+...Solid's recommended ESLint config *does* fire a warning for this!
+
+So, I don't really see a reason why React's ESLint config shouldn't prohibit this.
+
+
+## Official workarounds
+
+React offers a few solutions to this problem, both in the old ["You Probably Don't Need Derived State"](https://legacy.reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html) article (pre-hooks!), and in the [way more recent article on useState](https://react.dev/reference/react/useState#resetting-state-with-a-key).  
+
+First, if the derived state you're creating is read-only, i.e. is only written to when the source state changes - you don't need `useState` at all. You can just compute it directly like so:
+
+```js
+function Component({ a }) {
+	const [b, setB] = useState(0);
+	const sum = a + b;
+	...
+}
+```
+
+Or, if you really don't want to re-compute it each render, and aren't using the new React Compiler, there's `useMemo`:
+
+```js
+function Component({ a }) {
+	const [b, setB] = useState(0);
+	const sum = useMemo(() => a + b, [a, b]);
+	...
+}
+```
+
+It's the cases that can't be represented this way - cases that need *mutable* derived state - that get really messy. This tends to come up a lot when dealing with user input and optimistic updates (if you can't use `useOptimistic` or Tanstack Query for whatever reason).
+
+Let's go back to the todo list example from before. The textbook way of fixing this is through the `key` prop, which exists on every React component.
+
+And it works! But we have to be careful with this - what if there's still some state that we want to *preserve*?
+
+If `key` changes between renders, the entire component tree below that point is re-mounted. In addition to DOM nodes being recreated, any state declared below that point is *trashed* and reset.
+
+We can't just reset state at the level of a single `useState` hook, or even a single component instance. Also, you need to create a proper `key`, which can get annoying when working with more than one dependency.
+
+So, sometimes forcing a remount with `key` is fine, but there's many cases when it's too much of an ask. 
+
+For those cases, the React docs provides a more isolated pattern:
+
+```js
+export default function CountLabel({ count }) {
+  const [prevCount, setPrevCount] = useState(count);
+  const [trend, setTrend] = useState(null);
+  if (prevCount !== count) {
+    setPrevCount(count);
+    setTrend(count > prevCount ? 'increasing' : 'decreasing');
+  }
+  return (
+    <>
+      <h1>{count}</h1>
+      {trend && <p>The count is {trend}</p>}
+    </>
+  );
+}
+```
+
+The nicest thing I can say about this is that it works. And at the very least, React *does* prevent Effects from running and children from re-rendering if all a render here does is trigger another render.
+
+But this looks confusing, despite this pattern only being applied to *one* value. We now have to manage previous state, and there's a lot of room for things to go wrong. Maybe our condition gets us stuck in an infinite loop, or maybe we accidentally omit a dependency that we should be listening to.
+
+What I've seen more in practice is code like this, which definitely *looks* more elegant:
+
+TODO EXAMPLE WITH USEEFFECT
+
+But this introduces an unnecessary re-render. What's even worse is the fact that the first re-render has a mix of stale and non-stale data, leading to potentially dangerous behaviour with useEffect:
+
+IMAGE OF DATABASE CALLS
+
+## We need better primitives for mutable derived state
+
+[Svelte](https://svelte.dev/docs/svelte/$derived) and [SolidJS](https://dev.to/this-is-learning/mutable-derivations-in-reactivity-2ffl) are now introducing proper tools for dealing with mutable derived state.
+
+Let's look at the `createWritable` "hook" being proposed for Solid. Its implementation is actually fairly simple, and reveals a lot about its expected behaviour.
+
+Some context: 
+- Solid components only render once, so instead of "hooks" you just have factory functions that usually start with `create`
+- `createSignal` is basically just `useState`
+- `createMemo` is basically just `useMemo`, but automatically derives its dependencies instead of requiring a dependency array
+
+
+```js
+function createWritable(
+	// Function for computing "initial" state
+	fn,
+) {
+  // When dependencies used by `fn` change, the memoized state is 
+  // discarded and recomputed
+  const computed = createMemo(() => createSignal(fn()))
+  // This looks scary, but it's basically just returning the getters
+  // and setters from the state declared above
+  return [() => computed()[0](), (v) => computed()[1](v))]
+}
+`````
+
+What this returns is state that is *memoized* by whatever dependencies were used to create that state. Just like Svelte's `$derived`, that state can change over the lifetime of its dependencies - but once one of those dependencies changes, that state is trashed and re-computed.
+
+I'm only using Solid's implementation as an example here because implementing a hook like this in React is actually quite annoying. For starters, [rules of hooks](https://react.dev/reference/rules/rules-of-hooks#only-call-hooks-at-the-top-level) prevent you from nesting a `useState` inside a `useMemo`. 
+
+But React implementations of this concept do exist, such as https://github.com/peterjuras/use-state-with-deps:
+
+EXAMPLE
+
+Hopefully the somewhat inflammatory title of this article makes a bit more sense now. What I'm proposing is that this becomes **how `useState` works by default**. 
+
+Remember that ESLint error I proposed further up? Maybe it should look more like this:
+```ts
+function Component({ someProp }) {
+	// ESLint error: someProp not specified in dependency array
+	const [state, setState] = useState(someProp);
+	...
+}
+```
+
+...and be fixed like so:
+
+```js
+function Component({ someProp }) {
+	// No error!
+	const [state, setState] = useState(someProp, [someProp]);
+	...
+}
+```
+
+There's a lot of precedent to draw from with how dependency arrays for `useMemo` and `useEffect` work. We'd probably want to inherit the same ESLint warnings and autofixes, and have the React Compiler auto-generate it in the same way.
+
+Of course, we wouldn't want to fully follow `useEffect`'s precedent and have the absence of a dependency array re-create state on each render. A missing dependency array here should behave the same as an empty one, which also means code like this is still perfectly valid:
+
+```js
+function Component({ someProp }) {
+	// No error - we're not deriving state from anything that moves.
+	const [state, setState] = useState(0);
+	...
+}
+```
+
+
+I'm not trying to entirely rule out having `useState` *not* reset when something it depends on changes. You'd still have the option of lying to the dependency array like with other hooks:
+
+```javascript
+// eslint-disable-next-line react-hooks/exhaustive-deps
+useState(someProp, [])
+```
+
+...which is a much simpler escape hatch than what it takes to get the behaviour that's more "correct" today.
+
+
