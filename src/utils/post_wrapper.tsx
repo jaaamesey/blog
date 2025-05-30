@@ -5,6 +5,7 @@ import { PostConfig } from "~/post_types";
 import { UnreachableError } from "~/utils/unreachable_error";
 import { useColorScheme } from "~/utils/use_color_scheme";
 import { clientOnly } from "@solidjs/start";
+import styles from "./post_wrapper.module.css";
 
 export function PostWrapper(props: {
   postConfig: PostConfig;
@@ -51,7 +52,9 @@ export function PostWrapper(props: {
             </span>
           </div>
         </h1>
-        <div class="text-lg flex flex-col gap-4">{props.children}</div>
+        <div class={`text-lg flex flex-col gap-4 mb-20 ${styles.postBody}`}>
+          {props.children}
+        </div>
         <div style={{ display: "none" }}>
           {id()}
           {nextPosts.size}

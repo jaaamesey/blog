@@ -3,7 +3,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 
 // Doesn't update
 export function BadTodoApp1() {
-	const [items, setItems] = useState([{ name: 'First item' }, { name: 'Second item' }, { name: 'Third item' }]);
+	const [items, setItems] = useState([{ name: 'First task' }, { name: 'Second task' }, { name: 'Third task' }]);
 	const [activeItem, setActiveItem] = useState(0);
 
 	return <div class="flex flex-col gap-2">
@@ -24,7 +24,7 @@ export function BadTodoApp1() {
 
 function TodoEditor1({ item, saveName }) {
 	const [name, setName] = useState(item.name, [item]);
-	return <div class="flex"><input value={name} onChange={(e) => setName(e.target.value)} /><button onClick={() => saveName(name)}>Save</button></div>
+	return <form class="flex"><input value={name} onChange={(e) => setName(e.target.value)} /><button type="submit" onClick={(e) => { e.preventDefault(); saveName(name) }}>Save</button></form>
 }
 
 

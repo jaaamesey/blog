@@ -1,0 +1,9 @@
+.postBody a {
+  text-decoration: underline;
+}
+
+.postBody h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+
+}

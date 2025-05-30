@@ -1,14 +1,11 @@
 import {EmbedReactComponent} from '~/utils/embed_react_component';
 import {DemoWrapper} from '~/utils/demo_wrapper';
 
-  
-
-
-Maybe I should have chosen something that sounds less blasphemous for my first article. Oh well.
+React has a wonderful hook called [`useState`](https://react.dev/reference/react/useState) that we use to store things that might change over time, and have those changes reflected in the UI.
 
 There's a few points I'd like to argue here.
 
-My first, and hopefully least controversial point, is that **code like this should throw a lint error**:
+My first, and hopefully least controversial point, is that **using `useState` like this should throw a lint error**:
 
 ```ts
 function Component({ someProp }) {
@@ -20,7 +17,7 @@ function Component({ someProp }) {
 
 The second is that **derived state is *sometimes* a valid approach to solving a problem**, but **the escape hatches React suggests can be invasive and error-prone**.
 
-The third is that **the "right" primitive for this would be a `useState` hook that requires a dependency array**. The title: we'll get to that eventually.
+The third is that **the "right" primitive for this would be a `useState` hook that requires a dependency array**. The title. We'll get to that eventually.
  
 ## useState as it exists now should not allow derived state
 
@@ -213,5 +210,4 @@ useState(someProp, [])
 ```
 
 ...which is a much simpler escape hatch than what it takes to get the behaviour that's more "correct" today.
-
 

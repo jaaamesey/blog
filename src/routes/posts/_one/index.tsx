@@ -1,4 +1,4 @@
-import { PostWrapper } from "~/components/post_wrapper";
+import { PostWrapper } from "~/utils/post_wrapper";
 import Article from "./article.mdx";
 import config from "./meta";
 
