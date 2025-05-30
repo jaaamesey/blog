@@ -159,7 +159,7 @@ Now, what I've seen more in practice is code that looks like this, which definit
 function EditPanel({ item, ... }) {
 	const [name, setName] = useState(item.name, [item]);
 	useEffect(() => {
-		setName(item.name)
+		setName(item.name);
 	}, [item.name]);
 ...
 ```
@@ -174,7 +174,7 @@ function EditPanel({ item, ... }) {
 		someDatabase.sync({ id: item.id, name });
 	}, [item.id, name]);
 	// Runs twice when item.id changes:
-	// 1. someDatabase.sync({ id: 'Second item ID', name: 'First item name' })
+	// 1. someDatabase.sync({ id: 'Second item ID', name: 'First item name' }) (incorrect!)
 	// 2. someDatabase.sync({ id: 'Second item ID', name: 'Second item name' })
 ...
 
@@ -268,7 +268,7 @@ I'm not trying to entirely rule out having `useState` *not* reset when something
 
 ```javascript
 // eslint-disable-next-line react-hooks/exhaustive-deps
-useState(someProp, [])
+useState(someProp, []);
 ```
 
 ...which in my opinion, is a much simpler escape hatch than what it takes to get the behaviour that's more "correct" today.
