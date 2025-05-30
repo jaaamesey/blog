@@ -9,7 +9,7 @@ My first, and hopefully least controversial point, is that **using `useState` li
 
 ```ts {2,3}
 function Component({ someProp }) {
-	// ESLint error: initial state depends on a mutable function Component({ someProp }) {value
+	// ESLint error: initial state depends on a mutable value
 	const [state, setState] = useState(someProp);
 	...
 }
