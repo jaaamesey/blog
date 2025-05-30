@@ -266,7 +266,7 @@
     "isDynamicEntry": true
   },
   "src/routes/posts/use_state_should_require_a_dependency_array/index.tsx?pick=default&pick=$css": {
-    "file": "assets/index-BneHwhXQ.js",
+    "file": "assets/index-D602IZKY.js",
     "name": "index",
     "src": "src/routes/posts/use_state_should_require_a_dependency_array/index.tsx?pick=default&pick=$css",
     "isEntry": true,
@@ -327,7 +327,7 @@
     ]
   },
   "virtual:$vinxi/handler/client": {
-    "file": "assets/client-C0xM77_G.js",
+    "file": "assets/client-BLVlmDHj.js",
     "name": "client",
     "src": "virtual:$vinxi/handler/client",
     "isEntry": true,
