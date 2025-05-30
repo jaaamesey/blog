@@ -3,6 +3,7 @@ import tailwindcss from "@tailwindcss/vite";
 import mdx from "@mdx-js/rollup";
 import compileTime from "vite-plugin-compile-time";
 import rehypePrettyCode from "rehype-pretty-code";
+import { allPosts } from "./src/all_posts.compile";
 
 export default defineConfig({
   solid: { exclude: /\.react\.(tsx|jsx)/ },
@@ -19,5 +20,10 @@ export default defineConfig({
   ssr: true,
   server: {
     preset: "static",
+    prerender: {
+      // What the hell, crawling is broken???
+      crawlLinks: false,
+      routes: ["/", ...allPosts.map((p) => "/" + p.id)],
+    },
   },
 });
