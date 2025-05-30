@@ -1,0 +1,1 @@
+import{m as t,b as a}from"./web-V5pwFSD5.js";import{u as e}from"./routing-BMGDGDqe.js";import{A as m}from"./components-Dc_S2E9h.js";function s(){const r=e();return[t(()=>r.param),a(m,{get href(){return"/client-routing-test/"+r.param+"1"},children:"next"})]}export{s as default};

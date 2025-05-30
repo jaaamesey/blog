@@ -1,5 +1,0 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/react_bad.react-R5t7SY1x.js","assets/index-BJfUAbRs.js"])))=>i.map(i=>d[i]);
-import{d as e,M as a,h as m,P as _}from"./jsx-runtime-6D5wAP0m.js";import{_ as n}from"./preload-helper-ug3pwPZ1.js";import{E as d}from"./embed_react_component-DYuFo_LV.js";import{b as i}from"./web-CBcu1dwP.js";import"./all_posts.compile-B-enHPVs.js";import"./routing-BjFlmBxB.js";import"./components-C8pyS6QA.js";function p(t){const r={p:"p",...t.components};return a(m,{children:[e(r.p,{children:"Article text goes here"}),`
-`,e(d,{loader:()=>n(()=>import("./react_bad.react-R5t7SY1x.js"),__vite__mapDeps([0,1])).then(o=>o.BadTodoApp1)}),`
-`,e(d,{loader:()=>n(()=>import("./react_bad.react-R5t7SY1x.js"),__vite__mapDeps([0,1])).then(o=>o.BadTodoApp2)}),`
-`,e(d,{loader:()=>n(()=>import("./react_bad.react-R5t7SY1x.js"),__vite__mapDeps([0,1])).then(o=>o.BadTodoApp3)})]})}function c(t={}){const{wrapper:r}=t.components||{};return r?e(r,{...t,children:e(p,{...t})}):p(t)}const s={title:"useState should require a dependency array",date:"2025-05-30"},T=()=>i(_,{postConfig:s,get children(){return i(c,{})}});export{T as default};
