@@ -120,7 +120,9 @@ function EditPanel(...) {
 <EmbedReactComponent props={{enableDrawing: true}} loader={() => import('./react_bad.react.jsx').then(r=>r.BadTodoAppWithKey)}/>
 </DemoWrapper>
 
-**Try changing the brush colour before editing another task.** Why should the colour we're drawing with reset each time we change what task we're editing?
+**Try changing the brush colour before selecting another task.** 
+
+Why should the colour we're drawing with reset each time we change what task we're editing? That state might be part of the same component, but it shouldn't be joined to the specific task we're editing.
 
 If `key` changes between renders, the entire component tree below that point is *"remounted"*. That means that the underlying DOM nodes will be re-created, and that *any* state declared below that point will be trashed and reset.
 
@@ -226,7 +228,7 @@ function EditPanel({ item, ... }) {
 <EmbedReactComponent props={{enableDrawing: true}} loader={() => import('./react_bad.react.jsx').then(r=>r.BadTodoAppWithDeps)}/>
 </DemoWrapper>
 
-No messing with `key`, setter calls in the root render method, or `useEffect` - it just kinda works.
+No messing with `key`, weird setter calls in the render method, or `useEffect` - it just kinda works.
 
 
 What I'm proposing is that **this becomes how `useState` works by default**. 
