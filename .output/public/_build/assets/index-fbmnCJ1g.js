@@ -1,4 +1,4 @@
-import{d as o,M as t,h as s,P as a}from"./jsx-runtime-CwYC41Ck.js";import{b as r}from"./web-DYO1r_n-.js";import"./all_posts.compile-uYno7xFZ.js";import"./index-CxeZ2ADl.js";import"./routing-CouTEQdE.js";import"./components-Dezfg5Cr.js";function i(n){const e={li:"li",p:"p",ul:"ul",...n.components};return t(s,{children:[o(e.p,{children:"You've probably seen this new genre of puzzle games crop up over the past few years. You know, games that:"}),`
+import{d as o,M as t,h as s,P as a}from"./jsx-runtime-CdQ6bFw8.js";import{b as r}from"./web-DYO1r_n-.js";import"./all_posts.compile-uYno7xFZ.js";import"./index-CxeZ2ADl.js";import"./routing-CouTEQdE.js";import"./components-Dezfg5Cr.js";function i(n){const e={li:"li",p:"p",ul:"ul",...n.components};return t(s,{children:[o(e.p,{children:"You've probably seen this new genre of puzzle games crop up over the past few years. You know, games that:"}),`
 `,t(e.ul,{children:[`
 `,o(e.li,{children:"release a new puzzle each day"}),`
 `,o(e.li,{children:'encourage their users to share some kind of "score" with others'}),`

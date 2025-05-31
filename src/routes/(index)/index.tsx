@@ -39,6 +39,7 @@ export default function Home() {
             return (
               <A
                 class="w-full bg-white/90 rounded-2xl p-4 text-start text-gray-950"
+                preload
                 href={`/posts/${p.id}`}
                 onClick={() => {
                   if (document.startViewTransition) {

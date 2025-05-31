@@ -34,7 +34,7 @@ export function PostWrapper(props: {
             }}
           />
           <div class="text-text-secondary">
-            <A href="/" style={{ "view-transition-name": "logo" }}>
+            <A preload href="/" style={{ "view-transition-name": "logo" }}>
               james karlsson
             </A>
           </div>
