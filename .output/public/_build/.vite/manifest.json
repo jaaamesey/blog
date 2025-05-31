@@ -319,7 +319,7 @@
     ]
   },
   "virtual:$vinxi/handler/client": {
-    "file": "assets/client-B9DehWB8.js",
+    "file": "assets/client-jcOjKOKy.js",
     "name": "client",
     "src": "virtual:$vinxi/handler/client",
     "isEntry": true,
@@ -350,7 +350,7 @@
       "src/routes/posts/_two/shouldnotappear/meta.ts?pick=default&pick=$css"
     ],
     "css": [
-      "assets/client-B_JNecB5.css"
+      "assets/client-Cff-02EO.css"
     ]
   }
 }

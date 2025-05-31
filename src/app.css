@@ -74,3 +74,6 @@ code[data-line-numbers-max-digits="4"] > [data-line]::before {
   navigation: auto;
 }
 
+#app {
+  overflow-x: hidden;
+}
