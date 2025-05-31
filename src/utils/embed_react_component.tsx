@@ -1,4 +1,4 @@
-import { createResource, createRoot, Suspense } from "solid-js";
+import { createResource, createRoot, ErrorBoundary, Suspense } from "solid-js";
 import { clientOnly } from "@solidjs/start";
 
 const EmbedReactComponentImpl = <
@@ -11,6 +11,7 @@ const EmbedReactComponentImpl = <
     const [Component, { SynchronousReactComponent }] = await Promise.all([
       props.loader(),
       import("./synchronous_react_component"),
+      Promise.reject(),
     ]);
     return createRoot(() => (
       <SynchronousReactComponent Component={Component} props={props.props} />
@@ -25,8 +26,12 @@ const EmbedReactComponentLazy = clientOnly(() =>
 
 export const EmbedReactComponent: typeof EmbedReactComponentLazy = (props) => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <EmbedReactComponentLazy {...props} />
-    </Suspense>
+    <ErrorBoundary
+      fallback={<div>An error occurred. Please try refreshing the page.</div>}
+    >
+      <Suspense fallback={<div>Loading...</div>}>
+        <EmbedReactComponentLazy {...props} />
+      </Suspense>
+    </ErrorBoundary>
   );
 };

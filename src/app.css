@@ -73,7 +73,3 @@ code[data-line-numbers-max-digits="4"] > [data-line]::before {
 @view-transition {
   navigation: auto;
 }
-
-#app {
-  overflow-x: hidden;
-}

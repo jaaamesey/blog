@@ -19,7 +19,7 @@ export default function Home() {
   });
   const preload = usePreloadRoute();
   return (
-    <main class="text-center mx-auto p-4 flex flex-col items-center gap-2">
+    <main class="text-center mx-auto p-4 flex flex-col items-center gap-2 overflow-x-hidden">
       <Title>bikeshedd.ing</Title>
       <h1 class="max-6-xs text-2xl my-6">james karlsson</h1>
       <div class="mb-6 text-sm">i makea da software</div>
