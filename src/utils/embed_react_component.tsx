@@ -11,7 +11,6 @@ const EmbedReactComponentImpl = <
     const [Component, { SynchronousReactComponent }] = await Promise.all([
       props.loader(),
       import("./synchronous_react_component"),
-      Promise.reject(),
     ]);
     return createRoot(() => (
       <SynchronousReactComponent Component={Component} props={props.props} />
