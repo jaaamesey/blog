@@ -1,4 +1,4 @@
-import { A, useLocation } from "@solidjs/router";
+import { A, useLocation, usePreloadRoute } from "@solidjs/router";
 import { createMemo, JSX } from "solid-js";
 import { nextPosts, prevPosts } from "~/all_posts.compile";
 import { PostConfig } from "~/post_types";
@@ -14,6 +14,8 @@ export function PostWrapper(props: {
 }) {
   const location = useLocation();
   const id = createMemo(() => location.pathname.substring("/posts/".length));
+  const preload = usePreloadRoute();
+  preload("/");
   return (
     <div class="min-h-screen flex justify-center py-8 px-4 text-text-primary overflow-x-clip">
       <Title>{props.postConfig.title}</Title>
@@ -34,7 +36,7 @@ export function PostWrapper(props: {
             }}
           />
           <div class="text-text-secondary">
-            <A preload href="/" style={{ "view-transition-name": "logo" }}>
+            <A href="/" style={{ "view-transition-name": "logo" }}>
               james karlsson
             </A>
           </div>
