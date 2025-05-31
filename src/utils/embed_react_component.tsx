@@ -1,4 +1,4 @@
-import { createResource, createRoot } from "solid-js";
+import { createResource, createRoot, Suspense } from "solid-js";
 import { clientOnly } from "@solidjs/start";
 
 const EmbedReactComponentImpl = <
@@ -19,6 +19,14 @@ const EmbedReactComponentImpl = <
   return <>{component()}</>;
 };
 
-export const EmbedReactComponent = clientOnly(() =>
+const EmbedReactComponentLazy = clientOnly(() =>
   Promise.resolve({ default: EmbedReactComponentImpl }),
 ) as typeof EmbedReactComponentImpl;
+
+export const EmbedReactComponent: typeof EmbedReactComponentLazy = (props) => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <EmbedReactComponentLazy {...props} />
+    </Suspense>
+  );
+};

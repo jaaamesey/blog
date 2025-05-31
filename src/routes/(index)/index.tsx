@@ -1,4 +1,4 @@
-import { A } from "@solidjs/router";
+import { A, usePreloadRoute } from "@solidjs/router";
 import { onCleanup, onMount, For } from "solid-js";
 import { allPosts } from "~/all_posts.compile";
 import { Marquee } from "./marquee";
@@ -17,6 +17,7 @@ export default function Home() {
     resolveViewTransition(undefined);
     resolveViewTransition = () => {};
   });
+  const preload = usePreloadRoute();
   return (
     <main class="text-center mx-auto p-4 flex flex-col items-center gap-2">
       <Title>bikeshedd.ing</Title>
@@ -36,11 +37,13 @@ export default function Home() {
         <For each={allPosts}>
           {(p) => {
             const titleEl = (<span>{p.title}</span>) as HTMLSpanElement;
+            const url = `/posts/${p.id}`;
+            preload(url);
             return (
               <A
                 class="w-full bg-white/90 rounded-2xl p-4 text-start text-gray-950"
                 preload
-                href={`/posts/${p.id}`}
+                href={url}
                 onClick={() => {
                   if (document.startViewTransition) {
                     const promise = new Promise((resolve) => {
