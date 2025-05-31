@@ -20,6 +20,8 @@ function Component({ someProp }) {
 3.&nbsp;**The "right" primitive for this would be a `useState` hook that requires a dependency array**. The title. We'll get to that eventually.
 
 Let's get started.
+
+*Edit (31/05/25): I'm using [*controlled* inputs](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable) throughout this article, but you'll find that a similar issue actually comes up with [using `defaultValue` for *uncontrolled* inputs](https://stackoverflow.com/questions/30727837/change-input-defaultvalue-by-passing-props)!* 
  
 ## 1. useState as it exists now should not allow derived state
 
