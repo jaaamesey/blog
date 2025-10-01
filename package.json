@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "dev": "vinxi dev",
-    "build": "vinxi build",
+    "build": "vinxi build && tsx build_scripts/post.ts",
     "start": "vinxi start",
     "lint": "eslint"
   },
@@ -31,6 +31,7 @@
     "eslint-plugin-solid": "^0.14.5",
     "globals": "^16.1.0",
     "tailwindcss": "^4.0.15",
+    "tsx": "^4.20.6",
     "typescript-eslint": "^8.32.1",
     "vite-plugin-compile-time": "^0.4.6"
   },
