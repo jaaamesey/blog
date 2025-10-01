@@ -1,0 +1,239 @@
+>TL;DR:
+>1. I'd say it's React's rendering model that leads to this specific problem with `useEffect`, more than the core `useEffect` API or concept of an "effect" itself
+>2. the React Compiler (or pre-2025 style memoization) would have likely prevented this
+>3. Tanstack Query or some other data fetching abstraction would have likely prevented this
+
+Disclaimer: I'm literally just a guy, I have no affiliation with Cloudflare (aside from freeloading off of their very generous free tier for Workers), and I can't say I have enough backend expertise to talk about what could have gone better on that side.
+I also have no affiliation with the React dev team and do not hold a license to practice medicine.
+
+After [my first post](/posts/use_state_should_require_a_dependency_array), I would never have thought that:
+
+1. the second would be about another React hook
+2. it would be about `useEffect`
+3. I would be *defending* `useEffect` *(well, just a little...)*
+
+I'm not entirely sure if this is going to come across as an anti-React or pro-React article. If it's the former, then maybe I ought to even things out by defending Server Components somewhere. If it's the latter... 
+
+...oh no I've dropped something...
+
+import vid from './solidmybeloved.mp4?url';
+
+<video style={{width: '128px', display: 'inline-block', margin: '32px auto', transform: 'rotate(2deg)', 'border-radius': '16px'}} src={vid} autoPlay loop muted playsInline></video>
+
+Anyway, I'm like two weeks late to this, but in case you hadn't heard the news:
+
+[Cloudflare's dashboard and API got DDOSed.](https://blog.cloudflare.com/deep-dive-into-cloudflares-sept-12-dashboard-and-api-outage/)
+
+By their own users.
+
+Because of a `useEffect`.
+
+...sorta.
+
+
+[Now here's the official docs for `useEffect`](https://react.dev/reference/react/useEffect). Basically, it's a way for a component to detect changes to data it sees (whether that's from props, state, or elsewhere), and respond to that in some way. Maybe it's even just reacting to the fact that the component "exists" (i.e. whether it's mounted/unmounted). 
+
+Why would we ever want to model things this way? Well, components in React are declarative, but at some point they'll probably need to do some imperative things, like listen for keyboard shortcuts, or fetch some data from a server. You could tie all imperative logic to imperative actions (e.g. click and keypress listeners), but especially when a change to an "input" can come from multiple sources, it can be a lot simpler to model something as an effect.
+
+I have also seen (okay, and *written*) many horrible things with `useEffect`. You definitely don't want to be setting state or something inside one if you can avoid it.
+
+Anyway, here's how Cloudflare explained the outage:
+
+> "The incident’s impact stemmed from several issues, but the immediate trigger was a bug in the dashboard. This bug caused repeated, unnecessary calls to the Tenant Service API. The API calls were managed by a React useEffect hook, but we mistakenly included a <mark>problematic object in its dependency array</mark>. Because <mark>this object was recreated on every state or prop change</mark>, React treated it as “always new,” causing the useEffect to re-run each time. As a result, <mark>the API call executed many times during a single dashboard render instead of just once</mark>."
+
+From this we can assume the cause to be an object created on each render of a component, that's somehow made its way to a `useEffect` dependency array.
+
+So, the culprit was some React code that might have looked like this:
+
+```tsx
+function SomeDashboard({ page, sortBy... }) {
+    const [fetchedData, setFetchedData] = useState([]);
+    
+    // Our unstable object
+    const requestParams = { 
+        page, 
+        sortBy, 
+        source: 'some_dashboard', 
+        ...
+    };
+
+    // Our effect, run each time this component renders!
+    useEffect(() => {
+        fetchData(requestParams).then(data => setFetchedData(data));
+    }, [requestParams]);  
+
+    return <div>{fetchedData.map(...)}</div>;
+}
+```
+
+
+When this component renders, it:
+
+1. creates a new `requestParams` object to store request parameters
+2. detects if this render's `requestParams` is different from the previous render's `requestParams` object
+3. realizes that `requestParams` is new (it always is - in JavaScript, objects and arrays are pass by reference)
+4. responds by calling `fetchData`
+
+Then, when that request resolves, the component updates its internal state to reflect the new data coming in.
+
+This requires another render. We then return to step 1, and continue this horrible loop until we've accidentally committed cybercrime.
+
+
+
+
+Of course, this example is taking some artistic license in a few places. 
+
+For example, we don't know how far away the object's creation was from the `useEffect` call. Here they're both in the same component, but it could have very well have been passed through several layers of prop drilling. 
+
+We also don't know that the request resolving is what always caused the next render. In React, you can (and should) expect a re-render to be caused by pretty much anything.
+
+Maybe there was a timer in the component that ticked every second. Maybe it was flu season and their `useSneezeListener` hook kept picking things up.
+
+Point is, network requests were being repeated with such frequency that it brought down their backend.
+
+
+import {EmbedReactComponent} from '~/utils/embed_react_component';
+import {DemoWrapper} from '~/utils/demo_wrapper';
+
+<DemoWrapper>
+<EmbedReactComponent loader={() => import('./use_effect_bad.react').then(r=>r.UseEffectBad)}/>
+</DemoWrapper>
+
+...let's just leave this running and hope nobody notices.
+
+## How much can we blame the useEffect API?
+
+Not much, in my opinion. There's some other things around `useEffect` that [I think are questionable](https://react.dev/reference/react/useEffect#my-effect-runs-twice-when-the-component-mounts), 
+but the core concept of "detect changes and respond to them" is something you see in nearly [every](https://svelte.dev/docs/svelte/$effect) [other](https://docs.solidjs.com/reference/basic-reactivity/create-effect) [framework](https://vuejs.org/guide/essentials/watchers).
+
+You might say "well, the [lint rules](https://stackoverflow.com/questions/58866796/understanding-the-react-hooks-exhaustive-deps-lint-rule) force me to put things in the dependency array that shouldn't be there!".
+And you'd be right. We could just remove the problematic object from the dependency array, and not have it get stuck in a loop.
+
+```tsx {15-16}
+function SomeDashboard({ page, sortBy... }) {
+    const [fetchedData, setFetchedData] = useState([]);
+    
+    const requestParams = { ... };
+
+    useEffect(() => {
+        fetchData(requestParams).then(data => setFetchedData(data));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    return <div>{fetchedData.map(...)}</div>;
+}
+```
+
+But other frameworks are arguably stricter and more opaque about this. Svelte's `$effect` for example doesn't even ask for a dependency array, it just automatically listens to *everything it sees* in the effect function. 
+
+There's still escape hatches of course, but the core philosophy of an effect that tracks everything by default is by no means unique to React. We don't want to go back to [`componentDidUpdate`](https://legacy.reactjs.org/docs/react-component.html#componentdidupdate), I was there and it was horrible.
+
+## How much can we blame the victim?
+
+A little. A `useMemo` would fix this by making the object more stable between renders:
+
+```tsx
+function SomeDashboard({ page, sortBy... }) {
+    const [fetchedData, setFetchedData] = useState([]);
+    
+    // Our now fairly stable object
+    const requestParams = useMemo(() => ({ 
+        page, 
+        sortBy, 
+        source: 'some_dashboard', 
+        ...
+    }), [page, sortBy, ...]);
+
+    // No longer gets us stuck in a loop!
+    useEffect(() => {
+        fetchData(requestParams).then(data => setFetchedData(data));
+    }, [requestParams]);  
+
+    return <div>{fetchedData.map(...)}</div>;
+}
+```
+
+In fact if they were using the [React Compiler](https://react.dev/learn/react-compiler), they wouldn't even have to wrap anything in a `useMemo` in the first place!
+
+But even if this is stable in practice right now, React insists that [its memoization isn't a semantic guarantee](https://react.dev/reference/react/useMemo#preventing-an-effect-from-firing-too-often) - that it's something you should be seeing more as a performance optimization that may or may not decide to kick in. I'm not quite sure how much something with that caveat can be relied upon.
+
+Okay, maybe they should have just created the object inside the `useEffect` itself?
+
+```tsx {15-16}
+function SomeDashboard({ page, sortBy... }) {
+    const [fetchedData, setFetchedData] = useState([]);
+
+    useEffect(() => {
+        const requestParams = { ... };
+        fetchData(requestParams).then(data => setFetchedData(data));
+    }, [page, sortBy, ...]);  
+
+    return <div>{fetchedData.map(...)}</div>;
+}
+```
+
+But I'm sure there's some cases where this isn't realistic. Maybe there was a good reason for this object to come from somewhere far away, or be shared with other things in the component.
+
+Could this have been caught by a linter? Maybe, for very simple cases - but I'd imagine it'd be difficult, perhaps impossible to catch anything crossing component boundaries.
+
+The one area I will throw shade at is the fact that they're not using something like Tanstack Query. Data fetching (or more specifically, managing the state around it) can be a lot more complex than people anticipate, and one of the things these abstractions can provide is a [dependency array that's effectively pass by value instead of pass by reference](https://tanstack.com/query/v4/docs/framework/react/guides/query-keys#query-keys-are-hashed-deterministically).
+
+In other words: Tanstack Query would have prevented this. Maybe part of that is on React for not having built-in primitives like [createResource](https://docs.solidjs.com/reference/basic-reactivity/create-resource), though.
+
+## ...what else can we blame, then?
+
+We have to turn our pitchforks at something, right?
+
+The one thing that sets React apart from more modern frameworks like Svelte, Solid, and (from my understanding) Vue, is its rendering model.
+
+It's easy to forget that React has been around for well over a decade. There was a time when this syntax would have been mind-blowing:
+
+```tsx
+function Counter() {
+    const [count, setCount] = useState(0);
+    return <button onClick={() => setCount(count + 1)}>{count}</button>;
+}
+```
+
+A Virtual DOM makes it fairly easy to represent UI in a way that isn't absolutely horrible. Core language primitives like if/else and arrays become how you handle conditional rendering and lists, whereas other frameworks have to spend a lot of time getting basic things like derived state right. Even native iOS and Android UIs (at least with SwiftUI and Jetpack) are built on top of a similar model. 
+
+Most of the time when we talk about the shortfalls of this model, it's about performance - the fact that we're doing a ton of unnecessary recomputation each time any piece of state changes. Obviously this is important. Any fully signals-based framework (e.g. Solid and now Svelte) is likely going to outperform anything VDOM-based by a landslide.
+
+But the other problem here is that anything declared inside a component is, by default, ephemeral. 
+
+A regular old `const` is not really "constant", in that it won't persist between renders. 
+
+Any functions you define are going to be constantly re-created.
+
+It's not `useEffect` itself - it's the inherent *instability* baked into React that makes dealing with it so much worse than its equivalent in other frameworks.
+
+To be fair, React would likely share this problem with fully immediate mode renderers like [imgui](https://github.com/ocornut/imgui). But, I don't think we put widgets in that domain under the stress of managing so much state and side effects themselves. 
+
+It's not that hard to write equivalent code that *doesn't* get stuck in an infinite loop in something like Solid or Svelte:
+
+```tsx
+function SomeDashboardButInSolidJS(props) {
+    const [fetchedData, setFetchedData] = createSignal([]);
+    
+    // This needs to be a getter function, or else we'll lose reactivity.
+    const requestParams = () => ({ 
+        page, 
+        sortBy, 
+        source: 'some_dashboard', 
+        ...
+    }); 
+
+    // createResource would be the right tool for this, but I'm trying to get it as close to vanilla React as possible
+    createEffect(() => {
+        fetchData(requestParams()).then(data => setFetchedData(data));
+    });
+
+    return <div>{fetchedData().map(...)}</div>;
+}
+```
+
+Of course, in Solid's case, this comes at the cost of its state model requiring slightly more annoying syntax, and asks us to rely a lot more on linting to prevent loss of reactivity. I'm sure you could find plenty of footguns with effects here too, perhaps even ones that don't even happen in React.
+
+But hey, if we're going to blame *some* part of React for that Cloudflare outage, why not blame... the very principles React was founded upon?
+
+...yeah, I now see why it's easier to just call it a `useEffect` bug.
