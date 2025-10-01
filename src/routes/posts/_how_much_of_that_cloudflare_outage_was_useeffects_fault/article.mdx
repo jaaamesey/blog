@@ -217,8 +217,8 @@ function SomeDashboardButInSolidJS(props) {
     
     // This needs to be a getter function, or else we'll lose reactivity.
     const requestParams = () => ({ 
-        page, 
-        sortBy, 
+        page: props.page, 
+        sortBy: props.sortBy, 
         source: 'some_dashboard', 
         ...
     }); 
