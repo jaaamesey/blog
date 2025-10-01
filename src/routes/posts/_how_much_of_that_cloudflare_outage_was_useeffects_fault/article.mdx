@@ -1,5 +1,5 @@
 >TL;DR:
->1. I'd say it's React's rendering model that leads to this specific problem with `useEffect`, more than the core `useEffect` API or concept of an "effect" itself
+>1. I'd say it's React's rendering model that leads to this specific problem with `useEffect`, moreso than the core `useEffect` API or concept of an "effect" itself
 >2. the React Compiler (or pre-2025 style memoization) would have likely prevented this
 >3. Tanstack Query or some other data fetching abstraction would have likely prevented this
 
@@ -41,7 +41,7 @@ Anyway, here's how Cloudflare explained the outage:
 
 > "The incident’s impact stemmed from several issues, but the immediate trigger was a bug in the dashboard. This bug caused repeated, unnecessary calls to the Tenant Service API. The API calls were managed by a React useEffect hook, but we mistakenly included a <mark>problematic object in its dependency array</mark>. Because <mark>this object was recreated on every state or prop change</mark>, React treated it as “always new,” causing the useEffect to re-run each time. As a result, <mark>the API call executed many times during a single dashboard render instead of just once</mark>."
 
-From this we can assume the cause to be an object created on each render of a component, that's somehow made its way to a `useEffect` dependency array.
+From this we can assume the cause to be an object created on each render of a component, that somehow made its way to a `useEffect` dependency array.
 
 So, the culprit was some React code that might have looked like this:
 
@@ -104,7 +104,7 @@ import {DemoWrapper} from '~/utils/demo_wrapper';
 ## How much can we blame the useEffect API?
 
 Not much, in my opinion. There's some other things around `useEffect` that [I think are questionable](https://react.dev/reference/react/useEffect#my-effect-runs-twice-when-the-component-mounts), 
-but the core concept of "detect changes and respond to them" is something you see in nearly [every](https://svelte.dev/docs/svelte/$effect) [other](https://docs.solidjs.com/reference/basic-reactivity/create-effect) [framework](https://vuejs.org/guide/essentials/watchers).
+but the core concept of "detect changes and respond to them" is something that has an equivalent in nearly [every](https://svelte.dev/docs/svelte/$effect) [other](https://docs.solidjs.com/reference/basic-reactivity/create-effect) [framework](https://vuejs.org/guide/essentials/watchers).
 
 You might say "well, the [lint rules](https://stackoverflow.com/questions/58866796/understanding-the-react-hooks-exhaustive-deps-lint-rule) force me to put things in the dependency array that shouldn't be there!".
 And you'd be right. We could just remove the problematic object from the dependency array, and not have it get stuck in a loop.
@@ -207,7 +207,7 @@ Any functions you define are going to be constantly re-created.
 
 It's not `useEffect` itself - it's the inherent *instability* baked into React that makes dealing with it so much worse than its equivalent in other frameworks.
 
-To be fair, React would likely share this problem with fully immediate mode renderers like [imgui](https://github.com/ocornut/imgui). But, I don't think we put widgets in that domain under the stress of managing so much state and side effects themselves. 
+To be fair, React would likely share this problem with fully immediate mode renderers like [imgui](https://github.com/ocornut/imgui). But, I don't think we put widgets in that domain under as much stress around managing state and side effects themselves. 
 
 It's not that hard to write equivalent code that *doesn't* get stuck in an infinite loop in something like Solid or Svelte:
 
