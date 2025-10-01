@@ -17,7 +17,7 @@ export function generateRSS() {
       <link>${postUrl}</link>
       <guid isPermaLink="true">${postUrl}</guid>
       <pubDate>${pubDate}</pubDate>
-      <description><![CDATA[${post.title}]]></description>
+      <description><![CDATA[${post.description}]]></description>
     </item>`;
   }).join('\n');
 
