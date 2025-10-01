@@ -5,5 +5,14 @@
     <description>james karlsson's blog</description>
     <link>https://bikeshedd.ing</link>
     <language>en-us</language>
+    <lastBuildDate>Wed, 01 Oct 2025 09:36:32 GMT</lastBuildDate>
+    <generator>Custom RSS Generator</generator>
+    <item>
+      <title><![CDATA[useState should require a dependency array]]></title>
+      <link>https://bikeshedd.ing/posts/use_state_should_require_a_dependency_array</link>
+      <guid isPermaLink="true">https://bikeshedd.ing/posts/use_state_should_require_a_dependency_array</guid>
+      <pubDate>Fri, 30 May 2025 00:00:00 GMT</pubDate>
+      <description><![CDATA[useState should require a dependency array]]></description>
+    </item>
   </channel>
 </rss>
