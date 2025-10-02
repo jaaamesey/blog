@@ -5,6 +5,7 @@ import{d as n,M as l,h as s,P as c}from"./jsx-runtime-KrxziLr8.js";import{_ as i
 `,l(e.li,{children:["I'd say it's React's rendering model that leads to this specific problem with ",n(e.code,{children:"useEffect"}),", moreso than the core ",n(e.code,{children:"useEffect"}),' API or concept of an "effect" itself']}),`
 `,n(e.li,{children:"the React Compiler (or pre-2025 style memoization) would have likely prevented this"}),`
 `,n(e.li,{children:"Tanstack Query or some other data fetching abstraction would have likely prevented this"}),`
+`,n(e.li,{children:"in general, just... be careful with effects?"}),`
 `]}),`
 `]}),`
 `,n(e.p,{children:`Disclaimer: I'm literally just a guy, I have no affiliation with Cloudflare (aside from freeloading off of their very generous free tier for Workers), and I can't say I have enough backend expertise to talk about what could have gone better on that side.
@@ -85,7 +86,7 @@ And you'd be right. We could just remove the problematic object from the depende
 `,n(e.span,{"data-line":"",children:" "}),`
 `,l(e.span,{"data-line":"",children:[n(e.span,{style:{color:"#C678DD"},children:"    return"}),n(e.span,{style:{color:"#ABB2BF"},children:" <"}),n(e.span,{style:{color:"#E06C75"},children:"div"}),n(e.span,{style:{color:"#ABB2BF"},children:">"}),n(e.span,{style:{color:"#C678DD"},children:"{"}),n(e.span,{style:{color:"#E5C07B"},children:"fetchedData"}),n(e.span,{style:{color:"#ABB2BF"},children:"."}),n(e.span,{style:{color:"#61AFEF"},children:"map"}),n(e.span,{style:{color:"#ABB2BF"},children:"(...)"}),n(e.span,{style:{color:"#C678DD"},children:"}"}),n(e.span,{style:{color:"#ABB2BF"},children:"</"}),n(e.span,{style:{color:"#E06C75"},children:"div"}),n(e.span,{style:{color:"#ABB2BF"},children:">;"})]}),`
 `,n(e.span,{"data-line":"",children:n(e.span,{style:{color:"#ABB2BF"},children:"}"})})]})})}),`
-`,l(e.p,{children:["But other frameworks are arguably stricter and more opaque about this. Svelte's ",n(e.code,{children:"$effect"})," for example doesn't even ask for a dependency array, it just automatically listens to ",n(e.em,{children:"everything it sees"})," in the effect function."]}),`
+`,l(e.p,{children:["But other frameworks are arguably stricter and more opaque about this. Svelte's ",n(e.a,{href:"https://svelte.dev/docs/svelte/$effect",children:n(e.code,{children:"$effect"})})," for example doesn't even ask for a dependency array, it just automatically listens to ",n(e.em,{children:"everything it sees"})," in the effect function."]}),`
 `,l(e.p,{children:["There's still escape hatches of course, but the core philosophy of an effect that tracks everything by default is by no means unique to React. We don't want to go back to ",n(e.a,{href:"https://legacy.reactjs.org/docs/react-component.html#componentdidupdate",children:n(e.code,{children:"componentDidUpdate"})}),", I was there and it was horrible."]}),`
 `,n(e.h2,{children:"How much can we blame the victim?"}),`
 `,l(e.p,{children:["A little. A ",n(e.code,{children:"useMemo"})," would fix this by making the object more stable between renders:"]}),`

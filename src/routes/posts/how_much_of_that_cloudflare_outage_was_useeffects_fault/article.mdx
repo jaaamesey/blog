@@ -2,6 +2,7 @@
 >1. I'd say it's React's rendering model that leads to this specific problem with `useEffect`, moreso than the core `useEffect` API or concept of an "effect" itself
 >2. the React Compiler (or pre-2025 style memoization) would have likely prevented this
 >3. Tanstack Query or some other data fetching abstraction would have likely prevented this
+>4. in general, just... be careful with effects?
 
 Disclaimer: I'm literally just a guy, I have no affiliation with Cloudflare (aside from freeloading off of their very generous free tier for Workers), and I can't say I have enough backend expertise to talk about what could have gone better on that side.
 I also have no affiliation with the React dev team and do not hold a license to practice medicine.
@@ -124,7 +125,7 @@ function SomeDashboard({ page, sortBy... }) {
 }
 ```
 
-But other frameworks are arguably stricter and more opaque about this. Svelte's `$effect` for example doesn't even ask for a dependency array, it just automatically listens to *everything it sees* in the effect function. 
+But other frameworks are arguably stricter and more opaque about this. Svelte's [`$effect`](https://svelte.dev/docs/svelte/$effect) for example doesn't even ask for a dependency array, it just automatically listens to *everything it sees* in the effect function. 
 
 There's still escape hatches of course, but the core philosophy of an effect that tracks everything by default is by no means unique to React. We don't want to go back to [`componentDidUpdate`](https://legacy.reactjs.org/docs/react-component.html#componentdidupdate), I was there and it was horrible.
 

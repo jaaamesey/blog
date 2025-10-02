@@ -281,7 +281,7 @@
     "isDynamicEntry": true
   },
   "src/routes/posts/how_much_of_that_cloudflare_outage_was_useeffects_fault/index.tsx?pick=default&pick=$css": {
-    "file": "assets/index-CQJ6TQUe.js",
+    "file": "assets/index-CiIr11sb.js",
     "name": "index",
     "src": "src/routes/posts/how_much_of_that_cloudflare_outage_was_useeffects_fault/index.tsx?pick=default&pick=$css",
     "isEntry": true,
@@ -375,7 +375,7 @@
     ]
   },
   "virtual:$vinxi/handler/client": {
-    "file": "assets/client-dLZznXSr.js",
+    "file": "assets/client-C-9wNpV2.js",
     "name": "client",
     "src": "virtual:$vinxi/handler/client",
     "isEntry": true,
