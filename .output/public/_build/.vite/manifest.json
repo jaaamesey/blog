@@ -1,6 +1,6 @@
 {
-  "_all_posts.compile-CbZ4RSx1.js": {
-    "file": "assets/all_posts.compile-CbZ4RSx1.js",
+  "_all_posts.compile-BJQoYtSW.js": {
+    "file": "assets/all_posts.compile-BJQoYtSW.js",
     "name": "all_posts.compile"
   },
   "_components-DXy5a4Nx.js": {
@@ -11,13 +11,27 @@
       "_routing-DrBnyfrK.js"
     ]
   },
-  "_embed_react_component-CYVE6Eo7.js": {
-    "file": "assets/embed_react_component-CYVE6Eo7.js",
+  "_demo_wrapper-B0zURUJ_.css": {
+    "file": "assets/demo_wrapper-B0zURUJ_.css",
+    "src": "_demo_wrapper-B0zURUJ_.css"
+  },
+  "_demo_wrapper-uuiyxa6q.js": {
+    "file": "assets/demo_wrapper-uuiyxa6q.js",
+    "name": "demo_wrapper",
+    "imports": [
+      "_web-DYO1r_n-.js"
+    ],
+    "css": [
+      "assets/demo_wrapper-B0zURUJ_.css"
+    ]
+  },
+  "_embed_react_component-D7D9jITn.js": {
+    "file": "assets/embed_react_component-D7D9jITn.js",
     "name": "embed_react_component",
     "imports": [
       "_preload-helper-ug3pwPZ1.js",
       "_web-DYO1r_n-.js",
-      "_jsx-runtime-Ctf4abZ0.js"
+      "_jsx-runtime-KrxziLr8.js"
     ],
     "dynamicImports": [
       "src/utils/synchronous_react_component.tsx"
@@ -38,12 +52,12 @@
     "file": "assets/jsx-runtime-CCakz991.css",
     "src": "_jsx-runtime-CCakz991.css"
   },
-  "_jsx-runtime-Ctf4abZ0.js": {
-    "file": "assets/jsx-runtime-Ctf4abZ0.js",
+  "_jsx-runtime-KrxziLr8.js": {
+    "file": "assets/jsx-runtime-KrxziLr8.js",
     "name": "jsx-runtime",
     "imports": [
       "_web-DYO1r_n-.js",
-      "_all_posts.compile-CbZ4RSx1.js",
+      "_all_posts.compile-BJQoYtSW.js",
       "_index-CxeZ2ADl.js",
       "_routing-DrBnyfrK.js",
       "_components-DXy5a4Nx.js"
@@ -68,14 +82,14 @@
     "name": "web"
   },
   "src/routes/(index)/index.tsx?pick=default&pick=$css": {
-    "file": "assets/index-ByxRuiJI.js",
+    "file": "assets/index-Blt8nq7D.js",
     "name": "index",
     "src": "src/routes/(index)/index.tsx?pick=default&pick=$css",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_web-DYO1r_n-.js",
-      "_all_posts.compile-CbZ4RSx1.js",
+      "_all_posts.compile-BJQoYtSW.js",
       "_index-CxeZ2ADl.js",
       "_routing-DrBnyfrK.js",
       "_components-DXy5a4Nx.js"
@@ -104,15 +118,15 @@
     ]
   },
   "src/routes/posts/___template/index.tsx?pick=default&pick=$css": {
-    "file": "assets/index-tPgQO2RX.js",
+    "file": "assets/index-CFauOq7m.js",
     "name": "index",
     "src": "src/routes/posts/___template/index.tsx?pick=default&pick=$css",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_jsx-runtime-Ctf4abZ0.js",
+      "_jsx-runtime-KrxziLr8.js",
       "_web-DYO1r_n-.js",
-      "_all_posts.compile-CbZ4RSx1.js",
+      "_all_posts.compile-BJQoYtSW.js",
       "_index-CxeZ2ADl.js",
       "_routing-DrBnyfrK.js",
       "_components-DXy5a4Nx.js"
@@ -135,17 +149,17 @@
     ]
   },
   "src/routes/posts/_how_this_blog_works/index.tsx?pick=default&pick=$css": {
-    "file": "assets/index-Cb6frXo1.js",
+    "file": "assets/index-CaXgvxB-.js",
     "name": "index",
     "src": "src/routes/posts/_how_this_blog_works/index.tsx?pick=default&pick=$css",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_jsx-runtime-Ctf4abZ0.js",
+      "_jsx-runtime-KrxziLr8.js",
       "_preload-helper-ug3pwPZ1.js",
       "_web-DYO1r_n-.js",
-      "_embed_react_component-CYVE6Eo7.js",
-      "_all_posts.compile-CbZ4RSx1.js",
+      "_embed_react_component-D7D9jITn.js",
+      "_all_posts.compile-BJQoYtSW.js",
       "_index-CxeZ2ADl.js",
       "_routing-DrBnyfrK.js",
       "_components-DXy5a4Nx.js"
@@ -172,15 +186,15 @@
     ]
   },
   "src/routes/posts/_my-time-with-solid-start/index.tsx?pick=default&pick=$css": {
-    "file": "assets/index-BJaRHgps.js",
+    "file": "assets/index-DTPkVfEB.js",
     "name": "index",
     "src": "src/routes/posts/_my-time-with-solid-start/index.tsx?pick=default&pick=$css",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_jsx-runtime-Ctf4abZ0.js",
+      "_jsx-runtime-KrxziLr8.js",
       "_web-DYO1r_n-.js",
-      "_all_posts.compile-CbZ4RSx1.js",
+      "_all_posts.compile-BJQoYtSW.js",
       "_index-CxeZ2ADl.js",
       "_routing-DrBnyfrK.js",
       "_components-DXy5a4Nx.js"
@@ -194,15 +208,15 @@
     "isDynamicEntry": true
   },
   "src/routes/posts/_one/index.tsx?pick=default&pick=$css": {
-    "file": "assets/index-l0txHTL4.js",
+    "file": "assets/index-D5HiHB93.js",
     "name": "index",
     "src": "src/routes/posts/_one/index.tsx?pick=default&pick=$css",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_jsx-runtime-Ctf4abZ0.js",
+      "_jsx-runtime-KrxziLr8.js",
       "_web-DYO1r_n-.js",
-      "_all_posts.compile-CbZ4RSx1.js",
+      "_all_posts.compile-BJQoYtSW.js",
       "_index-CxeZ2ADl.js",
       "_routing-DrBnyfrK.js",
       "_components-DXy5a4Nx.js"
@@ -216,15 +230,15 @@
     "isDynamicEntry": true
   },
   "src/routes/posts/_so_you_want_to_make_a_daily_game/index.tsx?pick=default&pick=$css": {
-    "file": "assets/index-CuayptWQ.js",
+    "file": "assets/index-CLaIz9nS.js",
     "name": "index",
     "src": "src/routes/posts/_so_you_want_to_make_a_daily_game/index.tsx?pick=default&pick=$css",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_jsx-runtime-Ctf4abZ0.js",
+      "_jsx-runtime-KrxziLr8.js",
       "_web-DYO1r_n-.js",
-      "_all_posts.compile-CbZ4RSx1.js",
+      "_all_posts.compile-BJQoYtSW.js",
       "_index-CxeZ2ADl.js",
       "_routing-DrBnyfrK.js",
       "_components-DXy5a4Nx.js"
@@ -238,15 +252,15 @@
     "isDynamicEntry": true
   },
   "src/routes/posts/_two/index.tsx?pick=default&pick=$css": {
-    "file": "assets/index-CZj_siFb.js",
+    "file": "assets/index-D1ky3A1W.js",
     "name": "index",
     "src": "src/routes/posts/_two/index.tsx?pick=default&pick=$css",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_jsx-runtime-Ctf4abZ0.js",
+      "_jsx-runtime-KrxziLr8.js",
       "_web-DYO1r_n-.js",
-      "_all_posts.compile-CbZ4RSx1.js",
+      "_all_posts.compile-BJQoYtSW.js",
       "_index-CxeZ2ADl.js",
       "_routing-DrBnyfrK.js",
       "_components-DXy5a4Nx.js"
@@ -266,18 +280,63 @@
     "isEntry": true,
     "isDynamicEntry": true
   },
+  "src/routes/posts/how_much_of_that_cloudflare_outage_was_useeffects_fault/index.tsx?pick=default&pick=$css": {
+    "file": "assets/index-CQJ6TQUe.js",
+    "name": "index",
+    "src": "src/routes/posts/how_much_of_that_cloudflare_outage_was_useeffects_fault/index.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_jsx-runtime-KrxziLr8.js",
+      "_preload-helper-ug3pwPZ1.js",
+      "_embed_react_component-D7D9jITn.js",
+      "_demo_wrapper-uuiyxa6q.js",
+      "_web-DYO1r_n-.js",
+      "_all_posts.compile-BJQoYtSW.js",
+      "_index-CxeZ2ADl.js",
+      "_routing-DrBnyfrK.js",
+      "_components-DXy5a4Nx.js"
+    ],
+    "dynamicImports": [
+      "src/routes/posts/how_much_of_that_cloudflare_outage_was_useeffects_fault/use_effect_bad.react.tsx"
+    ],
+    "assets": [
+      "assets/solidmybeloved-DMjdaR_t.mp4"
+    ]
+  },
+  "src/routes/posts/how_much_of_that_cloudflare_outage_was_useeffects_fault/meta.ts?pick=default&pick=$css": {
+    "file": "assets/meta-CkpXW7f-.js",
+    "name": "meta",
+    "src": "src/routes/posts/how_much_of_that_cloudflare_outage_was_useeffects_fault/meta.ts?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true
+  },
+  "src/routes/posts/how_much_of_that_cloudflare_outage_was_useeffects_fault/solidmybeloved.mp4": {
+    "file": "assets/solidmybeloved-DMjdaR_t.mp4",
+    "src": "src/routes/posts/how_much_of_that_cloudflare_outage_was_useeffects_fault/solidmybeloved.mp4"
+  },
+  "src/routes/posts/how_much_of_that_cloudflare_outage_was_useeffects_fault/use_effect_bad.react.tsx": {
+    "file": "assets/use_effect_bad.react-BQhTHDjl.js",
+    "name": "use_effect_bad.react",
+    "src": "src/routes/posts/how_much_of_that_cloudflare_outage_was_useeffects_fault/use_effect_bad.react.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-BJfUAbRs.js"
+    ]
+  },
   "src/routes/posts/use_state_should_require_a_dependency_array/index.tsx?pick=default&pick=$css": {
-    "file": "assets/index-20sRECHV.js",
+    "file": "assets/index-Blm7cxfG.js",
     "name": "index",
     "src": "src/routes/posts/use_state_should_require_a_dependency_array/index.tsx?pick=default&pick=$css",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_jsx-runtime-Ctf4abZ0.js",
+      "_jsx-runtime-KrxziLr8.js",
       "_preload-helper-ug3pwPZ1.js",
-      "_embed_react_component-CYVE6Eo7.js",
+      "_embed_react_component-D7D9jITn.js",
+      "_demo_wrapper-uuiyxa6q.js",
       "_web-DYO1r_n-.js",
-      "_all_posts.compile-CbZ4RSx1.js",
+      "_all_posts.compile-BJQoYtSW.js",
       "_index-CxeZ2ADl.js",
       "_routing-DrBnyfrK.js",
       "_components-DXy5a4Nx.js"
@@ -287,9 +346,6 @@
       "src/routes/posts/use_state_should_require_a_dependency_array/react_bad.react.jsx",
       "src/routes/posts/use_state_should_require_a_dependency_array/react_bad.react.jsx",
       "src/routes/posts/use_state_should_require_a_dependency_array/react_bad.react.jsx"
-    ],
-    "css": [
-      "assets/index-B0zURUJ_.css"
     ]
   },
   "src/routes/posts/use_state_should_require_a_dependency_array/meta.ts?pick=default&pick=$css": {
@@ -319,7 +375,7 @@
     ]
   },
   "virtual:$vinxi/handler/client": {
-    "file": "assets/client-ClRiyRCY.js",
+    "file": "assets/client-dLZznXSr.js",
     "name": "client",
     "src": "virtual:$vinxi/handler/client",
     "isEntry": true,
@@ -345,12 +401,14 @@
       "src/routes/posts/_so_you_want_to_make_a_daily_game/meta.ts?pick=default&pick=$css",
       "src/routes/posts/_two/index.tsx?pick=default&pick=$css",
       "src/routes/posts/_two/meta.ts?pick=default&pick=$css",
+      "src/routes/posts/how_much_of_that_cloudflare_outage_was_useeffects_fault/index.tsx?pick=default&pick=$css",
+      "src/routes/posts/how_much_of_that_cloudflare_outage_was_useeffects_fault/meta.ts?pick=default&pick=$css",
       "src/routes/posts/use_state_should_require_a_dependency_array/index.tsx?pick=default&pick=$css",
       "src/routes/posts/use_state_should_require_a_dependency_array/meta.ts?pick=default&pick=$css",
       "src/routes/posts/_two/shouldnotappear/meta.ts?pick=default&pick=$css"
     ],
     "css": [
-      "assets/client-B37HTPlv.css"
+      "assets/client-Dy4gELDf.css"
     ]
   }
 }
