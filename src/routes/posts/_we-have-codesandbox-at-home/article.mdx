@@ -1,0 +1,47 @@
+import img from './image.png?url';
+
+Maybe the way I use CodeSandbox is different to most people. Generally, I just want to create a quick, sharable draft of something in as little time as possible. 
+
+Often I'll need to sketch out something involving React and/or TypeScript, and other external libraries, so the Console in Chrome DevTools won't really cut it.
+
+Maybe I need to test out some complex CSS in isolation. Maybe I need to link someone a quick demo for some algo or React component. Or maybe I just forgot it's Day 1 of Advent of Code and I need to get a head start.
+
+Tools like CodeSandbox and StackBlitz seem to be veering away from this use case - they want to be a home for full projects, rather than just a sharable scratchpad. They could be both but the length of time these tools take to boot up and requiring everything to be tied to an account indicates otherwise.
+
+I don't want to:
+
+1. Deal with some login system
+2. Configure a new "project"
+3. Manually wire up dependencies and types
+4. Think about more than one file
+5. See a bunch of alerts about T&C changes and AI features that I don't particularly care about
+
+I just want to get in, quickly sketch something, and get out. There should be very little friction involved in this process.
+
+Anyway, I got disproportionately annoyed by this problem enough to make "CodeSandbox at home", that is, [tsx.zone](https://tsx.zone). Hopefully the time spent building it will be outweighed by the time saved using it in like... 20 years or so.
+
+<img src={img} alt="tsx.zone" style={{width: '100%', height: 'auto'}} />
+
+It:
+
+1. Compiles and runs code locally in the browser
+2. Supports TypeScript
+3. Supports JSX (both React and Solid)
+4. Supports Tailwind (ew) and the React Compiler
+5. Automatically downloads dependencies and types
+6. Technically works on phones (if you hate yourself enough to use an interface that really isn't designed for it)
+7. Allows sharing sandboxes via URLs
+8. Autoformats with Prettier
+9. Looks _absolutely hideous_
+
+Is it _secure_? Well, I probably can't guarantee that. At the very least, any code you bring in (including libraries) is going to be sandboxed to an iframe in a single browser tab. But yes, I'm unironically using `eval` in production.
+
+One thing of note is that it's currently an entirely static site. 
+
+When your code is "compiled", your browser is running Babel locally to perform things like TypeScript and JSX transformations. We also inspect any library imports and map them to appropriate CDN endpoints.
+
+The share links are literally just your code and settings GZIP'ed and converted to base64 - nothing really hits a real server.
+
+The only things that require an extra network request are fetching libraries and types, which go through esm.sh, unpkg, and the TS playground. These are all still static files though so it probably wouldn't be too hard in the future to cache them or make the endpoints configurable.
+
+Again, that's [tsx.zone](https://tsx.zone). If you want to check out the source code, it's here, though be prepared for some crude and fairly disorganized code.
