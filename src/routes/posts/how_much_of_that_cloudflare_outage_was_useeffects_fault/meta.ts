@@ -1,4 +1,4 @@
-import { PostConfig } from "~/post_types";
+import type { PostConfig } from "~/post_types";
 
 export default {
   title: "How much of that Cloudflare outage was actually useEffect's fault?",

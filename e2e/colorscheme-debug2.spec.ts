@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test } from "@playwright/test";
 
 test("color scheme button debug", async ({ page }) => {
   await page.goto("http://localhost:4321/posts/use_state_should_require_a_dependency_array/");
@@ -9,12 +9,12 @@ test("color scheme button debug", async ({ page }) => {
   console.log("Before click:", before);
 
   // Check if window._hooks exists
-  const hooksExist = await page.evaluate(() => typeof (window as any)._hooks !== "undefined");
+  const hooksExist = await page.evaluate(() => typeof window._hooks !== "undefined");
   console.log("window._hooks exists:", hooksExist);
 
   // Try calling rotate directly
   await page.evaluate(() => {
-    const hooks = (window as any)._hooks;
+    const hooks = window._hooks;
     console.log("Current scheme:", hooks.getColorScheme());
     hooks.setColorSchemeOverride("dark");
     console.log("After set dark:", hooks.getColorScheme());

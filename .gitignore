@@ -1,11 +1,8 @@
 dist
 .astro
-test-results
-.output
 .wrangler
 .vercel
 .netlify
-.vinxi
 app.config.timestamp_*.js
 
 # Environment

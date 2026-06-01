@@ -1,8 +1,25 @@
 import { createSignal, onMount } from "solid-js";
 
+type DemoComponent = (props: Record<string, unknown>) => unknown;
+
+interface ReactDemosWindow extends Window {
+  _reactDemos?: Record<string, DemoComponent>;
+  React?: {
+    createElement: (
+      type: DemoComponent,
+      props?: Record<string, unknown>,
+    ) => unknown;
+  };
+  ReactDOM?: {
+    createRoot: (container: HTMLElement) => {
+      render: (element: unknown) => void;
+    };
+  };
+}
+
 export function EmbedReactComponent(props: {
   name: string;
-  demoProps?: any;
+  demoProps?: Record<string, unknown>;
 }) {
   const [el, setEl] = createSignal<HTMLDivElement | null>(null);
 
@@ -10,8 +27,10 @@ export function EmbedReactComponent(props: {
     const container = el();
     if (!container) return;
 
+    const win = window as ReactDemosWindow;
+
     await new Promise<void>((resolve) => {
-      if ((window as any)._reactDemos) {
+      if (win._reactDemos) {
         resolve();
         return;
       }
@@ -21,12 +40,10 @@ export function EmbedReactComponent(props: {
       document.head.appendChild(script);
     });
 
-    const demos = (window as any)._reactDemos;
-    const Component = demos?.[props.name];
+    const Component = win._reactDemos?.[props.name];
     if (!Component) return;
 
-    const React = (window as any).React;
-    const ReactDOM = (window as any).ReactDOM;
+    const { React, ReactDOM } = win;
     if (!React || !ReactDOM) return;
 
     const root = ReactDOM.createRoot(container);

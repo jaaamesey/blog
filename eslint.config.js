@@ -7,7 +7,14 @@ import solid from "eslint-plugin-solid/configs/typescript";
 import * as tsParser from "@typescript-eslint/parser";
 
 export default defineConfig([
-  globalIgnores(["dist/", "node_modules/", ".vinxi/", ".git/", ".output/"]),
+  globalIgnores([
+    "dist/",
+    "node_modules/",
+    ".git/",
+    ".astro/",
+    "public/",
+    "worker-configuration.d.ts",
+  ]),
   {
     files: ["**/*.{js,mjs,cjs,ts}"],
     plugins: { js },
@@ -32,6 +39,12 @@ export default defineConfig([
       parserOptions: {
         project: "tsconfig.json",
       },
+    },
+  },
+  {
+    files: ["**/*.react.{jsx,tsx}"],
+    rules: {
+      "solid/style-prop": "off",
     },
   },
 ]);

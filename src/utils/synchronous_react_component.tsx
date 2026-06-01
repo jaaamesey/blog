@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import { createRoot, Root } from "react-dom/client";
+import { createRoot, type Root } from "react-dom/client";
 import { createRenderEffect, createSignal, onCleanup } from "solid-js";
 
 export function SynchronousReactComponent<

@@ -1,6 +1,6 @@
 /** @jsxImportSource react */
-import React, { useLayoutEffect, useMemo } from 'react'
-import { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useLayoutEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useStateWithDeps } from 'use-state-with-deps'
 
 // Doesn't update

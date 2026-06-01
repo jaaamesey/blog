@@ -1,4 +1,4 @@
-import { PostConfig } from "~/post_types";
+import type { PostConfig } from "~/post_types";
 
 export default {
   title: "How to actually disable zoom gestures in iOS Safari",

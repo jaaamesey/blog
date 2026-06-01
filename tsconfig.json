@@ -7,7 +7,8 @@
     },
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
-    "types": ["astro/client"]
+    "types": ["astro/client"],
+    "ignoreDeprecations": "6.0"
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "e2e/**/*", "playwright.config.ts", "worker-configuration.d.ts"]
 }

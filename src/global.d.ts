@@ -18,14 +18,17 @@ declare global {
       };
     };
   }
+  interface Document {
+    startViewTransition?: (_: () => Promise<unknown>) => void;
+  }
+}
+
+declare module "solid-js" {
   namespace JSX {
-    interface HTMLElementTags {
+    interface IntrinsicElements {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       marquee: any;
     }
-  }
-  interface Document {
-    startViewTransition?: (_: () => Promise<unknown>) => void;
   }
 }
 
