@@ -1,4 +1,4 @@
-import { PostConfig } from "./post_types";
+import type { PostConfig } from "./post_types";
 
 const metaFiles = import.meta.glob("./routes/posts/*/meta.ts", { eager: true });
 
