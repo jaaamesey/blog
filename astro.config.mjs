@@ -7,6 +7,7 @@ import rehypePrettyCode from "rehype-pretty-code";
 import path from "node:path";
 
 export default defineConfig({
+  site: "https://bikeshedd.ing",
   output: "server",
   adapter: cloudflare({
     // rehype-pretty-code/postcss are happier in Node during prerender
