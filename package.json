@@ -5,9 +5,13 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "deploy": "astro build && wrangler deploy",
+    "cf:dev": "astro build && wrangler dev",
+    "cf:types": "wrangler types",
     "lint": "eslint"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^13.6.0",
     "@astrojs/mdx": "^6.0.1",
     "@astrojs/react": "^5.0.6",
     "@astrojs/solid-js": "^6.0.1",
@@ -31,7 +35,8 @@
     "globals": "^16.1.0",
     "tailwindcss": "^4.0.15",
     "tsx": "^4.20.6",
-    "typescript-eslint": "^8.32.1"
+    "typescript-eslint": "^8.32.1",
+    "wrangler": "^4.95.0"
   },
   "engines": {
     "node": ">=22"

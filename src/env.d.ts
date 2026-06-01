@@ -1,4 +1,5 @@
 /// <reference types="astro/client" />
+/// <reference path="../worker-configuration.d.ts" />
 
 declare global {
   type ColorScheme = "dark" | "light" | undefined;
