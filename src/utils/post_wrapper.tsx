@@ -1,6 +1,6 @@
 import { A, useLocation, usePreloadRoute } from "@solidjs/router";
 import { createMemo, JSX } from "solid-js";
-import { nextPosts, prevPosts } from "~/all_posts.compile";
+import { nextPosts, prevPosts } from "~/all_posts";
 import { PostConfig } from "~/post_types";
 import { UnreachableError } from "~/utils/unreachable_error";
 import { useColorScheme } from "~/utils/use_color_scheme";

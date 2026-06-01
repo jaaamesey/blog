@@ -1,6 +1,6 @@
 import { A, usePreloadRoute } from "@solidjs/router";
 import { onCleanup, onMount, For } from "solid-js";
-import { allPosts } from "~/all_posts.compile";
+import { allPosts } from "~/all_posts";
 import { Marquee } from "./marquee";
 import { Title } from "@solidjs/meta";
 
