@@ -1,0 +1,56 @@
+---
+import type { PostConfig } from "~/post_types";
+import ColorSchemeButton from "~/components/ColorSchemeButton";
+import styles from "~/utils/post_wrapper.module.css";
+
+interface Props {
+  postConfig: PostConfig;
+  slug: string;
+}
+
+const { postConfig, slug } = Astro.props;
+---
+
+<div class="min-h-screen flex justify-center py-8 px-4 text-text-primary overflow-x-clip">
+  <div class="max-w-xl w-full">
+    <header class="sticky top-5 not-sm:text-xs flex justify-between items-center pb-4 border-b border-border-color mb-8 z-1">
+      <div
+        style={{
+          position: "absolute",
+          "background-color": "rgb(var(--background-rgb))",
+          transition: "var(--bg-transition)",
+          height: "100%",
+          width: "100%",
+          transform: "scaleY(10) scaleX(5)",
+          "transform-origin": "center bottom",
+          top: 0,
+          "z-index": -1,
+          opacity: 0.975,
+        }}
+      />
+      <div class="text-text-secondary">
+        <a href="/" style={{ "view-transition-name": "logo" }}>
+          james karlsson
+        </a>
+      </div>
+      <div class="flex gap-2 text-text-secondary">
+        <ColorSchemeButton client:only="solid" />
+      </div>
+      <div class="text-text-secondary">{postConfig.date}</div>
+    </header>
+    <h1 class="text-4xl md:text-5xl mb-8 text-text-primary">
+      <div>
+        <span
+          style={{
+            "view-transition-name": `title-${slug}`,
+          }}
+        >
+          {postConfig.title}
+        </span>
+      </div>
+    </h1>
+    <div class={`text-lg flex flex-col gap-4 mb-20 ${styles.postBody}`}>
+      <slot />
+    </div>
+  </div>
+</div>
