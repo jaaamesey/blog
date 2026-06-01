@@ -1,3 +1,4 @@
+/** @jsxImportSource react */
 import React, { useLayoutEffect, useMemo } from 'react'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useStateWithDeps } from 'use-state-with-deps'

@@ -1,36 +1,37 @@
-import { createResource, createRoot, ErrorBoundary, Suspense } from "solid-js";
-import { clientOnly } from "@solidjs/start";
+import { createSignal, onMount } from "solid-js";
 
-const EmbedReactComponentImpl = <
-  ReactProps extends Record<string, unknown> | undefined,
->(props: {
-  loader: () => Promise<React.FunctionComponent<ReactProps>>;
-  props?: ReactProps;
-}) => {
-  const [component] = createResource(async () => {
-    const [Component, { SynchronousReactComponent }] = await Promise.all([
-      props.loader(),
-      import("./synchronous_react_component"),
-    ]);
-    return createRoot(() => (
-      <SynchronousReactComponent Component={Component} props={props.props} />
-    ));
+export function EmbedReactComponent(props: {
+  name: string;
+  demoProps?: any;
+}) {
+  const [el, setEl] = createSignal<HTMLDivElement | null>(null);
+
+  onMount(async () => {
+    const container = el();
+    if (!container) return;
+
+    await new Promise<void>((resolve) => {
+      if ((window as any)._reactDemos) {
+        resolve();
+        return;
+      }
+      const script = document.createElement("script");
+      script.src = "/react-demos.js";
+      script.onload = () => resolve();
+      document.head.appendChild(script);
+    });
+
+    const demos = (window as any)._reactDemos;
+    const Component = demos?.[props.name];
+    if (!Component) return;
+
+    const React = (window as any).React;
+    const ReactDOM = (window as any).ReactDOM;
+    if (!React || !ReactDOM) return;
+
+    const root = ReactDOM.createRoot(container);
+    root.render(React.createElement(Component, props.demoProps));
   });
-  return <>{component()}</>;
-};
 
-const EmbedReactComponentLazy = clientOnly(() =>
-  Promise.resolve({ default: EmbedReactComponentImpl }),
-) as typeof EmbedReactComponentImpl;
-
-export const EmbedReactComponent: typeof EmbedReactComponentLazy = (props) => {
-  return (
-    <ErrorBoundary
-      fallback={<div>An error occurred. Please try refreshing the page.</div>}
-    >
-      <Suspense fallback={<div>Loading...</div>}>
-        <EmbedReactComponentLazy {...props} />
-      </Suspense>
-    </ErrorBoundary>
-  );
-};
+  return <div ref={setEl}>Loading...</div>;
+}

@@ -1,13 +1,9 @@
 import { DEV } from "solid-js";
+import { PostConfig } from "./post_types";
 
 export async function getAllPosts() {
   if (DEV || true) {
-    return import("./all_posts.compile").then((r) => r.default());
+    return import("./all_posts").then((r) => (r as any).default() as PostConfig[]);
   }
 }
 
-export async function testFn() {
-  const x = compileTime(33);
-  console.log({ x });
-  return x;
-}

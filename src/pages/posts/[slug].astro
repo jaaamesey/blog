@@ -1,0 +1,33 @@
+---
+export const prerender = true;
+
+import Layout from "~/layouts/Layout.astro";
+import PostLayout from "~/layouts/PostLayout.astro";
+import { allPosts } from "~/all_posts";
+
+const allArticles = import.meta.glob("../../routes/posts/*/article.mdx");
+const allMetas = import.meta.glob("../../routes/posts/*/meta.ts", { eager: true });
+
+export async function getStaticPaths() {
+  return allPosts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { slug } = Astro.params;
+
+const metaPath = `../../routes/posts/${slug}/meta.ts`;
+const articlePath = `../../routes/posts/${slug}/article.mdx`;
+
+const meta = (allMetas[metaPath] as any).default;
+const articleModule = await allArticles[articlePath]();
+const Article = (articleModule as any).default;
+---
+
+<Layout title={meta.title}>
+  <PostLayout postConfig={meta} slug={slug}>
+    <Article />
+  </PostLayout>
+</Layout>

@@ -1,3 +1,4 @@
+/** @jsxImportSource react */
 import * as React from "react";
 
 export function UseEffectBad() {
@@ -11,10 +12,10 @@ export function UseEffectBad() {
   }, [object]);
   return (<div>
     <div style={{display: 'none'}}>Okay, since you've gone as far as to inspect the code for this - the show's over, this widget doesn't actually ping the Cloudflare API. It just simulates that with a randomized setTimeout.</div>
-    <h1 style={{"font-size": "32px"}}>
+    <h1 style={{"fontSize": "32px"}}>
         Cloudflare Outage Simulator 2025
     </h1>
     <p>I've made {count} unnecessary requests to the Cloudflare API!</p>
-    <button style={{'font-size': "8px"}} onClick={() => setSneezeCount((n) => n + 1)}>Sneeze</button>
+    <button style={{'fontSize': "8px"}} onClick={() => setSneezeCount((n) => n + 1)}>Sneeze</button>
 </div>);
 }

@@ -97,7 +97,7 @@ import {EmbedReactComponent} from '~/utils/embed_react_component';
 import {DemoWrapper} from '~/utils/demo_wrapper';
 
 <DemoWrapper>
-<EmbedReactComponent loader={() => import('./use_effect_bad.react').then(r=>r.UseEffectBad)}/>
+<EmbedReactComponent client:only="solid" name="UseEffectBad" />
 </DemoWrapper>
 
 ...let's just leave this running and hope nobody notices.
