@@ -1,14 +1,23 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "baseUrl": ".",
+        "lib": ["DOM", "DOM.Iterable", "ES2022"],
     "paths": {
-      "~/*": ["src/*"]
+      "~/*": [
+        "./src/*"
+      ]
     },
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
-    "types": ["astro/client"],
-    "ignoreDeprecations": "6.0"
+    "types": [
+      "astro/client",
+      "react"
+    ]
   },
-  "include": ["src/**/*", "e2e/**/*", "playwright.config.ts", "worker-configuration.d.ts"]
+  "include": [
+    "src/**/*",
+    "e2e/**/*",
+    "playwright.config.ts",
+    "worker-configuration.d.ts"
+  ]
 }

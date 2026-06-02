@@ -1,5 +1,4 @@
-import {EmbedReactComponent} from '~/utils/embed_react_component';
-import {DemoWrapper} from '~/utils/demo_wrapper';
+import DemoWrapper from '~/utils/DemoWrapper.astro';
 
 React has a wonderful hook called [`useState`](https://react.dev/reference/react/useState) that we use to set and listen to things that might change over time.
 
@@ -27,8 +26,10 @@ Let's get started.
 
 So, about that lint error I suggested. Maybe you've already identified the issue with the code above. If not, hopefully this demo illustrates it better:
 
+import {BadTodoApp1, BadTodoAppWithKey, BadTodoAppWithDeps, BadTodoAppWithUseEffect} from './react_bad.react.jsx'
+
 <DemoWrapper>
-<EmbedReactComponent client:only="solid" name="BadTodoApp1" />
+<BadTodoApp1 client:load/>
 </DemoWrapper>
 
 When you change the "task" being edited, **the text in the input doesn't change to whatever the title for the new task is for.**
@@ -104,7 +105,7 @@ Let's go back to the todo list example from before. The textbook way of fixing t
 ```
 
 <DemoWrapper>
-<EmbedReactComponent client:only="solid" name="BadTodoAppWithKey" demoProps={{enableDrawing: false}} />
+<BadTodoAppWithKey client:load enableDrawing={false}/>
 </DemoWrapper>
 
 And it works - the input field changes when we edit a new task! 
@@ -121,7 +122,7 @@ function EditPanel(...) {
 ```
 
 <DemoWrapper>
-<EmbedReactComponent client:only="solid" name="BadTodoAppWithKey" demoProps={{enableDrawing: true}} />
+<BadTodoAppWithKey client:load enableDrawing={true}/>
 </DemoWrapper>
 
 **Try changing the brush colour before selecting another task.** 
@@ -229,7 +230,7 @@ function EditPanel({ item, ... }) {
 ```
 
 <DemoWrapper>
-<EmbedReactComponent client:only="solid" name="BadTodoAppWithDeps" demoProps={{enableDrawing: true}} />
+<BadTodoAppWithDeps client:load enableDrawing={true}/>
 </DemoWrapper>
 
 No messing with `key`, weird setter calls in the render method, or `useEffect` - it just kinda works.

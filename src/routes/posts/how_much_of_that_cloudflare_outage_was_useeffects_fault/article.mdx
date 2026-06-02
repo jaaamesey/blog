@@ -93,11 +93,11 @@ Maybe there was a timer in the component that ticked every second. Maybe it was 
 Point is, network requests were being repeated with such frequency that it brought down their backend.
 
 
-import {EmbedReactComponent} from '~/utils/embed_react_component';
-import {DemoWrapper} from '~/utils/demo_wrapper';
+import {UseEffectBad} from './use_effect_bad.react.jsx';
+import DemoWrapper from '~/utils/DemoWrapper.astro';
 
 <DemoWrapper>
-<EmbedReactComponent client:only="solid" name="UseEffectBad" />
+<UseEffectBad client:load />
 </DemoWrapper>
 
 ...let's just leave this running and hope nobody notices.
