@@ -1,0 +1,35 @@
+Maybe the way I use CodeSandbox is different to most people. Generally, I just want to create a quick, sharable draft of something in as little time as possible. 
+
+Often I'll need to sketch out something involving React and/or TypeScript, and other external libraries, so the Console in Chrome DevTools won't really cut it.
+
+Maybe I need to test out some complex CSS in isolation. Maybe I need to link someone a quick demo for some algo or React component. Or maybe I just forgot it's Day 1 of Advent of Code and I need to get a head start.
+
+Tools like CodeSandbox and StackBlitz seem to be veering away from this use case - they want to be a home for full projects, rather than just a sharable scratchpad. Maybe they could be both, but the length of time these tools take to boot up and requiring everything to be tied to an account indicates otherwise.
+
+I just want to get in, quickly sketch something, and get out. That's why I scrapped [tsx.zone](https://tsx.zone) together.
+
+It:
+
+1. Compiles and runs code locally in the browser
+2. Supports TypeScript
+3. Supports JSX (both React and Solid)
+4. Supports Tailwind (ew) and the React Compiler
+5. Automatically downloads dependencies and types
+6. Works on phones (if you hate yourself enough)
+7. Allows sharing sandboxes via URLs (if you're okay with the URL literally being your gzipped code)
+8. Autoformats with Prettier
+9. ...doesn't do much else.
+<br/>
+10. okay it has a vim mode too
+<br/>
+
+Is it _secure_? Well, I probably can't guarantee that. At the very least, any code you bring in (including libraries) is going to be sandboxed to an iframe in a single browser tab. But yes, we're unironically using `eval` in production, if that matters.
+
+Anyway, [feel free to give it a try.](https://tsx.zone) Lemme know if anything breaks or is just plain bad.
+
+
+Special thanks to:
+
+- CodeMirror (for the actual editing interface)
+- \@valtown/codemirror-ts (for all the TypeScript amenities for that interface)
+- esm.sh and unpkg (for replacing npm here)
