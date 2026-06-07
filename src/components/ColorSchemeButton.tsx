@@ -26,18 +26,19 @@ export default function ColorSchemeButton() {
       style={{ transform: pressed() ? 'translateY(1.5px) scale(1.07, 0.95)' : undefined, transition: 'transform .1s ease-out' }}
       onPointerDown={() => {
         setPressed(true);
-        setSpringing(false);
+        setSpringing(false)
         const release = () => {
           setPressed(false);
-          setSpringing(false);
-          setSpringing(true);
           window.removeEventListener("pointerup", release);
           console.log('release') // always fires
         };
         console.log('add release') // always fires
         window.addEventListener("pointerup", release);
       }}
-      onclick={() => colorScheme.rotate()}
+      onclick={() => {
+        setSpringing(true);
+        colorScheme.rotate()
+      }}
     >
       colours:{" "}
       <span
