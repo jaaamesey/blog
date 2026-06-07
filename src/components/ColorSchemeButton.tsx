@@ -22,7 +22,7 @@ export default function ColorSchemeButton() {
 
   return (
     <button
-      class="hover:cursor-pointer select-none"
+      class="hover:cursor-pointer select-none touch-none"
       style={{ transform: pressed() ? 'translateY(1.5px) scale(1.07, 0.95)' : undefined, transition: 'transform .1s ease-out' }}
       onPointerDown={() => {
         setPressed(true);
