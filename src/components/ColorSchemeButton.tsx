@@ -1,5 +1,6 @@
 import { useColorScheme } from "~/utils/use_color_scheme";
 import { UnreachableError } from "~/utils/unreachable_error";
+import { createSignal } from "solid-js";
 
 function getColorSchemeIcon(scheme: ColorScheme) {
   switch (scheme) {
@@ -16,10 +17,39 @@ function getColorSchemeIcon(scheme: ColorScheme) {
 
 export default function ColorSchemeButton() {
   const colorScheme = useColorScheme();
+  const [pressed, setPressed] = createSignal(false);
+  const [springing, setSpringing] = createSignal(false);
+
   return (
-    <button class="hover:cursor-pointer" onClick={colorScheme.rotate}>
+    <button
+      class="hover:cursor-pointer"
+      style={{ transform: pressed() ? 'translateY(1.5px) scale(1.07, 0.95)' : undefined, transition: 'transform .1s ease-out' }}
+      onPointerDown={() => {
+        setPressed(true);
+        setSpringing(false);
+        const release = () => {
+          setPressed(false);
+          setSpringing(false);
+          setSpringing(true);
+          window.removeEventListener("pointerup", release);
+          console.log('release') // always fires
+        };
+        console.log('add release') // always fires
+        window.addEventListener("pointerup", release);
+      }}
+      onclick={() => colorScheme.rotate()}
+    >
       colours:{" "}
-      <span class="inline-block w-10">
+      <span
+        class="inline-block w-10"
+        style={
+          springing()
+            ? { animation: "spring-return 1s ease-out" }
+            : pressed()
+              ? { transform: "translateY(1.5px)", transition: "transform 0.15s ease-in" }
+              : undefined
+        }
+      >
         {getColorSchemeIcon(colorScheme.getOverride())}
       </span>
     </button>

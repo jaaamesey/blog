@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+/* NOTE: @keyframes are unreliable here between page swaps, for some reason. Use local CSS or inline in Layout.astro instead. */
+
 html {
   font-size: 1.25rem;
 }
